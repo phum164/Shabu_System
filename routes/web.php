@@ -1,14 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\TableadminController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home_admin', function () {
-    return view('home_admin');
-});
+Route::get('/admin/home', [AdminController::class, 'index'])->name('home_admin');
+Route::get('/table_admin', [TableadminController::class, 'index'])->name('table_admin');
+
 
 Route::middleware([
     'auth:sanctum',
