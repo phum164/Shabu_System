@@ -18,6 +18,9 @@ return new class extends Migration
             $table->integer('person_amount');
             $table->integer('total_pay');
             $table->integer('status');
+            $table->dateTime('start_time');
+            $table->dateTime('finish_time')->nullable();
+            $table->dateTime('end_time');
             $table->timestamps();
             $table->softDeletes();
 

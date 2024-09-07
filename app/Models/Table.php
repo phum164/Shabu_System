@@ -5,16 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class menu extends Model
+class Table extends Model
 {
     use HasFactory;
+
+    public function bill(){
+        return $this->hasMany(Bill::class);
+    }
 
     public function listorder(){
         return $this->hasMany(ListOrder::class);
     }
-    
-    public function menutype(){
-        return $this->belongsTo(Menutype::class);
-    }
-
 }
