@@ -12,7 +12,7 @@ class Bill extends Model
     public function table(){
         return $this->belongsTo(Table::class);
     }
-    public function employee(){
-        return $this->belongsTo(Employee::class);
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }
