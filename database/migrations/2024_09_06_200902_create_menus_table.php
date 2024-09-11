@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('menutype_id');
             $table->string('name');
             $table->integer('stock');
+            $table->string('image');
             $table->timestamps();
             $table->softDeletes();
 

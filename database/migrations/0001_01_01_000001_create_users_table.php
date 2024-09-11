@@ -20,7 +20,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->foreignId('position_id')->nullable()->constrained('positions');
-            $table->string('profile_photo_path', 2048)->nullable();
+            $table->string('profile_photo_path', 2048)->default('img\user_profile\user_profile.jpg');
             $table->timestamps();
             $table->softDeletes();
         });
