@@ -17,8 +17,8 @@ class ListOrder extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function table(){
-        return $this->belongsTo(Table::class);
+        public function bill(){
+        return $this->hasMany(Bill::class);
     }
 
 }

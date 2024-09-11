@@ -13,6 +13,7 @@ Route::get('/', function () {
 });
 
 Route::get('/home_admin', [AdminController::class, 'index'])->name('home_admin');
+Route::get('/editmenu', [AdminController::class, 'editmenu'])->name('editmenu');
 Route::get('/table_admin', [TableadminController::class, 'index'])->name('table_admin');
 Route::get('/Orderfood', [OrderfoodController::class, 'index'])->name('Orderfood_user');
 Route::get('/historyoder', [HistoryOController::class, 'index'])->name('historyoder');

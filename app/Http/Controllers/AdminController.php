@@ -11,4 +11,7 @@ class AdminController extends Controller
         return view('home_admin');
     }
 
+    public function editmenu(){
+        return view('edit_menu');
+    }
 }

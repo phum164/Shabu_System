@@ -18,9 +18,13 @@ class MenuController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $menu = Menu::create([
+            'name' => $request->name,
+            // '' => $request->,
+        ]);
+
     }
 
     /**

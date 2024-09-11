@@ -15,15 +15,15 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('menu_id');
             $table->unsignedBigInteger('employee_id');
-            $table->unsignedBigInteger('table_id');
+            $table->unsignedBigInteger('bill_id');
             $table->integer('amount');
-            $table->integer('status');
+            $table->tinyInteger('status')->default(0); // 0 = pending, 1 = completed, 2 = cancelled
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade');
             $table->foreign('employee_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('table_id')->references('id')->on('tables')->onDelete('cascade');
+            $table->foreign('bill_id')->references('id')->on('bills')->onDelete('cascade');
         });
     }
 

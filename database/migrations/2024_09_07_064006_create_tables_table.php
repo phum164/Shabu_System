@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tables', function (Blueprint $table) {
             $table->id();
             $table->integer('name');
-            $table->integer('status');
+            $table->tinyInteger('status')->default(1); // 0 = ไม่ว่าง, 1 = ว่าง, 2 = ปรับปรุง;
             $table->timestamps();
             $table->softDeletes();
         });
