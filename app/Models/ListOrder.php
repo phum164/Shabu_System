@@ -21,4 +21,11 @@ class ListOrder extends Model
         return $this->hasMany(Bill::class);
     }
 
+    protected $fillable = [
+        'name',
+        'menutype_id',
+        'stock',
+        'image'
+    ];
+
 }

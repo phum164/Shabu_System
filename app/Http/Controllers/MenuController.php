@@ -12,7 +12,7 @@ class MenuController extends Controller
      */
     public function index()
     {
-        //
+        return view('add_menu');
     }
 
     /**
@@ -20,9 +20,22 @@ class MenuController extends Controller
      */
     public function create(Request $request)
     {
-        $menu = Menu::create([
+        $request->validate([
+            'name' => 'required|max:255|string',
+            'image' => 'nullable|mimes:png,jpeg,webp'
+        ]);
+
+        if($request->has('image')){
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $path = 'img/user_profile/';
+            $file->move($path, $filename);
+        }
+        Menu::create([
             'name' => $request->name,
-            // '' => $request->,
+            'menutype_id'=> $request->type_id,
+            'stock' => $request->stock
         ]);
 
     }
