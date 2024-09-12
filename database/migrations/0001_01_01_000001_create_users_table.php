@@ -19,8 +19,10 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
-            $table->string('profile_photo_path', 2048)->nullable();
+            $table->foreignId('position_id')->nullable()->constrained('positions');
+            $table->string('profile_photo_path', 2048)->default('img\user_profile\user_profile.jpg');
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
