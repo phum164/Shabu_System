@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Menutype;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,11 +14,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        Menutype::create(['name' => 'เนื้อสัตว์']);
+        Menutype::create(['name' => 'ผัก']);
+        Menutype::create(['name' => 'ทะเล']);
+        Menutype::create(['name' => 'เครื่องใน']);
+        Menutype::create(['name' => 'ของทานเล่น']);
+        Menutype::create(['name' => 'ของหวาน']);
+        Menutype::create(['name' => 'รายการอื่นๆ']);
     }
 }

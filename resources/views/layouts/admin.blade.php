@@ -57,6 +57,13 @@
             </div>
         </div>
     </div> --}}
+    <div class="container">
+        <div class="row-2 m-3">
+            <div class="col-3">
+                <h3>@yield('headline')</h3>
+            </div>
+        </div>
+    </div>
 
     <div class="container">
         <div class="row">
