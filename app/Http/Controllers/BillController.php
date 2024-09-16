@@ -22,7 +22,9 @@ class BillController extends Controller
      */
     public function create()
     {
-        //
+        $data =[
+
+        ];
     }
 
     /**
@@ -31,7 +33,7 @@ class BillController extends Controller
     public function store(Request $request)
     {
         $data = [
-            
+
         ];
     }
 
