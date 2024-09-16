@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Menu;
+use App\Models\menutype;
 
 class MenuController extends Controller
 {
@@ -53,9 +54,13 @@ class MenuController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function stock(Request $request)
     {
-        //
+        $menu = Menu::fidn($request->id);
+        $menu -> update([
+            'stock' => $request->stock
+        ]);
+        return redirect('/addstock')->with('success', 'เพิ่มสต๊อกสินค้าแล้ว');;
     }
 
     /**
@@ -63,7 +68,7 @@ class MenuController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // $menu = Menu::fidnOrFail($id)->manutype->type
     }
 
     /**
@@ -71,7 +76,6 @@ class MenuController extends Controller
      */
     public function edit(string $id)
     {
-        //
         $menu = Menu::findOrFail($id);
         return(view('edit_menu',compact('menu')));
     }

@@ -12,7 +12,8 @@ class MenutypeController extends Controller
      */
     public function index()
     {
-        //
+        $menutype = Menutype::all();
+        return view('#',compact('menutype'));
     }
 
     /**
@@ -34,9 +35,10 @@ class MenutypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $menu = Menutype::find($id)->menu->id;
+        return view('#',compact('menu'));
     }
 
     /**

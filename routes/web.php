@@ -6,6 +6,7 @@ use App\Http\Controllers\TableadminController;
 use App\Http\Controllers\OrderfoodController;
 use App\Http\Controllers\HistoryOController;
 use App\Http\Controllers\TotalpriceController;
+use App\Http\Controllers\MenuController;
 
 
 Route::get('/', function () {
@@ -18,6 +19,7 @@ Route::get('/table_admin', [TableadminController::class, 'index'])->name('table_
 Route::get('/Orderfood', [OrderfoodController::class, 'index'])->name('Orderfood_user');
 Route::get('/historyoder', [HistoryOController::class, 'index'])->name('historyoder');
 Route::get('/Totalprice', [HistoryOController::class, 'index'])->name('totalprice');
+Route::post('/addstock', [MenuController::class, 'stock'])->name('add_stock');
 
 
 
