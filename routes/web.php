@@ -17,7 +17,9 @@ Route::get('/editmenu', [AdminController::class, 'editmenu'])->name('editmenu');
 Route::get('/table_admin', [TableadminController::class, 'index'])->name('table_admin');
 Route::get('/Orderfood', [OrderfoodController::class, 'index'])->name('Orderfood_user');
 Route::get('/historyoder', [HistoryOController::class, 'index'])->name('historyoder');
-Route::get('/Totalprice', [HistoryOController::class, 'index'])->name('totalprice');
+Route::get('/Totalprice', [TotalpriceController::class, 'index'])->name('Totalprice');
+Route::post('/order/submit', [OrderfoodController::class, 'submitOrder'])->name('order.submit');
+
 
 
 
