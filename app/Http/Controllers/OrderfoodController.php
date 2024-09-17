@@ -10,29 +10,24 @@ use Illuminate\Http\Request;
 class OrderfoodController extends Controller
 {
     public function index(Request $request)
-{
-    $typeId = $request->input('id'); 
-
-    if ($typeId) {
-        $menus = Menu::where('menutype_id', $typeId)->get(); 
-    } else {
-        $menus = Menu::all(); 
-    }
-
-    $menuTypes = MenuType::all(); 
-
-    return view('Orderfood_user', [
-        'menus' => $menus, 
-        'menuTypes' => $menuTypes,
-        'selected' => $typeId 
-    ]);
-}
-
-public function submitOrder(Request $request)
     {
-       
+        $typeId = $request->input('id'); 
+    
+        if ($typeId) {
+            $menus = Menu::where('menutype_id', $typeId)->get(); 
+        } else {
+            $menus = Menu::all(); 
+        }
+    
+        $menuTypes = MenuType::all(); 
+    
+        return view('Orderfood', [
+            'menus' => $menus, 
+            'menuTypes' => $menuTypes,
+            'selected' => $typeId 
+        ]);
     }
-
+    
 
 
 

@@ -17,4 +17,13 @@ class menu extends Model
         return $this->belongsTo(Menutype::class);
     }
 
+    protected $tabal = 'menus';
+
+    protected $fillable = [
+        'name',
+        'menutype_id',
+        'stock',
+        'image'
+    ];
+
 }

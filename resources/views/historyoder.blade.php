@@ -1,14 +1,14 @@
-@extends('layout')
+@extends('layouts.layout')
 @section('active')
 <ul class="navbar-nav">
   <li class="nav-item">
-    <a class="nav-link " href="{{ route('Orderfood_user')}}" >สั่งอาหาร</a>
+    <a class="nav-link " href="{{ route('Orderfood')}}" >สั่งอาหาร</a>
   </li>
   <li class="nav-item">
     <a class="nav-link active" href="{{ route('historyoder')}}">ประวัติการสั่งอาหาร</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link"  href="{{ route('Totalprice')}}">ยอดรวมทั้งหมด</a>
+    <a class="nav-link"  href="{{ route('totalprice')}}">ยอดรวมทั้งหมด</a>
   </li>
 </ul>
 @endsection
@@ -17,34 +17,16 @@
 <h4>ประวัติการสั่งอาหาร</h4>
 @endsection
 
-@section('sidebar')
-<div class="col-sm-12 col-md-3 sidebar order-md-last">
-  <div class="timeout">
-    <p>คุณเหลือเวลาอีก</p>
-    <p>1 : 59 : 59</p>
-  </div>
-  <div class="listoder">
-    <p><i class="bi bi-cart3"></i>  รายการอาหารของคุณ</p>
-    <div class="oderlist">
-      <img class="imglist" src="{{ asset('img/Pork/p1.png') }}"><br><br>
-      <div class="gbtnoder sib">
-        <p>หมูสามชั้น</p>
-        <div class="ml-auto">
-          <a class="del" href="#"> - </a>
-          <label class="numoder"> 1 </label>
-          <a class="add" href="#"> + </a>
-        </div>
-      </div>
+@section('catagory')
+    <p>โชว์เวลาที่เหลือตรงนี้</p>
+@endsection
 
-    </div><br>
-    <p>โต๊ะ 1</p>
-    <a class="comf" href="#">สั่งอาหาร</a>
-  </div>
-</div>
+@section('sidebar')
+
 @endsection
 
 @section('oder')
-  <div class="col-md-11 mt-3 ms-2">
+ 
     <div class="lishis">
     <label class="historyOder">สั่งไปเมื่อ 5 นาทีที่แล้ว</label><br><br>
      <table>
@@ -56,7 +38,7 @@
       </tr>
      </table>
     </div>
-  </div>
+
   
 @endsection
         

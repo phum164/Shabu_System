@@ -28,7 +28,17 @@ class ListOrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'menu_id' => 'required|integer',
+            'amount' => 'required|integer|min:1',
+        ]);
+
+        $listorder = new ListOrder();
+        $listorder->menu_id = $request->input('menu_id');
+        $listorder->amount = $request->input('amount');
+        $listorder->save();
+
+        return redirect()->back()->with('success', 'Order has been added!');
     }
 
     /**
@@ -42,17 +52,17 @@ class ListOrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        
     }
 
     /**

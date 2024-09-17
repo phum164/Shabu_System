@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('listsorder', function (Blueprint $table) {
+        Schema::create('listsorders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('menu_id');
             $table->unsignedBigInteger('employee_id');
