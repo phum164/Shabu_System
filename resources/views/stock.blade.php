@@ -30,7 +30,7 @@
             <td>{{$item->name}}</td>
             <td>{{$item->stock}}</td>
             <td>
-                <form method="POST" action="{{ route('', $item->id) }}">
+                <form method="POST" action="{{ route('addstock', $item->id) }}">
                     @csrf
                     <input type="number" name="add_stock" class="form-control" placeholder="จำนวน">
             </td>

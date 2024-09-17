@@ -23,7 +23,7 @@ class BillController extends Controller
     public function create()
     {
         $data =[
-
+            
         ];
     }
 

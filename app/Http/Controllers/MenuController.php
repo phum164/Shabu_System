@@ -59,15 +59,16 @@ class MenuController extends Controller
         $menu -> update([
             'stock' => $request->stock
         ]);
-        return redirect('/addstock')->with('success', 'เพิ่มสต๊อกสินค้าแล้ว');;
+        return redirect('/showstock')->with('success', 'เพิ่มสต๊อกสินค้าแล้ว');;
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function showstock()
     {
-        // $menu = Menu::fidnOrFail($id)->manutype->type
+        $menus = Menu::all();
+        return view('stock',compact('menus'));
     }
 
     /**

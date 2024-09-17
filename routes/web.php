@@ -19,6 +19,7 @@ Route::get('/table_admin', [TableadminController::class, 'index'])->name('table_
 Route::get('/Orderfood', [OrderfoodController::class, 'index'])->name('Orderfood_user');
 Route::get('/historyoder', [HistoryOController::class, 'index'])->name('historyoder');
 Route::get('/Totalprice', [HistoryOController::class, 'index'])->name('totalprice');
+Route::get('/addstock', [MenuController::class, 'showstock'])->name('show_stock');
 Route::post('/addstock', [MenuController::class, 'stock'])->name('add_stock');
 
 
