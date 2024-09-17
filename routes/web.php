@@ -6,7 +6,9 @@ use App\Http\Controllers\TableadminController;
 use App\Http\Controllers\OrderfoodController;
 use App\Http\Controllers\HistoryOController;
 use App\Http\Controllers\TotalpriceController;
-use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ManageTableAdminController;
+use App\Http\Controllers\MenuListAdminController;
+use App\Http\Controllers\AddMenuAdminController;use App\Http\Controllers\MenuController;
 
 
 Route::get('/', function () {
@@ -21,8 +23,9 @@ Route::get('/historyoder', [HistoryOController::class, 'index'])->name('historyo
 Route::get('/Totalprice', [HistoryOController::class, 'index'])->name('totalprice');
 Route::get('/addstock', [MenuController::class, 'showstock'])->name('show_stock');
 Route::post('/addstock', [MenuController::class, 'stock'])->name('add_stock');
-
-
+Route::get('/Menulist', [MenuListAdminController::class, 'index'])->name('menulist');
+Route::get('/Managetable', [ManageTableAdminController::class, 'index'])->name('Managetable');
+Route::get('/Addmenuadmin', [AddMenuAdminController::class,'index'])->name('Addmenuadmin');
 
 Route::middleware([
     'auth:sanctum',
