@@ -8,7 +8,8 @@ use App\Http\Controllers\HistoryOController;
 use App\Http\Controllers\TotalpriceController;
 use App\Http\Controllers\ManageTableAdminController;
 use App\Http\Controllers\MenuListAdminController;
-use App\Http\Controllers\AddMenuAdminController;use App\Http\Controllers\MenuController;
+use App\Http\Controllers\AddMenuAdminController;
+use App\Http\Controllers\MenuController;
 
 
 Route::get('/', function () {
@@ -21,12 +22,13 @@ Route::get('/table_admin', [TableadminController::class, 'index'])->name('table_
 Route::get('/Orderfood', [OrderfoodController::class, 'index'])->name('Orderfood_user');
 Route::get('/historyoder', [HistoryOController::class, 'index'])->name('historyoder');
 Route::get('/Totalprice', [HistoryOController::class, 'index'])->name('totalprice');
-Route::get('/addstock', [MenuController::class, 'showstock'])->name('show_stock');
-Route::post('/addstock', [MenuController::class, 'stock'])->name('add_stock');
+Route::get('/showstock', [MenuController::class, 'showstock'])->name('showstock');
+Route::post('/addstock/{id}', [MenuController::class, 'stock'])->name('add_stock');
 Route::get('/Menulist', [MenuListAdminController::class, 'index'])->name('menulist');
 Route::get('/Managetable', [ManageTableAdminController::class, 'index'])->name('Managetable');
 Route::get('/Addmenuadmin', [AddMenuAdminController::class,'index'])->name('Addmenuadmin');
-
+Route::post('/insertmenu',[MenuController::class,'create'])->name('insertmenu');
+route::get('/adminpage',[MenuController::class,'page'])->middleware(('admin'));
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
