@@ -1,4 +1,7 @@
 @extends('layout_admin')
+@push ('style')
+        <link rel="stylesheet" href="/css/admin.css">
+    @endpush
 @section('menu')
 <div class="col-sm-12 col-md-6 col-lg-4">
   <div class="content">
@@ -9,7 +12,7 @@
 <div class="col-sm-12 col-md-6 col-lg-4">
   <div class="content">
   <img src="{{ asset('img/table.png') }}" alt="รูปโลโก้ IT BEEF CHABU">
-      <a class="btn" href="#">รายการอาหารของลูกค้า</a> 
+      <a class="btn" href="{{ route('menulist' )}}">รายการอาหารของลูกค้า</a> 
   </div>
 </div>
 <div class="col-sm-12 col-md-6 col-lg-4">
