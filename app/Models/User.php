@@ -81,15 +81,15 @@ class User extends Authenticatable
         return $this -> position_id === 1;
     }
     public function isManager(){
-        return $this -> position_id === 2;
+        return $this->isAdmin() || $this->position_id === 2;
     }
     public function isKitch(){
-        return $this -> position_id === 3;
+        return $this->isAdmin() || $this->position_id === 3;
     }
     public function isCash(){
-        return $this -> position_id === 4;
+        return $this->isAdmin() || $this->position_id === 4;
     }
     public function isStock(){
-        return $this -> position_id === 5;
+        return $this->isAdmin() || $this->position_id === 5;
     }
 }

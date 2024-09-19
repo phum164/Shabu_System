@@ -6,7 +6,8 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
-class Admin
+
+class Kitch
 {
     /**
      * Handle an incoming request.
@@ -18,7 +19,7 @@ class Admin
         if (!Auth::check()) {
             return redirect('/login');
         }
-        if(auth()->user()->position && auth()->user()->isAdmin()){
+        if(auth()->user()->position && auth()->user()->isKitch()){
             return $next($request);
         }
         return redirect('/');
