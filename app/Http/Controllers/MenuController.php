@@ -12,7 +12,7 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menu = Menu::all();
+        $menu = Menu::paginate(10);
         return view('add_menu',compact('menu'));
     }
 
@@ -23,12 +23,13 @@ class MenuController extends Controller
     {
         $request->validate(
             [
-                'menuName' => 'required|max:255|string',
+                'menuName' => 'required|max:255|string||unique:menus,name',
                 'menuImage' => 'nullable|mimes:png,jpeg,webp',
             ],
             [
-                'name.required' => 'กรุณากรอกชื่อเมนู',
-                'name.max:255' => 'ชื่อเมนูไม่เกิน 255 ตัวอักษร'
+                'menuName.required' => 'กรุณากรอกชื่อเมนู',
+                'menuName.max:255' => 'ชื่อเมนูไม่เกิน 255 ตัวอักษร',
+                'menuName.unique' => 'มีเมนูนี้แล้ว',
             ]
         );
         $path = 'img/menus/';
@@ -46,7 +47,7 @@ class MenuController extends Controller
             'stock' => 100,
             'image' => $path . $filename
         ]);
-        redirect('/showstock');
+        return redirect('/showstock');
     }
 
     /**
@@ -73,7 +74,7 @@ class MenuController extends Controller
      */
     public function showstock()
     {
-        $menus = Menu::all();
+        $menus = Menu::paginate(10);
         return view('stock',compact('menus'));
     }
 

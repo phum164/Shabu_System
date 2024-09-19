@@ -85,7 +85,8 @@
             </div>
             <div class="col-md-2" id="addmenu">
                 {{-- <button type="button" class="btn bg-gradient-success w-auto me-1 mb-0">เพิ่มเมนูอาหาร</button> --}}
-                <button type="button" class="btn btn-success"><b>เพิ่มเมนูอาหาร</b></button>
+                {{-- <button type="button" class="btn btn-success"><b>เพิ่มเมนูอาหาร</b></button> --}}
+                <a href="{{route('Addmenuadmin')}}" class="btn btn-success" role="button">เพิ่มเมนูอาหาร</a>
             </div>
         </div>
     </div>

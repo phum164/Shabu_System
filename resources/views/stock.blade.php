@@ -3,13 +3,18 @@
 @section('headline', 'เพิ่มสต๊อกเมนู')
 @section('content')
 
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
 
-    <table class="table">
+    <table class="table-striped-columns mx-auto" style="width: 80%;">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if ($errors->has('stock'))
+                        <div class="alert alert-danger">
+                            {{ $errors->first('stock') }}
+                        </div>
+                    @endif
         <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -24,9 +29,9 @@
         @foreach ($menus as $item)
             <tbody>
                 <tr>
-                    <th scope="row">{{ $item->id }}</th>
+                    <th scope="row da">{{ $item->id }}</th>
                     <td><img src="{{ asset($item->image) }}" alt="รูปเมนู" width="50" height="50"></td>
-                    <td>{{ $item->menutype->name}}</td>
+                    <td>{{ $item->menutype->name }}</td>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->stock }}</td>
                     <td>
@@ -34,11 +39,6 @@
                             @csrf
                             <input type="number" name="stock" class="form-control" placeholder="จำนวน">
                     </td>
-                    @if ($errors->has('stock'))
-                        <div class="alert alert-danger">
-                            {{ $errors->first('stock') }}
-                        </div>
-                    @endif
                     <td>
                         <button type="submit" class="btn btn-warning">เพิ่มสต๊อก</button>
                         </form>
@@ -47,5 +47,8 @@
             </tbody>
         @endforeach
     </table>
+    <div class="mt-3">
+        {{ $menus->links() }}
+    </div>
 
 @endsection
