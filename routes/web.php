@@ -6,6 +6,9 @@ use App\Http\Controllers\TableadminController;
 use App\Http\Controllers\OrderfoodController;
 use App\Http\Controllers\HistoryOController;
 use App\Http\Controllers\TotalpriceController;
+use App\Http\Controllers\ManageTableAdminController;
+use App\Http\Controllers\MenuListAdminController;
+use App\Http\Controllers\AddMenuAdminController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ListorderController;
 
@@ -22,11 +25,12 @@ Route::get('/Orderfood', [OrderfoodController::class, 'index'])->name('Orderfood
 Route::get('/historyoder', [HistoryOController::class, 'index'])->name('historyoder');
 Route::get('/Totalprice', [TotalpriceController::class, 'index'])->name('totalprice');
 Route::post('/listorders', [ListOrderController::class, 'store'])->name('listorders.store');
-
-
-
-
-
+Route::get('/showstock', [MenuController::class, 'showstock'])->name('showstock');
+Route::post('/addstock/{id}', [MenuController::class, 'stock'])->name('add_stock');
+Route::get('/Menulist', [MenuListAdminController::class, 'index'])->name('menulist');
+Route::get('/Managetable', [ManageTableAdminController::class, 'index'])->name('Managetable');
+Route::get('/Addmenuadmin', [AddMenuAdminController::class,'index'])->name('Addmenuadmin');
+Route::post('/insertmenu',[MenuController::class,'create'])->name('insertmenu');
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -35,4 +39,21 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+Route::middleware(['auth'])->group(function () {
+    Route::middleware(['admin'])->group(function () {
+        Route::get('/adminpage', [MenuController::class, 'page'])->name('admin.page');
+    });
+    Route::middleware(('cash'))->group(function(){
+        //ใส่ route ของพนักงานต้อนรับ คิดเงิน
+    });
+    Route::middleware(('kich'))->group(function(){
+        //ใส่ route ของพนักงานครัว
+    });
+    Route::middleware(('manager'))->group(function(){
+        //ใส่ route ของผู้บริหาร
+    });
+    Route::middleware(('stock'))->group(function(){
+        //ใส่ route ของพนักงานครัว
+    });
 });

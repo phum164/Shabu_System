@@ -1,4 +1,4 @@
-@extends('layout_admin')
+@extends('layouts.layout_admin')
 @section('menu')
 <br><h2>การจัดการโต๊ะภายในร้าน</h2><br>
 <div class="row">
