@@ -12,7 +12,9 @@ class ListOrderController extends Controller
      */
     public function index()
     {
-        //
+        // $loder = ListOrder::whereNotIn('status', [1, 2])->get();
+        $loder = ListOrder::all();
+        return view('#',compact('loder'));
     }
 
     /**
@@ -28,7 +30,12 @@ class ListOrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       foreach($request as $order){
+        ListOrder::create([
+            'menu_id' => $order->menuid,
+            'stock' => $order->amount,
+        ]);
+       }
     }
 
     /**
