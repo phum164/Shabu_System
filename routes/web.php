@@ -31,10 +31,6 @@ Route::get('/Menulist', [MenuListAdminController::class, 'index'])->name('menuli
 Route::get('/Managetable', [ManageTableAdminController::class, 'index'])->name('Managetable');
 Route::get('/Addmenuadmin', [AddMenuAdminController::class,'index'])->name('Addmenuadmin');
 Route::post('/insertmenu',[MenuController::class,'create'])->name('insertmenu');
-route::get('/adminpage',[MenuController::class,'page'])->middleware(('admin'));
-
-
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -43,4 +39,21 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+Route::middleware(['auth'])->group(function () {
+    Route::middleware(['admin'])->group(function () {
+        Route::get('/adminpage', [MenuController::class, 'page'])->name('admin.page');
+    });
+    Route::middleware(('cash'))->group(function(){
+        //ใส่ route ของพนักงานต้อนรับ คิดเงิน
+    });
+    Route::middleware(('kich'))->group(function(){
+        //ใส่ route ของพนักงานครัว
+    });
+    Route::middleware(('manager'))->group(function(){
+        //ใส่ route ของผู้บริหาร
+    });
+    Route::middleware(('stock'))->group(function(){
+        //ใส่ route ของพนักงานครัว
+    });
 });

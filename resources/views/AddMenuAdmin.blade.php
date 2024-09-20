@@ -67,6 +67,12 @@
 
         <div class="card shadow" style="border-radius: 10px;">
             <div class="card-body">
+                @if ($errors->has('menuName'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ $errors->first('menuName') }}
+                        <button type="button" class="btn-close align-middle fade show" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
                 <form action="/insertmenu" method="POST" enctype="multipart/form-data">
                     @csrf
                     <!-- ส่วนอัปโหลดรูปภาพ -->
@@ -95,10 +101,6 @@
                             @foreach ($types as $type)
                                 <option value="{{ $type->id }}">{{ $type->name }}</option>
                             @endforeach
-                            {{-- <option value="vegetable">ผัก</option>
-                            <option value="other_food">รายการอาหารอื่นๆ</option>
-                            <option value="snack">ของทานเล่น</option>
-                            <option value="service">บริการอื่นๆ</option> --}}
                         </select>
                     </div>
 
@@ -109,11 +111,6 @@
                         <a href="/admin-menu" class="btn btn-danger rounded-pill" style="width: 150px;">ยกเลิก</a>
                     </div>
                 </form>
-                @if ($errors->has('menuName'))
-                    <div class="alert alert-danger">
-                        {{ $errors->first('menuName') }}
-                    </div>
-                @endif
             </div>
         </div>
     </div>
