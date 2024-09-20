@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Menu;
-use App\Models\menutype;
 
 class MenuController extends Controller
 {
@@ -23,9 +22,8 @@ class MenuController extends Controller
     {
         $request->validate(
             [
-                'name' => 'required|max:255|string',
-                'image' => 'nullable|mimes:png,jpeg,webp',
-                'stock' => ''
+                'menuName' => 'required|max:255|string',
+                'menuImage' => 'nullable|mimes:png,jpeg,webp',
             ],
             [
                 'name.required' => 'กรุณากรอกชื่อเมนู',
@@ -33,8 +31,8 @@ class MenuController extends Controller
             ]
         );
         $path = 'img/menus/';
-        if ($request->has('image')) {
-            $file = $request->file('image');
+        if ($request->hasFile('menuImage')) {
+            $file = $request->file('menuImage');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
             $file->move($path, $filename);
@@ -42,32 +40,40 @@ class MenuController extends Controller
             $filename = 'emptymenu.jpg';
         }
         Menu::create([
-            'name' => $request->name,
+            'name' => $request->menuName,
             'menutype_id' => $request->type_id,
-            'stock' => $request->stock,
-            'menuimage' => $path . $filename
+            'stock' => 100,
+            'image' => $path . $filename
         ]);
-        redirect('/editmenu');
+        redirect('/showstock');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function stock(Request $request)
+    public function stock(Request $request,$id)
     {
-        $menu = Menu::fidn($request->id);
-        $menu -> update([
-            'stock' => $request->stock
+        $request->validate([
+            'stock' => 'required|integer|min:1',
+        ], [
+            'stock.required' => 'กรุณาระบุจำนวนสต๊อก',
+            'stock.integer' => 'สต๊อกต้องเป็นจำนวนเต็ม',
+            'stock.min' => 'จำนวนสต๊อกต้องมากกว่า 0',
         ]);
-        return redirect('/addstock')->with('success', 'เพิ่มสต๊อกสินค้าแล้ว');;
+        $menu = Menu::find($id);
+        $menu -> update([
+            'stock' => $menu->stock + $request->stock
+        ]);
+        return redirect('/showstock')->with('success', 'เพิ่มสต๊อกสินค้าแล้ว');;
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function showstock()
     {
-        // $menu = Menu::fidnOrFail($id)->manutype->type
+        $menus = Menu::all();
+        return view('stock',compact('menus'));
     }
 
     /**
@@ -121,5 +127,9 @@ class MenuController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function page(){
+        return view('adminpagetest');
     }
 }

@@ -62,4 +62,19 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function isAdmin(){
+        return $this -> position_id === 1;
+    }
+    public function isManager(){
+        return $this -> position_id === 2;
+    }
+    public function isKitch(){
+        return $this -> position_id === 3;
+    }
+    public function isCash(){
+        return $this -> position_id === 4;
+    }
+    public function isStock(){
+        return $this -> position_id === 5;
+    }
 }

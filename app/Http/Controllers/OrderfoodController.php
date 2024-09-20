@@ -27,7 +27,7 @@ class OrderfoodController extends Controller
             'selected' => $typeId 
         ]);
     }
-    
+
 
 
 
