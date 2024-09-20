@@ -1,4 +1,4 @@
-@extends('layout_admin')
+@extends('layouts.layout_admin')
 @section('menu')
 <div class="col-sm-12 col-md-6 col-lg-4">
   <div class="content">

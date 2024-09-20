@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ListOrder extends Model
 {
     use HasFactory;
-
+    protected $table ='listsorder';
     public function menu(){
         return $this->belongsTo(Menu::class);
     }

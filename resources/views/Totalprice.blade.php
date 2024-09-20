@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="/css/user.css">
+  <link rel="stylesheet" href="/css/total.css">
 </head>
 <body>
 <!-- เมนูฝั่งแอดมิน -->
@@ -22,73 +22,38 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('Orderfood_user')}}" >สั่งอาหาร</a>
+            <a class="nav-link" href="{{ route('Orderfood')}}" >สั่งอาหาร</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="{{ route('historyoder')}}">ประวัติการสั่งอาหาร</a>
+            <a class="nav-link" href="{{ route('historyoder')}}">ประวัติการสั่งอาหาร</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('Totalprice')}}">ยอดรวมทั้งหมด</a>
+            <a class="nav-link active"  href="{{ route('totalprice')}}">ยอดรวมทั้งหมด</a>
           </li>
         </ul>
       </div>
     </div>
   </nav><br>
-
-
-<div class="container search">
-  <h4>ประวัติการสั่งอาหาร</h4>
-</div>
- 
-<div class="container-fluid mt-4"><br>
-  <div class="row ms-1" style="min-height: 100vh;">
-    <!-- Sidebar -->
-    <div class="col-sm-12 col-md-3 sidebar order-md-last">
-      <div class="timeout">
-        <p>คุณเหลือเวลาอีก</p>
-        <p>1 : 59 : 59</p>
-      </div>
-      <div class="listoder">
-        <p><i class="bi bi-cart3"></i>  รายการอาหารของคุณ</p>
-        <div class="oderlist">
-          <img class="imglist" src="{{ asset('img/Pork/p1.png') }}"><br><br>
-          <div class="gbtnoder sib">
-            <p>หมูสามชั้น</p>
-            <div class="ml-auto">
-              <a class="del" href="#"> - </a>
-              <label class="numoder"> 1 </label>
-              <a class="add" href="#"> + </a>
-            </div>
-          </div>
-
-        </div><br>
-        <p>โต๊ะ 1</p>
-        <a class="comf" href="#">สั่งอาหาร</a>
-      </div>
-    </div>
-
-    <!-- Main Content Area -->
-    <div class="col-sm-12 col-md-9">
-      <div class="col-md-11 mt-3 ms-2">
-        <div class="lishis">
-        <label class="historyOder">สั่งไปเมื่อ 5 นาทีที่แล้ว</label><br><br>
-         <table>
-          <tr>
-            <td><img class="hisimg" src="{{ asset('img/Pork/p1.png') }}"></td>
-            <td class="mg">หมูสามชั้น</td>
-            <td class="mg">จำนวน <br> 5</td>
-            <td class="mg">กำลังดำเนินการ...</td>
-          </tr>
-         </table>
+  
+  <div class="container-fluid">
+    <div class="receipt">
+      <h3 class="text-center">IT BEEF CHABU</h3>
+      <p class="text-center">ใบเสร็จชำระเงิน</p>
+      <p class="text-center">แสดงเวลาที่เหลือ</p>
+      
+      <div class="showdata">
+        <p>โต๊ะ : 03 | Order_ID : 021</p>
+        <p>วันที่ : | เวลา :</p>
+        <p>ผู้ทำรายการ :</p>
+        <hr>
+        <div class="detail">
+          <p><b>รายการ</b></p>
+          <p>ผู้ใหญ่</p><br><br>
+          <p><b>จำนวน</b></p>
+          <p>3 ท่าน</p><br><br>
+          <p><b>ราคา</b></p>
+          <p>897.00 บาท</p>
         </div>
       </div>
-
-      </div>
     </div>
-
   </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
-</html>

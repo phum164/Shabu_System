@@ -18,7 +18,6 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
-
     public function position(){
         return $this->belongsTo(Position::class);
     }
@@ -30,8 +29,6 @@ class User extends Authenticatable
     public function listoder(){
         return $this->hasMany(ListOrder::class);
     }
-
-
 
     /**
      * The attributes that are mass assignable.
