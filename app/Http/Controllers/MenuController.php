@@ -15,7 +15,6 @@ class MenuController extends Controller
         $menu = Menu::paginate(10);
         return view('add_menu',compact('menu'));
     }
-
     /**
      * Show the form for creating a new resource.
      */

@@ -20,21 +20,10 @@
       <div class="collapse navbar-collapse " id="navbarNav">
       </div>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" href="#" >สั่งอาหาร</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('historyoder')}}">ประวัติการสั่งอาหาร</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link"  href="{{ route('totalprice')}}">ยอดรวมทั้งหมด</a>
-          </li>
-        </ul>
+        @yield('active')
       </div>
     </div>
   </nav><br>
-
 
 <div class="container search">
  @yield('search')
@@ -43,7 +32,7 @@
 <div class="container">
    @yield('catagory')
 </div>
- 
+
 <div class="container-fluid mt-4"><br>
   <div class="row ms-1" style="min-height: 100vh;">
     <!-- Sidebar -->
@@ -53,19 +42,20 @@
     <div class="col-sm-12 col-md-9">
       <div class="row g-3">
         <!-- การ์ดอาหาร -->
-        <div class="col-md-4">
-          <div class="p-3 border bg-light">
-            @yield('oder')
-          </div>
-        </div>
-
-       
+        @yield('oder')
+        
 
       </div>
     </div>
   </div>
-</div>
 
+  @yield('content')
+
+
+
+</div>
+@stack('js')
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 </body>
 </html>

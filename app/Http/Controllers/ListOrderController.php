@@ -36,6 +36,17 @@ class ListOrderController extends Controller
             'stock' => $order->amount,
         ]);
        }
+        $request->validate([
+            'menu_id' => 'required|integer',
+            'amount' => 'required|integer|min:1',
+        ]);
+
+        $listorder = new ListOrder();
+        $listorder->menu_id = $request->input('menu_id');
+        $listorder->amount = $request->input('amount');
+        $listorder->save();
+
+        return redirect()->back()->with('success', 'Order has been added!');
     }
 
     /**
