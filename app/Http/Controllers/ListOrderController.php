@@ -30,6 +30,7 @@ class ListOrderController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
        foreach($request as $order){
         ListOrder::create([
             'menu_id' => $order->menuid,
