@@ -18,6 +18,16 @@ Route::get('/', function () {
     return redirect()-> route('register');
 });
 
+Route::get('/empdata', function () {
+    return view('empdata');
+});
+Route::get('/edithistory', function () {
+    return view('edithistory');
+});
+Route::get('/admin', function () {
+    return view('admin');
+});
+
 Route::get('/home_admin', [AdminController::class, 'index'])->name('home_admin');
 Route::get('/editmenu', [AdminController::class, 'editmenu'])->name('editmenu');
 Route::get('/table_admin', [TableadminController::class, 'index'])->name('table_admin');
@@ -40,20 +50,5 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
-Route::middleware(['auth'])->group(function () {
-    Route::middleware(['admin'])->group(function () {
-        Route::get('/adminpage', [MenuController::class, 'page'])->name('admin.page');
-    });
-    Route::middleware(('cash'))->group(function(){
-        //ใส่ route ของพนักงานต้อนรับ คิดเงิน
-    });
-    Route::middleware(('kich'))->group(function(){
-        //ใส่ route ของพนักงานครัว
-    });
-    Route::middleware(('manager'))->group(function(){
-        //ใส่ route ของผู้บริหาร
-    });
-    Route::middleware(('stock'))->group(function(){
-        //ใส่ route ของพนักงานครัว
-    });
-});
+
+
