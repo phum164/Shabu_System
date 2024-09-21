@@ -51,4 +51,20 @@ Route::middleware([
     })->name('dashboard');
 });
 
+    Route::middleware(['auth'])->group(function () {
+    Route::middleware(['admin'])->group(function () {
+        Route::get('/adminpage', [MenuController::class, 'page'])->name('admin.page');
+    });
+    Route::middleware(('cash'))->group(function(){
+        //ใส่ route ของพนักงานต้อนรับ คิดเงิน
+    });
+    Route::middleware(('kich'))->group(function(){
+        //ใส่ route ของพนักงานครัว
+    });
+    Route::middleware(('manager'))->group(function(){
+        //ใส่ route ของผู้บริหาร
+    });
+    Route::middleware(('stock'))->group(function(){
+        //ใส่ route ของพนักงานครัว
+    });});
 
