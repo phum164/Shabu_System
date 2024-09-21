@@ -12,7 +12,8 @@ class TableController extends Controller
      */
     public function index()
     {
-        //
+        $tables = Table::all();
+        return view('#',compact('tables'));
     }
 
     /**
@@ -42,9 +43,28 @@ class TableController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function addbill($id)
     {
-        //
+        $table = Table::find($id);
+        $table->update([
+            'status' => 0,
+        ]);
+    }
+
+    public function finsbill($id)
+    {
+        $table = Table::find($id);
+        $table->update([
+            'status' => 1,
+        ]);
+    }
+
+    public function fixtable($id)
+    {
+        $table = Table::find($id);
+        $table->update([
+            'status' => 2,
+        ]);
     }
 
     /**

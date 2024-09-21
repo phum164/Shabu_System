@@ -18,7 +18,6 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
-
     public function position(){
         return $this->belongsTo(Position::class);
     }
@@ -30,8 +29,6 @@ class User extends Authenticatable
     public function listoder(){
         return $this->hasMany(ListOrder::class);
     }
-
-
 
     /**
      * The attributes that are mass assignable.
@@ -76,5 +73,20 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function isAdmin(){
+        return $this -> position_id === 1;
+    }
+    public function isManager(){
+        return $this->isAdmin() || $this->position_id === 2;
+    }
+    public function isKitch(){
+        return $this->isAdmin() || $this->position_id === 3;
+    }
+    public function isCash(){
+        return $this->isAdmin() || $this->position_id === 4;
+    }
+    public function isStock(){
+        return $this->isAdmin() || $this->position_id === 5;
     }
 }

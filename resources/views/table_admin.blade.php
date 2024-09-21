@@ -1,3 +1,4 @@
+@extends('layouts.layout_admin')
 @extends('layout_admin')
 @push ('style')
         <link rel="stylesheet" href="/css/admin.css">

@@ -14,7 +14,7 @@ class menu extends Model
     }
     
     public function menutype(){
-        return $this->belongsTo(Menutype::class);
+        return $this->belongsTo(Menutype::class,'menutype_id');
     }
 
     protected $tabal = 'menus';
