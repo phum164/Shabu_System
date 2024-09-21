@@ -1,3 +1,5 @@
+@extends('layout_welcome')
+@section('menu')
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
@@ -56,3 +58,4 @@
         </div>
     </x-authentication-card>
 </x-guest-layout>
+@endsection

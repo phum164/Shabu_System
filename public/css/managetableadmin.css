@@ -1,0 +1,67 @@
+
+.container-fluid{
+    background-color:#e4e4e4 ;
+}
+.main-container {
+    padding-top: 20px;
+}
+
+.sidebar {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.main-content {
+    padding: 15px;
+}
+
+.table-list .table-status {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.table-list .table-status:hover {
+    background-color: #e7e7e7;
+}
+
+.table-list .table-status.active {
+    border-color: #dc3545;
+}
+
+.table-list .table-status.active .table-info,
+.table-list .table-status.active .people-info,
+.table-list .table-status.active .time-remaining,
+.table-list .table-status.active .timefont{
+    color: #dc3545;
+}
+
+.time-remaining {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.text-black {
+    color: black !important;
+}
+
+.card {
+    border-radius: 10px;
+    background-color: white;
+}
+
+.add-button {
+    color: #28a745;
+    font-size: 1.5em;
+    text-decoration: none;
+}
+
+/* Ensure buttons have some space between them */
+.btn-dark {
+    margin-right: 10px;
+}

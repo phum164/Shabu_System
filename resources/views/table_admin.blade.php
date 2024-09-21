@@ -1,10 +1,14 @@
 @extends('layouts.layout_admin')
+@extends('layout_admin')
+@push ('style')
+        <link rel="stylesheet" href="/css/admin.css">
+    @endpush
 @section('menu')
 <br><h2>การจัดการโต๊ะภายในร้าน</h2><br>
 <div class="row">
     <div class="col-sm-12 col-md-6 col-lg-3">
         <div class="table">
-        <a href="#"><img src="{{ asset('img/table.png') }}" alt="รูปโลโก้ IT BEEF CHABU"></a><br><br>
+        <a href="{{ route('Managetable' )}}"><img src="{{ asset('img/table.png') }}" alt="รูปโลโก้ IT BEEF CHABU"></a><br><br>
     <p>โต๊ะ 1</p>
     <hr>
     <p class="status c">Close</p>

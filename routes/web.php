@@ -15,7 +15,7 @@ use App\Http\Controllers\ListorderController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()-> route('register');
 });
 
 Route::get('/home_admin', [AdminController::class, 'index'])->name('home_admin');

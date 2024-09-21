@@ -1,3 +1,5 @@
+@extends('layout_welcome')
+@section('menu')
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
@@ -25,10 +27,11 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <x-button>
+                <x-danger-button>
                     {{ __('Email Password Reset Link') }}
-                </x-button>
+                </x-danger-button>
             </div>
         </form>
     </x-authentication-card>
 </x-guest-layout>
+@endsection
