@@ -1,4 +1,4 @@
-@extends('layout_welcome')
+@extends('layouts.layout_welcome')
 @section('menu')
 <x-guest-layout>
     <x-authentication-card>
