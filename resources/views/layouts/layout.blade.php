@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="/css/user.css">
 </head>
 <body>
-<!-- เมนูฝั่งแอดมิน -->
 
 <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: rgb(235, 8, 8);">
     <div class="container">
@@ -39,7 +38,7 @@
    @yield('sidebar')
    
     <!-- Main Content Area -->
-    <div class="col-sm-12 col-md-9">
+    <div class="col-md-9">
       <div class="row g-3">
         <!-- การ์ดอาหาร -->
         @yield('oder')
