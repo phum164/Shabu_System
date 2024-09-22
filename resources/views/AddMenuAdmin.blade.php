@@ -40,6 +40,13 @@
             /* ปรับปุ่มให้กลม */
         }
     </style>
+    <div>
+        @if (session('error'))
+            <div class="alert alert-warning text-center">
+                <b>{{ session('error') }}</b>
+            </div>
+        @endif
+    </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             document.getElementById('menuImage').addEventListener('change', previewImage);
@@ -63,25 +70,34 @@
 
     <div class="container" style="max-width: 500px; margin-top: 50px;">
         <!-- คำว่า "เพิ่มเมนูอาหาร" ที่แยกออกจากบล็อก -->
-        <h2 class="text-center mb-4">เพิ่มเมนูอาหาร</h2>
+        <h2 class="text-center mb-4">{{ isset($editmenu) ? 'แก้ไขเมนูอาหาร' : 'เพิ่มเมนูอาหาร' }}</h2>
 
         <div class="card shadow" style="border-radius: 10px;">
             <div class="card-body">
                 @if ($errors->has('menuName'))
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         {{ $errors->first('menuName') }}
-                        <button type="button" class="btn-close align-middle fade show" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <button type="button" class="btn-close align-middle fade show" data-bs-dismiss="alert"
+                            aria-label="Close"></button>
                     </div>
                 @endif
-                <form action="/insertmenu" method="POST" enctype="multipart/form-data">
+                {{-- <form action="/insertmenu" method="POST" enctype="multipart/form-data"> --}}
+                <form action="{{ isset($editmenu) ? route('editmenu',$editmenu->id) : route('insertmenu') }}"
+                    method="POST" enctype="multipart/form-data">
                     @csrf
+                    @if (isset($editmenu))
+                        @method('PUT')
+                    @endif
                     <!-- ส่วนอัปโหลดรูปภาพ -->
                     <div class="form-group text-center">
                         <label for="menuImage" class="d-block">
                             <div style="border: 2px solid #ccc; padding: 30px; border-radius: 10px;">
-                                <img src="" id="previewImage" alt="เลือกอัปโหลดรูปภาพ" class="img-fluid"
-                                    style="max-width: 100px; cursor: pointer;">
-                                <p>เพิ่มรูปภาพ</p>
+                                {{-- <img src="" id="previewImage" alt="เลือกอัปโหลดรูปภาพ" class="img-fluid"
+                                    style="max-width: 100px; cursor: pointer;"> --}}
+                                {{-- <p>เพิ่มรูปภาพ</p> --}}
+                                <img src="{{ isset($editmenu) ? asset($editmenu->image) : '' }}" id="previewImage"
+                                    alt="อัปโหลดรูปภาพ" class="img-fluid" style="max-width: 100px; cursor: pointer;">
+                                <p>{{ isset($editmenu) ? 'แก้ไขรูปภาพ' : 'เพิ่มรูปภาพ' }}</p>
                             </div>
                         </label>
                         <input type="file" id="menuImage" name="menuImage" class="d-none" onchange="previewImage(event)">
@@ -89,9 +105,11 @@
 
                     <!-- กรอกชื่อเมนู -->
                     <div class="form-group">
-                        <label for="menuName">กรอกชื่อเมนูที่ต้องการเพิ่ม</label>
+                        <label for="menuName">กรอกชื่อเมนู</label>
+                        {{-- <input type="text" class="form-control" id="menuName" name="menuName" placeholder="ชื่อเมนู"
+                            required> --}}
                         <input type="text" class="form-control" id="menuName" name="menuName" placeholder="ชื่อเมนู"
-                            required>
+                            value="{{ isset($editmenu) ? $editmenu->name : '' }}" required>
                     </div>
 
                     <!-- เลือกหมวดหมู่ -->
@@ -99,16 +117,22 @@
                         <label for="menuCategory">เลือกหมวดหมู่</label>
                         <select class="form-control" id="menuCategory" name="type_id" required>
                             @foreach ($types as $type)
-                                <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                {{-- <option value="{{ $type->id }}" {{isset($editmenu) && $editmenu->menutype_id == $type->id ? 'selected' : ''}}>
+                                    {{$type->name}}
+                                </option> --}}
+                                <option value="{{ $type->id }}"{{ isset($editmenu) && $editmenu->menutype_id == $type->id ? ' selected' : '' }}>
+                                    {{ $type->name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
 
                     <!-- ปุ่มยืนยันและยกเลิกในแถวเดียวกัน -->
                     <div class="text-center">
-                        <button type="submit" class="btn btn-success mr-2 rounded-pill"
-                            style="width: 150px;">ยืนยันเพิ่มเมนู</button>
-                        <a href="/admin-menu" class="btn btn-danger rounded-pill" style="width: 150px;">ยกเลิก</a>
+                        <button type="submit" class="btn btn-success mr-2 rounded-pill" style="width: 150px;">
+                            {{ isset($editmenu) ? 'ยืนยันแก้ไขเมนู' : 'ยืนยันเพิ่มเมนู' }}
+                        </button>
+                        <a href="/showstock" class="btn btn-danger rounded-pill" style="width: 150px;">ยกเลิก</a>
                     </div>
                 </form>
             </div>
