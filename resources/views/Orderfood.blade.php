@@ -47,9 +47,8 @@
 
     <form id="orderForm" method="POST" action="{{ route('listorders.store') }}">
       @csrf
-      <input type="hidden" name="menu_id" id="orderMenuId">
-      <input type="hidden" name="amount" id="orderAmount">
-      <button type="submit" class="comf">สั่งอาหาร</button>
+      <input type="hidden" value="">
+      <button type="submit" id="submitOrder" class="comf">สั่งอาหาร</button>
     </form>
 
     @if (session('success'))

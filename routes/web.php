@@ -15,7 +15,7 @@ use App\Http\Controllers\ListorderController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()-> route('register');
 });
 
 Route::get('/empdata', function () {
