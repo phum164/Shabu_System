@@ -1,7 +1,8 @@
 @extends('layouts.layout_admin')
 @push ('style')
         <link rel="stylesheet" href="/css/admin.css">
-    @endpush
+@endpush
+
 @section('menu')
 <div class="col-sm-12 col-md-6 col-lg-4">
   <div class="content">

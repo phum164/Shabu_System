@@ -30,6 +30,13 @@ class ListOrderController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
+       foreach($request as $order){
+        ListOrder::create([
+            'menu_id' => $order->menuid,
+            'stock' => $order->amount,
+        ]);
+       }
         $request->validate([
             'menu_id' => 'required|array',
             'menu_id.*' => 'required|integer',

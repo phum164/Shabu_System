@@ -114,5 +114,3 @@ document.getElementById('submitOrder').addEventListener('click', function() {
   });
   form.submit(); // ส่งฟอร์ม
 });
-
-
