@@ -1,4 +1,4 @@
-@extends('layout_admin')
+@extends('layouts.layout_admin')
 @section('menu')
 
 <!DOCTYPE html>

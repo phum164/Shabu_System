@@ -46,6 +46,8 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::middleware(('cash'))->group(function(){
         //ใส่ route ของพนักงานต้อนรับ คิดเงิน
+        Route::get('/Orderfood', [OrderfoodController::class, 'index'])->name('Orderfood');
+
     });
     Route::middleware(('kich'))->group(function(){
         //ใส่ route ของพนักงานครัว

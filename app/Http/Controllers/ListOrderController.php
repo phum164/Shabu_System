@@ -30,24 +30,24 @@ class ListOrderController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
-       foreach($request as $order){
-        ListOrder::create([
-            'menu_id' => $order->menuid,
-            'stock' => $order->amount,
-        ]);
-       }
         $request->validate([
-            'menu_id' => 'required|integer',
-            'amount' => 'required|integer|min:1',
+            'menu_id' => 'required|array',
+            'menu_id.*' => 'required|integer',
+            'amount' => 'required|array',
+            'amount.*' => 'required|integer|min:1',
         ]);
-
-        $listorder = new ListOrder();
-        $listorder->menu_id = $request->input('menu_id');
-        $listorder->amount = $request->input('amount');
-        $listorder->save();
-
-        return redirect()->back()->with('success', 'Order has been added!');
+        
+        // วนลูปผ่านค่า menu_id และ amount พร้อมกัน
+        foreach ($request->menu_id as $index => $menuId) {
+            $listOrder = new ListOrder();
+            
+            $listOrder->menu_id = $menuId;                   
+            $listOrder->amount	 = $request->amount	[$index];
+            
+            $listOrder->save();
+        }
+        
+        return redirect()->back()->with('success', 'คำสั่งซื้อถูกเพิ่มเรียบร้อยแล้ว!');
     }
 
     /**

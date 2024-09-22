@@ -32,6 +32,11 @@
 @section('sidebar')
 
 <div class="col-sm-12 col-md-3 sidebar order-md-last">
+  @if (session('success'))
+  <div class="alert alert-success">
+  {{ session('success') }}
+  </div>
+@endif
   <div class="timeout">
     <p>คุณเหลือเวลาอีก</p>
     <p>1 : 59 : 59</p>
@@ -51,11 +56,7 @@
       <button type="submit" id="submitOrder" class="comf">สั่งอาหาร</button>
     </form>
 
-    @if (session('success'))
-      <div class="alert alert-success">
-      {{ session('success') }}
-      </div>
-    @endif
+   
 
   </div>
 </div>
@@ -85,8 +86,8 @@
 @endforeach
 @endsection
 
-@push('js')
 
+@push('js')
 <script src="{{asset('js/script.js')}}"></script>    
 
 @endpush

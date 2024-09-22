@@ -1,14 +1,15 @@
 @extends('layouts.layout')
+
 @section('active')
 <ul class="navbar-nav">
   <li class="nav-item">
-    <a class="nav-link " href="{{ route('Orderfood')}}" >สั่งอาหาร</a>
+    <a class="nav-link" href="{{ route('Orderfood')}}" >สั่งอาหาร</a>
   </li>
   <li class="nav-item">
     <a class="nav-link active" href="{{ route('historyoder')}}">ประวัติการสั่งอาหาร</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link"  href="{{ route('totalprice')}}">ยอดรวมทั้งหมด</a>
+    <a class="nav-link" href="{{ route('totalprice')}}">ยอดรวมทั้งหมด</a>
   </li>
 </ul>
 @endsection
@@ -26,22 +27,28 @@
 @endsection
 
 @section('oder')
- 
-    <div class="lishis">
-    <label class="historyOder">สั่งไปเมื่อ 5 นาทีที่แล้ว</label><br><br>
-     <table>
-      <tr>
-        <td><img class="hisimg" src="{{ asset('img/Pork/p1.png') }}"></td>
-        <td class="mg">หมูสามชั้น</td>
-        <td class="mg">จำนวน <br> 5</td>
-        <td class="mg">กำลังดำเนินการ...</td>
-      </tr>
-     </table>
+<div class="lishis">
+    @foreach($orders as $order)
+    <div class="historyOder">
+        <label>สั่งไปเมื่อ {{ $order->created_at->diffForHumans() }}</label><br><br>
+        <table>
+            <tr>
+                <td><img class="hisimg" src="{{ asset($order->menu->image) }}"></td>
+                <td class="mg">{{ $order->menu->name }}</td>
+                <td class="mg">จำนวน <br> {{ $order->amount }}</td>
+                <td class="mg">
+                    @if($order->status == 'processing')
+                        กำลังดำเนินการ...
+                    @elseif($order->status == 'completed')
+                        เสร็จสิ้น
+                    @else
+                        {{ $order->status }}
+                    @endif
+                </td>
+            </tr>
+        </table>
     </div>
-
-  
+    <br>
+    @endforeach
+</div>
 @endsection
-        
-
-    
-    
