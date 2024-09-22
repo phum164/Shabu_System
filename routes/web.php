@@ -18,6 +18,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/empdata', function () {
+    return view('empdata');
+});
+Route::get('/edithistory', function () {
+    return view('edithistory');
+});
+Route::get('/admin', function () {
+    return view('admin');
+});
+
 Route::get('/home_admin', [AdminController::class, 'index'])->name('home_admin');
 // Route::get('/editmenu', [AdminController::class, 'editmenu'])->name('editmenu');
 Route::get('/table_admin', [TableadminController::class, 'index'])->name('table_admin');

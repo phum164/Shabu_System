@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #DD0019;
+    padding: 10px;
+    color: white;
+    padding: 1.5em;
+    padding-left: 4.2em;
+}
+
+.content-section {
+    width: 90%;
+    margin: auto;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-bar button {
+    padding: 10px;
+    background-color: #ddd;
+    border: none;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.category-buttons {
+    margin-bottom: 20px;
+}
+
+.category-buttons .btn {
+    padding: 10px 20px;
+    background-color: #ddd;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.category-buttons .btn:hover {
+    background-color: #ba1d1d;
+    color: white;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+table th, table td {
+    padding: 15px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+table th {
+    background-color: #f4f4f4;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
