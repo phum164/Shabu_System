@@ -29,6 +29,8 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ route('totalprice')}}">ยอดรวมทั้งหมด</a>
           </li>
+         
+
         </ul>
       </div>
     </div>
