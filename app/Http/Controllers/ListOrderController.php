@@ -28,7 +28,7 @@ class ListOrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
 {
     // ตรวจสอบการ validate ก่อน ว่าข้อมูลที่ส่งมาถูกต้อง
     $request->validate([
@@ -43,8 +43,9 @@ class ListOrderController extends Controller
         $listOrder = new ListOrder();
         
         // กำหนดค่า menu_id และ amount ให้กับโมเดล
-        $listOrder->menu_id = $menuId;                   
+        $listOrder->menu_id = $menuId;
         $listOrder->amount = $request->amount[$index]; // ใช้ $index ในการจับคู่ค่า amount กับ menu_id
+        $listOrder->bill_id = $id;
         
         // บันทึกข้อมูลลงในฐานข้อมูล
         $listOrder->save();

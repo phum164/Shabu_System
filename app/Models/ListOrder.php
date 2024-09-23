@@ -10,7 +10,7 @@ class ListOrder extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $table ='listsorder';
+    protected $table = 'listsorders';
     public function menu(){
         return $this->belongsTo(Menu::class);
     }

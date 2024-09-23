@@ -93,47 +93,6 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $request->validate(
-        //     [
-        //         'menuName' => 'required|max:60|string',
-        //         'menuImage' => 'nullable|mimes:png,jpeg,webp|max:2048',
-        //         'stock' => 'nullable|integer'
-        //     ],
-        //     [
-        //         'menuName.required' => 'กรุณากรอกชื่อเมนู',
-        //         'name.max:255' => 'ชื่อเมนูไม่เกิน 60 ตัวอักษร'
-        //     ]
-        // );
-
-        // $menu = Menu::findOrFail($id);
-        // $path = 'img/menus/';
-        // if ($request->hasFile('menuImage')) {
-        //     if ($menu->image != 'img/menus/emptymenu.jpg' && file_exists(public_path($menu->image))) {
-        //         unlink(public_path($menu->image));
-        //         $file = $request->file('menuImage');
-        //         $filename = time() . '.' . $file->getClientOriginalExtension();
-        //         $file->move($path, $filename);
-        //         $menu->image = $path . $filename;
-        //         $menu->update([
-        //             'name' => $request->menuName,
-        //             'menutype_id' => $request->type_id,
-        //             'image' => $path . $filename,
-        //         ]);
-        //         return redirect('/showstock')->with('success', 'อัปเดตเมนูเรียบร้อยแล้ว');
-        //     }
-        // }else{
-        //     if($menu->name == $request->menuName && $menu->menutype_id == $request->type_id){
-        //         return redirect('/showstock')->with('error', '');
-        //     }
-        // }
-
-        // $menu->update([
-        //     'name' => $request->menuName,
-        //     'menutype_id' => $request->type_id,
-        // ]);
-        // return redirect('/showstock')->with('success', 'อัปเดตเมนูเรียบร้อยแล้ว');
-
-        // ตรวจสอบข้อมูล
         $request->validate(
             [
                 'menuName' => 'required|max:60|string',
@@ -153,8 +112,9 @@ class MenuController extends Controller
 
         // ตรวจสอบว่ามีการอัปโหลดรูปภาพใหม่หรือไม่
         if ($request->hasFile('menuImage')) {
-            // ลบภาพเก่าถ้าไม่ใช่ภาพเริ่มต้น
+            //เปลี่ยนสถานะ check ว่ามีรูปภาพเข้ามา
             $checkImg = false;
+            // ลบภาพเดิม
             if ($menu->image != 'img/menus/emptymenu.jpg' && file_exists(public_path($menu->image))) {
                 unlink(public_path($menu->image));
             }
@@ -163,7 +123,7 @@ class MenuController extends Controller
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path($path), $filename);
 
-            // บันทึกชื่อไฟล์รูปภาพใหม่ในฐานข้อมูล
+            // บันทึกชื่อไฟล์รูปภาพใหม่
             $menu->image = $path . $filename;
         }
 
@@ -176,7 +136,7 @@ class MenuController extends Controller
         $menu->update([
             'name' => $request->menuName,
             'menutype_id' => $request->type_id,
-            'image' => $menu->image // อัปเดตรูปภาพด้วย ถ้ามีการเปลี่ยนแปลง
+            'image' => $menu->image
         ]);
 
         return redirect('/showstock')->with('success', 'อัปเดตเมนูเรียบร้อยแล้ว');
@@ -189,6 +149,8 @@ class MenuController extends Controller
     {
         $delete = Menu::find($id);
         $name = $delete->name;
+        if ($delete->image != 'img/menus/emptymenu.jpg' && file_exists(public_path($delete->image)))
+            unlink(public_path($delete->image));
         $delete->delete();
         return redirect('/showstock')->with('success', 'ลบเมนู '. $name.' เรียบร้อยแล้ว');
     }
