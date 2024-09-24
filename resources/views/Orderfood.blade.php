@@ -57,7 +57,6 @@
       <button type="submit" id="submitOrder" class="comf">สั่งอาหาร</button>
     </form>
 
-   
 
   </div>
 </div>
