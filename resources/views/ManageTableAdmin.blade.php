@@ -1,77 +1,223 @@
 @extends('layouts.layout_admin')
-@push ('style')
-        <link rel="stylesheet" href="{{ asset('css/managetableadmin.css') }}">
-    @endpush
-    
-@section('menu')
-<!-- อย่าพึ่งทำอะไร ทำให้มันไม่ error ตอน push เฉยๆเดะมาทำต่อจ้า แต่ถ้าใครอยากทำให้ก็ได้นะจุบุ -->
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ManageTable</title>
-    <link rel="stylesheet" href="managetableadmin.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
-<body style="background-color:rgb(228, 228, 228)">
+@push('style')
+<link rel="stylesheet" href="{{ asset('css/managetableadmin.css') }}">
+@endpush
+
+@section('menu')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4 bg-white p-3">
+        <!-- Sidebar โต๊ะทางซ้าย -->
+        <div class="col-md-4 p-3" style="background-color: white;">
             <div class="table-list">
-                @for ($i = 1; $i <= 8; $i++)
-                <div class="table-status mb-3 selectable-table" id="table-{{ $i }}" onclick="selectTable({{ $i }})">
+                @foreach ($tables as $table)
+                <div class="table-status mb-3 selectable-table {{ $table->status == 0 ? 'open' : 'close' }}" id="table-{{ $table->id }}" onclick="selectTable({{ $table->id }})">
                     <div class="d-flex justify-content-between align-items-center">
-                        <div class="table-info">โต๊ะ: {{ $i }}</div>
+                        <div class="table-info">โต๊ะ {{ $table->id }}</div>
                         <p>เวลาที่เหลือ</p>
                     </div>
-                    <div>
-                    <div class="people-info"><i class="bi bi-person-fill"></i>{{ $peopleCount[$i] }}</div>
-                    <div class="time-remaining text-black">{{ $timeRemaining[$i] }}</div>
-                     <a href="#" class="add-button">+</a></div>
+                    <div class="d-flex align-items-center">
+                        <div class="people-info">
+                            <i class="bi bi-person-fill"></i>
+                            @if($table->bill && $table->bill->count() > 0)
+                                {{ $table->bill->last()->person_amount }} คน
+                            @else
+                                0 คน
+                            @endif
+                        </div>
+                        <div class="time-remaining text-black" id="time-remaining-{{ $table->id }}">
+                            @if($table->status == 0 && $table->bill && $table->bill->count() > 0)
+                                <script>
+                                    startTableCountdown('{{ $table->bill->last()->start_time }}', 'time-remaining-{{ $table->id }}');
+                                </script>
+                            @else
+                                00:00:00
+                            @endif
+                        </div>
+                    </div>
                 </div>
-                @endfor
+                @endforeach
             </div>
         </div>
 
-        <!-- Right Column (Order Details) -->
+        <!-- Main Content แสดงรายละเอียดโต๊ะที่เลือกทางขวา -->
         <div class="col-md-8">
+            @if(isset($selectedTable))
             <div id="order-details">
                 <div class="card mb-3">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-start">
-                            <div class="mb-2"><strong>โต๊ะ:</strong> <span id="table-number">1</span></div>
-                            <div class="mb-2"><strong>จำนวนคน:</strong> <span id="people-number">2</span></div>
-                            <div class="mb-2"><strong>เวลา:</strong> <span id="time-remaining-right">1:59:59</span></div>
-                            <div class="mb-2"><strong>พนักงาน:</strong> EM003</div>
+                            <div class="mb-2"><strong>โต๊ะ</strong> <span id="table-number">{{ $selectedTable->id }}</span></div>
+                            <div class="mb-2"><strong>จำนวนคน:</strong>
+                                @if($selectedTable->bill && $selectedTable->bill->count() > 0)
+                                    {{ $selectedTable->bill->last()->person_amount }} คน
+                                @else
+                                    0 คน
+                                @endif
+                            </div>
+                            <div class="mb-2"><strong>เวลาที่เหลือ:</strong>
+                                <span id="selected-table-countdown">
+                                    @if($selectedTable->status == 0 && $selectedTable->bill && $selectedTable->bill->count() > 0)
+                                        <script>
+                                            startTableCountdown('{{ $selectedTable->bill->last()->start_time }}', 'selected-table-countdown');
+                                        </script>
+                                    @else
+                                        00:00:00
+                                    @endif
+                                </span>
+                            </div>
                         </div>
                         <div class="d-flex justify-content-end mt-3">
-                            <button class="btn btn-dark text-white mr-2">แก้ไข</button>
-                            <button class="btn btn-danger text-white">เช็คบิล</button>
+                            @if($selectedTable->status == 1)
+                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal" onclick="openModal({{ $selectedTable->id }})">เปิดโต๊ะ</button>
+                            @else
+                                <button class="btn btn-dark text-white mr-2" data-bs-toggle="modal" data-bs-target="#editModal" onclick="openEditModal({{ $selectedTable->id }})">แก้ไข</button>
+                                <button class="btn btn-danger text-white">เช็คบิล</button>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 </div>
 
+<!-- Modal for Editing -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">โต๊ะ <span id="table-number">{{ $selectedTable->id }}</span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <form id="openTableForm" action="{{ route('bill.create') }}" method="POST">
+          @csrf
+          <input type="hidden" name="tableid" id="table-id-input">
+          <input type="hidden" name="empid" value="{{ $employee->id }}">
+
+          <div class="mb-3">
+            <label for="people-amount" class="form-label">จำนวนคน</label>
+            <div class="input-group justify-content-center">
+              <button type="button" class="btn btn-outline-secondary" onclick="updatePeopleCount(-1)">-</button>
+              <input type="text" class="form-control text-center" id="people-amount" name="amount" value="1" readonly>
+              <button type="button" class="btn btn-outline-secondary" onclick="updatePeopleCount(1)">+</button>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="time-remaining" class="form-label">เวลา</label>
+            <input type="text" class="form-control text-center" id="time-remaining" name="time_remaining" value="2:00:00" readonly>
+          </div>
+
+          <div class="modal-footer justify-content-center">
+            <button type="submit" class="btn btn-success" onclick="startTimer()">เริ่มจับเวลา</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">โต๊ะ <span id="table-number">{{ $selectedTable->id }}</span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+      <form id="openTableForm" action="{{ route('bill.update') }}" method="POST">
+            @csrf
+            <input type="hidden" name="tableid" id="table-id-input">
+            <input type="hidden" name="empid" value="{{ $employee->id }}">
+          <div class="mb-3">
+            <label for="people-amount" class="form-label">จำนวนคน</label>
+            <div class="input-group justify-content-center">
+              <button type="button" class="btn btn-outline-secondary" onclick="updatePeopleCount(-1)">-</button>
+              <input type="text" class="form-control text-center" id="people-amount" name="amount" value="1" readonly>
+              <button type="button" class="btn btn-outline-secondary" onclick="updatePeopleCount(1)">+</button>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="time-remaining" class="form-label">เวลา</label>
+            <input type="text" class="form-control text-center" id="time-remaining" name="time_remaining" readonly> <!-- แสดง countdown ที่เหลือ -->
+          </div>
+
+          <div class="modal-footer justify-content-center">
+            <button type="submit" class="btn btn-success">ตกลง</button> <!-- เปลี่ยนปุ่มเป็นตกลง -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
-    const peopleCount = {1: 2, 2: 4, 3: 3, 4: 5, 5: 4, 6: 6, 7: 2, 8: 8};
-    const timeRemaining = {1: "1:59:59", 2: "0:00:00", 3: "0:45:30", 4: "0:00:00", 5: "1:15:10", 6: "0:00:00", 7: "1:30:50", 8: "0:00:00"};
-
     function selectTable(tableNumber) {
-        document.querySelectorAll('.selectable-table').forEach(table => table.classList.remove('active'));
-        document.getElementById('table-' + tableNumber).classList.add('active');
-        document.getElementById('table-number').innerText = tableNumber;
-        document.getElementById('people-number').innerText = peopleCount[tableNumber];
-        document.getElementById('time-remaining-right').innerText = timeRemaining[tableNumber];
+        // เปลี่ยน URL เพื่อให้ส่งค่า tableNumber ไปยัง URL
+        window.location.href = '/managetable/' + tableNumber;
+    }
+
+    function openModal(tableId) {
+        document.getElementById('table-id-input').value = tableId;
+        var modal = new bootstrap.Modal(document.getElementById('editModal'));
+        modal.show();
+    }
+
+    function updatePeopleCount(change) {
+        var peopleInput = document.getElementById('people-amount');
+        var currentPeople = parseInt(peopleInput.value);
+        var newPeople = currentPeople + change;
+        if (newPeople >= 1 && newPeople <= 4) {
+            peopleInput.value = newPeople;
+        }
+    }
+
+    function openEditModal(tableId) {
+        document.getElementById('table-id-input').value = tableId;
+
+        // ดึงข้อมูลเวลาที่เหลือและแสดงใน modal
+        var countdownElement = document.getElementById('time-remaining');
+        var startTime = '{{ $selectedTable->bill->last()->start_time }}';  // ดึงเวลาเริ่มจาก database
+        startTableCountdown(startTime, countdownElement.id);  // เรียกใช้ countdown
+
+        var modal = new bootstrap.Modal(document.getElementById('editModal'));
+        modal.show();
+    }
+
+    function startTableCountdown(startTime, elementId) {
+        // Convert startTime (from Laravel) to JavaScript Date object
+        const startDate = new Date(startTime);  
+        const countdownTime = 2 * 60 * 60 * 1000;  // 2 hours in milliseconds
+        const endTime = startDate.getTime() + countdownTime;
+
+        // Update the countdown every second
+        let timer = setInterval(function() {
+            const now = new Date().getTime();
+            const diff = endTime - now;
+
+            if (diff <= 0) {
+                clearInterval(timer);
+                document.getElementById(elementId).innerHTML = "<div class='expired'>หมดเวลา</div>";
+                return;
+            }
+
+            // Calculate the time remaining
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            // Display the countdown
+            document.getElementById(elementId).innerHTML = 
+                "<div class='hours'><div class='numbers'>" + hours + "</div>hours</div>" +
+                "<div class='minutes'><div class='numbers'>" + minutes + "</div>minutes</div>" +
+                "<div class='seconds'><div class='numbers'>" + seconds + "</div>seconds</div>";
+            
+        }, 1000);  // Update every second
     }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-@endsection
 
-</body>
-</html>
+@endsection
