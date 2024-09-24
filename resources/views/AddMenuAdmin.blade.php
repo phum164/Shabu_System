@@ -117,9 +117,6 @@
                         <label for="menuCategory">เลือกหมวดหมู่</label>
                         <select class="form-control" id="menuCategory" name="type_id" required>
                             @foreach ($types as $type)
-                                {{-- <option value="{{ $type->id }}" {{isset($editmenu) && $editmenu->menutype_id == $type->id ? 'selected' : ''}}>
-                                    {{$type->name}}
-                                </option> --}}
                                 <option value="{{ $type->id }}"{{ isset($editmenu) && $editmenu->menutype_id == $type->id ? ' selected' : '' }}>
                                     {{ $type->name }}
                                 </option>

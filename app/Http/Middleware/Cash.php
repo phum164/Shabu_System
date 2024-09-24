@@ -22,6 +22,6 @@ class Cash
         if(auth()->user()->position && auth()->user()->isCash()){
             return $next($request);
         }
-        return redirect('/');
+        return redirect()->back();
     }
 }

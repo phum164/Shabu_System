@@ -21,6 +21,22 @@
             </div>
 
             <div class="mt-4">
+                <x-label for="tell_number" value="{{ __('Tell Number') }}" />
+                <x-input id="tell_number" class="block mt-1 w-full" type="text" name="tell_number" :value="old('tell_number')" required />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="position">Position</x-label>
+                <select class="form-control" id="position" name="position_id" required>
+                    @foreach ($positions as $position)
+                        <option value="{{ $position->id }}">
+                            {{ $position->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mt-4">
                 <x-label for="password" value="{{ __('Password') }}" />
                 <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
             </div>

@@ -13,6 +13,7 @@
 </ul>
 @endsection
 @section('search')
+<div class="hidden">{{$bill_id = 1}}</div>
 <h4>สั่งอาหาร  <span class="Serch"></h4>
   <div class="box">
       <input class="s-t" type="text" name="" id="" placeholder="ค้นหารายการอาหารที่ต้องการ...">
@@ -50,7 +51,7 @@
     </div><br>
     <p>โต๊ะ 1</p>
 
-    <form id="orderForm" method="POST" action="{{ route('listorders.store') }}">
+    <form id="orderForm" method="POST" action="{{ route('listorders.store',['id' => $bill_id])}}">
       @csrf
       <input type="hidden" value="">
       <button type="submit" id="submitOrder" class="comf">สั่งอาหาร</button>

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('listsorders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('menu_id');
-            $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('employee_id')->nullable();
             $table->unsignedBigInteger('bill_id');
             $table->integer('amount');
             $table->tinyInteger('status')->default(0); // 0 = pending, 1 = completed, 2 = cancelled
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('listorder');
+        Schema::dropIfExists('listorders');
     }
 };

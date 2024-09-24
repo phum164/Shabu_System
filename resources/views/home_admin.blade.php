@@ -45,7 +45,7 @@
 <div class="col-sm-12 col-md-6 col-lg-4">
   <div class="content">
   <img src="{{ asset('img/table.png') }}" alt="รูปโลโก้ IT BEEF CHABU">
-      <a class="btn" href="#">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a> 
+      <a class="btn" href="/showstock">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a> 
   </div>
 </div>   
 @endsection
