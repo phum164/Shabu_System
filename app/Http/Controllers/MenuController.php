@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Menu;
 use App\Models\menutype;
+use Illuminate\Validation\Rule;
 
 class MenuController extends Controller
 {
@@ -23,8 +24,14 @@ class MenuController extends Controller
     {
         $request->validate(
             [
-                'menuName' => 'required|max:255|string||unique:menus,name',
+                'menuName' => [
+                    'required',
+                    'max:255',
+                    'string',
+                    Rule::unique('menus', 'name')->whereNull('deleted_at')
+                ],
                 'menuImage' => 'nullable|mimes:png,jpeg,webp|max:2048',
+
             ],
             [
                 'menuName.required' => 'กรุณากรอกชื่อเมนู',
@@ -152,7 +159,7 @@ class MenuController extends Controller
         if ($delete->image != 'img/menus/emptymenu.jpg' && file_exists(public_path($delete->image)))
             unlink(public_path($delete->image));
         $delete->delete();
-        return redirect('/showstock')->with('success', 'ลบเมนู '. $name.' เรียบร้อยแล้ว');
+        return redirect('/showstock')->with('success', 'ลบเมนู ' . $name . ' เรียบร้อยแล้ว');
     }
 
     public function page()

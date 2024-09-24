@@ -22,6 +22,6 @@ class Kitch
         if(auth()->user()->position && auth()->user()->isKitch()){
             return $next($request);
         }
-        return redirect('/');
+        return redirect()->back();
     }
 }

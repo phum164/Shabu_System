@@ -22,6 +22,6 @@ class Manager
         if(auth()->user()->position && auth()->user()->isManager()){
             return $next($request);
         }
-        return redirect('/');
+        return redirect()->back();
     }
 }

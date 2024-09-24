@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
-
+use App\Models\Position;
 class FortifyServiceProvider extends ServiceProvider
 {
     /**
@@ -41,6 +41,14 @@ class FortifyServiceProvider extends ServiceProvider
 
         RateLimiter::for('two-factor', function (Request $request) {
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
+        });
+
+        Fortify::registerView(function () {
+            // if (auth()->user()->position_id != 1 && auth()->user()->position_id != 2) {
+            //     return redirect()->back(); // ปฏิเสธการเข้าถึงถ้าไม่ใช่ manager
+            // }
+            $positions = Position::all();
+            return view('auth.register', ['positions' => $positions]);
         });
     }
 }

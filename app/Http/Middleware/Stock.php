@@ -22,6 +22,6 @@ class Stock
         if(auth()->user()->position && auth()->user()->isStock()){
             return $next($request);
         }
-        return redirect('/');
+        return redirect()->back();
     }
 }

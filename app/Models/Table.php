@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Ramsey\Uuid\Type\Integer;
 
 class Table extends Model
 {
@@ -15,7 +16,14 @@ class Table extends Model
         return $this->hasMany(Bill::class);
     }
 
-    public function stage(){
-
+    public static function status($id, $status){
+        $table = self::find($id);
+        // ตรวจสอบว่าพบ table หรือไม่
+        if (!$table) {
+            return false;
+        }
+        $table->status = $status;
+        $table->save();
+        return $table;
     }
 }

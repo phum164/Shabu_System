@@ -1,4 +1,4 @@
-@extends('layout_admin')
+@extends('layouts.layout_admin')
 @push ('style')
         <link rel="stylesheet" href="{{ asset('css/managetableadmin.css') }}">
     @endpush
