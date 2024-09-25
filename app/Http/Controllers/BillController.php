@@ -1,16 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Bill;
 use App\Models\Table;
+use Carbon\Carbon;
 
 class BillController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         //
@@ -18,63 +17,63 @@ class BillController extends Controller
         return view('#', compact('bills'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('createbill');
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function create(Request $request)
     {
-        $time = date('Y-m-d H:i:s', time());
-        $bill = Bill::create([
-            'employee_id' => $request->empid,
-            'table_id' => $request->tableid,
-            'person_amount	' => $request->amount,
-            'total_pay' => $request->amount * 299,
-            'status' => 0,
-            'start_time' => $time,
-            'end_time' => date('Y-m-d H:i:s', strtotime('+2 hours')),
-        ]);
-        Table::status($request->tableid, 0);
-        $request->session()->put('bill_id', $bill->id);
-        return view('testbill_section', ['billId' => $bill->id]);
-        // return redirect();
+        $employee_id = Auth::id(); 
+        $bill = new Bill;
+        $bill->employee_id = $employee_id; 
+        $bill->table_id = $request->tableid; 
+        $bill->person_amount = $request->amount; 
+        $bill->total_pay = $request->amount * 299; 
+        $bill->status = 0;
+        $bill->start_time = now(); // กำหนดฟิลด์ start_time
+        $bill->end_time = now()->addHours(2); 
+        $bill->save();
+    
+        // Update table status
+        $table = Table::find($request->tableid);
+        $table->status = 0; // Make the table unavailable
+        $table->save();
+        
+        // Redirect back to manage table view with the selected table ID
+        return redirect('/managetable/' . $request->tableid);
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
+    
+    public function showTable($id)
     {
-        $bill = Bill::find($id);
-        return view('#', compact('bill'));
+        $selectedTable = Table::find($id);
+    
+        // Retrieve the last bill associated with the table
+        $bill = $selectedTable->bill->last();
+        if ($bill) {
+            $start_time = $bill->start_time;  // Get the bill's start time
+        } else {
+            $start_time = now();  // Default to current time if no bill exists
+        }
+    
+        // Calculate the end time (2 hours after the start time)
+        $end_time = Carbon::parse($start_time)->addHours(2)->toDateTimeString();
+    
+        // Pass the selected table and end_time to the view
+        return view('managetableadmin', compact('selectedTable', 'end_time'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Request $request)
+    
+    public function update(Request $request)
     {
-        $bill = Bill::find($request->id);
-        $bill::update([
-            'person_amount	' => $bill->person_amount + $request->amount,
-            'total_pay' => $bill->person_amount + ($request->amount * 299),
-        ]);
+        // Get the latest bill associated with the table
+        $bill = Bill::where('table_id', $request->tableid)->latest()->first();
+    
+        if ($bill) {
+            // Update the person amount and save the bill
+            $bill->person_amount = $request->amount;
+            $bill->save();
+        }
+    
+        // Redirect back to the manage table view
+        return redirect()->route('managetable');
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    
 
     public function checkbill($id)
     {

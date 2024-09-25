@@ -6,7 +6,6 @@ use App\Http\Controllers\TableadminController;
 use App\Http\Controllers\OrderfoodController;
 use App\Http\Controllers\HistoryOController;
 use App\Http\Controllers\TotalpriceController;
-use App\Http\Controllers\ManageTableAdminController;
 use App\Http\Controllers\MenuListAdminController;
 use App\Http\Controllers\AddMenuAdminController;
 use App\Http\Controllers\MenuController;
@@ -26,12 +25,10 @@ Route::get('/empdata', function () {
 Route::get('/edithistory', function () {
     return view('edithistory');
 });
-Route::get('/admin', function () {
-    return view('admin');
-});
 
 Route::get('/home_admin', [AdminController::class, 'index'])->name('home_admin');
-Route::get('/table_admin', [TableadminController::class, 'index'])->name('table_admin');
+Route::get('/editmenu', [AdminController::class, 'editmenu'])->name('editmenu');
+Route::get('/table_admin', [TableController::class, 'index'])->name('table_admin');
 Route::get('/Orderfood', [OrderfoodController::class, 'index'])->name('Orderfood');
 Route::get('/historyoder', [HistoryOController::class, 'index'])->name('historyoder');
 Route::get('/Totalprice', [TotalpriceController::class, 'index'])->name('totalprice');
@@ -39,7 +36,9 @@ Route::post('/listorders/{id}', [ListOrderController::class, 'store'])->name('li
 Route::get('/showstock', [MenuController::class, 'showstock'])->name('showstock');
 Route::post('/addstock/{id}', [MenuController::class, 'stock'])->name('add_stock');
 Route::get('/Menulist', [MenuListAdminController::class, 'index'])->name('menulist');
-Route::get('/Managetable', [ManageTableAdminController::class, 'index'])->name('Managetable');
+Route::get('/managetable/{id}', [TableController::class, 'manage'])->name('Managetable');
+Route::post('/bill/create', [BillController::class, 'create'])->name('bill.create');
+Route::post('/bill/update', [BillController::class, 'update'])->name('bill.update');
 Route::get('/Addmenuadmin', [AddMenuAdminController::class,'index'])->name('Addmenuadmin');
 Route::post('/insertmenu',[MenuController::class,'create'])->name('insertmenu');
 Route::get('/edit/{id}',[MenuController::class,'edit'])->name('edit');
