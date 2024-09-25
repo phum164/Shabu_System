@@ -73,7 +73,7 @@ class MenuController extends Controller
         $menu->update([
             'stock' => $menu->stock + $request->stock
         ]);
-        return redirect('/showstock')->with('success', 'เพิ่มสต๊อกสินค้าแล้ว');;
+        return redirect('/showstock')->with('success', 'เพิ่มสต๊อกเรียบร้อยแล้ว!');
     }
 
     /**
@@ -146,7 +146,7 @@ class MenuController extends Controller
             'image' => $menu->image
         ]);
 
-        return redirect('/showstock')->with('success', 'อัปเดตเมนูเรียบร้อยแล้ว');
+        return redirect('/showstock')->with('success', 'อัปเดตเมนูเรียบร้อยแล้ว');    
     }
 
     /**

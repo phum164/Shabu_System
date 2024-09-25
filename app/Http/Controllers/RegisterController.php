@@ -27,9 +27,20 @@ class RegisterController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'tell_number' => 'required|digits:10|unique:users',
+            'tell_number' => [
+                    'required',
+                    'regex:/^0[0-9]{9}$/',
+                    'unique:users,tell_number'
+            ],
             'position_id' => 'required|exists:positions,id',
             'password' => 'required|string|min:8|confirmed',
+        ],[
+            'name.required' => 'กรุณากรอก ชื่อ-สกุล พนักงาน',  // กำหนดข้อความเองสำหรับฟิลด์ 'name'
+            'email.required' => 'กรุณากรอกอีเมล',
+            'email.unique' => 'อีเมลนี้ถูกใช้งานแล้ว',
+            'tell_number.required' => 'กรุณากรอกหมายเลขโทรศัพท์',
+            'tell_number.regex' => 'หมายเลขโทรศัพท์ต้องมี 10 หลักและขึ้นต้นด้วยเลข 0',
+            'tell_number.unique' => 'หมายเลขโทรศัพท์นี้มีผู้ใช้งานแล้ว',
         ]);
 
         // เรียกใช้ CreateNewUser เพื่อสร้างผู้ใช้ใหม่

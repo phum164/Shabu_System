@@ -7,12 +7,10 @@ use App\Models\Position;
 
 class PositionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $positions = Position::all();
+        return view('#',compact('positions'));
     }
 
     /**
@@ -20,7 +18,8 @@ class PositionController extends Controller
      */
     public function create()
     {
-        //
+        $positions = Position::all();
+        return view('#',compact('positions'));
     }
 
     /**
@@ -28,7 +27,11 @@ class PositionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+        ],[
+            
+        ]);
     }
 
     /**
