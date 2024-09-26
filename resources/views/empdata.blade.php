@@ -27,7 +27,7 @@
             <p>ชื่อ-นามสกุล</p>
             <p>เงินเดือน</p>
             <p>แผนก: ผู้จัดการร้าน</p>
-            <button class="btn green">เพิ่มพนักงาน</button>
+            <button class="btn btn-success">เพิ่มพนักงาน</button>
         </div>
         <br>
         <hr>
