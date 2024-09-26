@@ -85,3 +85,10 @@ header {
 .red {
     background-color: #dc3545;
 }
+
+.btn:hover{
+    transform: scale(0.75);
+}
+.btn{
+    transition: all 0.3ms;
+}

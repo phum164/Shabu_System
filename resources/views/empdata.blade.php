@@ -36,7 +36,14 @@
                 <p>ชื่อ-นามสกุล: {{$emp->name}}</p>
                 <p>เงินเดือน: {{$emp->position->sarary}}</p>
                 <p>แผนก: {{$emp->position->name}}</p>
-                <button class="btn red">แก้ไขข้อมูล</button>
+                <a href="{{ route('edit'$emp->id) }}"  class="btn btn-primary">แก้ไขข้อมูล</a>
+                <br>
+                <!-- ฟอร์มสำหรับลบข้อมูล -->
+                <form action="{{ route('Employee.destroy', $emp->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('คุณแน่ใจว่าจะลบข้อมูลนี้หรือไม่?');">ลบข้อมูล</button>
+                </form>            
             </div>
             <br>
         @endforeach
