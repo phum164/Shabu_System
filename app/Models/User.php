@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
@@ -17,6 +18,19 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use SoftDeletes;
+
+    public function position(){
+        return $this->belongsTo(Position::class);
+    }
+
+    public function bill(){
+        return $this->hasMany(Bill::class);
+    }
+
+    public function listoder(){
+        return $this->hasMany(ListOrder::class);
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -27,6 +41,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'tell_number',
+        'position_id',
     ];
 
     /**
@@ -61,5 +77,20 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function isAdmin(){
+        return $this -> position_id === 1;
+    }
+    public function isManager(){
+        return $this->isAdmin() || $this->position_id === 2;
+    }
+    public function isKitch(){
+        return $this->isAdmin() || $this->position_id === 3;
+    }
+    public function isCash(){
+        return $this->isAdmin() || $this->position_id === 4;
+    }
+    public function isStock(){
+        return $this->isAdmin() || $this->position_id === 5;
     }
 }

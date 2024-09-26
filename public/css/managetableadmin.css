@@ -1,0 +1,149 @@
+.container-fluid {
+    background-color: #e4e4e4;
+}
+
+.table-list .table-status {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.table-list .table-status.open {
+    border-left: 5px solid green;
+}
+
+.table-list .table-status.close {
+    border-left: 5px solid red;
+}
+
+.table-list .table-status:hover {
+    background-color: #f7f7f7;
+}
+
+.table-info {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.people-info {
+    color: black;
+    font-size: 1em;
+}
+
+.add-button {
+    color: #28a745;
+    font-size: 1.5em;
+    text-decoration: none;
+}
+
+.card {
+    border-radius: 10px;
+}
+
+.text-danger {
+    color: red;
+}
+.table-list .table-status {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    flex-direction: column; /* จัดให้เป็นคอลัมน์เพื่อแยกบรรทัด */
+    justify-content: space-between;
+    align-items: flex-start; /* ให้ชิดด้านซ้าย */
+}
+
+.table-info {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #000;
+}
+
+.people-info, .time-remaining {
+    font-size: 1em;
+    color: #000;
+}
+
+.people-info {
+    margin-right: 10px;
+}
+
+.time-remaining {
+    margin-left: 10px;
+}
+
+.add-button {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px; 
+    background-color: #28a745; 
+    color: white;
+    font-size: 1.5em;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.add-button:hover {
+    background-color: #218838;
+}
+.selectable-table.active {
+    background-color: #e4f0ff;
+    border: 2px solid #007bff;
+}
+.selectable-table .add-button {
+    border-radius: 50%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+}
+.selectable-table .add-button.disabled {
+    background-color: #dc3545;
+}
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.3); }
+    .modal-content {
+        border-radius: 10px;
+        padding: 15px;
+    }
+    
+    .modal-header {
+        text-align: center;
+    }
+    
+    .modal-header .modal-title {
+        font-weight: bold;
+    }
+    
+    .modal-footer {
+        display: flex;
+        justify-content: center;
+    }
+    
+    #openTableForm .input-group button {
+        font-size: 1.5rem;
+        padding: 0.5rem 1rem;
+    }
+    
+    #openTableForm .input-group input {
+        width: 50px;
+        font-size: 1.5rem;
+    }
+    
+    #openTableForm .btn-danger {
+        font-size: 1.2rem;
+        padding: 10px 20px;
+        border-radius: 10px;
+    }
+    .selectable-table.active {
+        background-color: #e4f0ff;
+        border: 2px solid #007bff;
+    }

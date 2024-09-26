@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Table;
+use Illuminate\Support\Facades\Auth;
 
 class TableController extends Controller
 {
@@ -12,20 +13,26 @@ class TableController extends Controller
      */
     public function index()
     {
-        //
+        $tables = Table::all();
+        return view('table_admin', compact('tables'));
     }
+    public function manage($id)
+    {
+        
+        $employee = Auth::user();   
+        $tables = Table::with('bill')->get(); // ดึงข้อมูลโต๊ะพร้อมบิล
+        
+        // ตรวจสอบว่ามีการเรียกดูโต๊ะที่ถูกต้อง
+        $selectedTable = Table::with('bill')->findOrFail($id);
 
-    /**
-     * Show the form for creating a new resource.
-     */
+        return view('managetableadmin', compact('tables', 'selectedTable', 'employee'));
+    }
     public function create()
     {
-        //
+        
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(Request $request)
     {
         //
@@ -42,14 +49,34 @@ class TableController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public static function addbill($id)
     {
-        //
+        $table = Table::find($id);
+        $table->update([
+            'status' => 0,
+        ]);
+    }
+
+    public static function finsbill($id)
+    {
+        $table = Table::find($id);
+        $table->update([
+            'status' => 1,
+        ]);
+    }
+
+    public static function fixtable($id)
+    {
+        $table = Table::find($id);
+        $table->update([
+            'status' => 2,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
+    
     public function update(Request $request, string $id)
     {
         //

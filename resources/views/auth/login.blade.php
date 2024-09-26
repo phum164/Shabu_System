@@ -1,3 +1,5 @@
+@extends('layouts.layout_welcome')
+@section('menu')
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
@@ -39,10 +41,11 @@
                     </a>
                 @endif
 
-                <x-button class="ms-4">
+                <x-button class="ms-4" style="background-color: #dc3545;">
                     {{ __('Log in') }}
                 </x-button>
             </div>
         </form>
     </x-authentication-card>
 </x-guest-layout>
+@endsection

@@ -1,26 +1,34 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Bill;
+use App\Models\Table;
+use Carbon\Carbon;
+use App\Http\Controllers\TableController;
 
 class BillController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         //
         $bills = Bill::all();
-        return view('#',compact('bills'));
+        return view('Billadmin', compact('bills'));
+    }
+    public function finsbill($id)
+    {
+        $table = Table::find($id);
+        if ($table) {
+            $table->update([
+                'status' => 1,
+            ]);
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+
+    public function create(Request $request)
     {
         $employee_id = Auth::id(); 
         $bill = new Bill;
@@ -41,18 +49,7 @@ class BillController extends Controller
         // Redirect back to manage table view with the selected table ID
         return redirect('/managetable/' . $request->tableid);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
+    
     public function showTable($id)
     {
         $selectedTable = Table::find($id);
@@ -71,54 +68,71 @@ class BillController extends Controller
         // Pass the selected table and end_time to the view
         return view('managetableadmin', compact('selectedTable', 'end_time'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-         // Get the latest bill associated with the table
-         $bill = Bill::where('table_id', $request->tableid)->latest()->first();
     
-         if ($bill) {
-             // Update the person amount and save the bill
-             $bill->person_amount = $request->amount;
-             $bill->save();
-         }
-     
-         // Redirect back to the manage table view
-         return redirect()->route('managetable');
+    public function update(Request $request)
+    {
+        // Get the latest bill associated with the table
+        $bill = Bill::where('table_id', $request->tableid)->latest()->first();
+    
+        if ($bill) {
+            // Update the person amount and save the bill
+            $bill->person_amount = $request->amount;
+            $bill->save();
+        }
+    
+        // Redirect back to the manage table view
+        return redirect()->route('managetable');
     }
-
     public function checkbill($id)
     {
         $time = date('Y-m-d H:i:s', time());
         $bill = Bill::find($id);
-        Table::status($bill->table_id, 0);
-        $bill->update([
-            'status' => 1,
-            'finish_time' => $time,
-        ]);
+    
+        if ($bill) {
+            $this->finsbill($bill->table_id);
+    
+            $bill->update([
+                'status' => 1,
+                'finish_time' => $time,
+            ]);
+        }
+    
+        return redirect()->back();
     }
+    
+
+
     /**
      * Remove the specified resource from storage.
      */
+    //check bill
     public function destroy(string $id)
     {
         //
     }
-
-    public function showall_bill()
+    public function showBill($billId)
     {
-        $bills = Bill::all();
-        return view('all_bill', compact('bills'));
+        $bill = Bill::findOrFail($billId);
+        return view('show-bill', compact('bill'));
     }
+
+   function updateTotalPay(Request $request)
+    {
+    $bill = Bill::find($request->bill_id);
+
+    if ($bill) {
+        $adjustment = $request->input('adjustment', 0); 
+        $amountDue = $request->input('amountprice', 0); 
+    
+        $total_pay = $bill->total_pay + $adjustment ;
+        
+        // อัปเดตยอดรวมใหม่
+        $bill->total_pay = $total_pay;
+        $bill->save();
+    }
+
+    // ส่งกลับไปที่หน้าเดิม พร้อมกับข้อความสำเร็จ
+    return redirect()->back()->with('success', 'บิลได้รับการอัปเดตเรียบร้อยแล้ว');
+}
+
 }

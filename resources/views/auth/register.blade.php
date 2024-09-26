@@ -1,7 +1,8 @@
+@extends('layouts.layout_welcome')
+@section('menu')
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
-            <x-authentication-card-logo />
         </x-slot>
 
         <x-validation-errors class="mb-4" />
@@ -17,6 +18,22 @@
             <div class="mt-4">
                 <x-label for="email" value="{{ __('Email') }}" />
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="tell_number" value="{{ __('Tell Number') }}" />
+                <x-input id="tell_number" class="block mt-1 w-full" type="text" name="tell_number" :value="old('tell_number')" required />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="position">Position</x-label>
+                <select class="form-control" id="position" name="position_id" required>
+                    @foreach ($positions as $position)
+                        <option value="{{ $position->id }}">
+                            {{ $position->name }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="mt-4">
@@ -51,10 +68,11 @@
                     {{ __('Already registered?') }}
                 </a>
 
-                <x-button class="ms-4">
-                    {{ __('Register') }}
+                <x-button class="ms-4" style="background-color: #4ac03a;">
+                    {{ __('Add_employee') }}
                 </x-button>
             </div>
         </form>
     </x-authentication-card>
 </x-guest-layout>
+@endsection
