@@ -90,14 +90,10 @@
                   <input type="text" class="form-control" id="amountDue" placeholder="กรอกจำนวนที่ต้องชำระ">
               </div>
       
-              <div class="mb-3">
-                  <label for="amountReceived" class="form-label">รับชำระ</label>
-                  <input type="text" class="form-control" id="amountReceived" placeholder="กรอกจำนวนที่รับชำระ">
-              </div>
       
               <div class="mb-3">
-                  <label for="totalAmount" class="form-label">ยอดรวมทั้งหมด:</label>
-                  <p>แสดงยอดรวมทั้งหมด</p>
+                  <label for="totalAmount" class="form-label">ยอดรวมทั้งหมด</label>
+                  <p> {{($bill->total_pay) }} บาท</p>
               </div>
               <button type="submit" class="btn btn-danger w-100 mb-5 mt-2">ขำระเงิน</button>
 
