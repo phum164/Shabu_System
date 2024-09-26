@@ -73,7 +73,7 @@ class MenuController extends Controller
         $menu->update([
             'stock' => $menu->stock + $request->stock
         ]);
-        return redirect('/showstock')->with('success', 'เพิ่มสต๊อกสินค้าแล้ว');;
+        return redirect('/showstock')->with('success', 'เพิ่มสต๊อกเรียบร้อยแล้ว!');
     }
 
     /**
@@ -136,7 +136,7 @@ class MenuController extends Controller
 
         // ตรวจสอบว่ามีการเปลี่ยนแปลงชื่อหรือประเภทเมนูหรือไม่
         if ($menu->name == $request->menuName && $menu->menutype_id == $request->type_id && $checkImg) {
-            return redirect('/showstock')->with('error', 'ไม่มีการเปลี่ยนแปลงข้อมูล');
+            return redirect('/showstock')->with('errors', 'ไม่มีการเปลี่ยนแปลงข้อมูล');
         }
 
         // อัปเดตข้อมูลเมนู
@@ -145,8 +145,7 @@ class MenuController extends Controller
             'menutype_id' => $request->type_id,
             'image' => $menu->image
         ]);
-
-        return redirect('/showstock')->with('success', 'อัปเดตเมนูเรียบร้อยแล้ว');
+        return redirect('/showstock')->with('success', 'อัปเดตเมนูเรียบร้อยแล้ว');  
     }
 
     /**
