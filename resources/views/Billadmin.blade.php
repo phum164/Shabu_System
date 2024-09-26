@@ -51,8 +51,8 @@
       <p class="text-center">ใบเสร็จชำระเงิน |   
         @if ($bill->status == 0)
           <b style="color: rgb(255, 0, 0)"> ยังไม่ชำระเงิน</b>
-        @elseif($order->status == 1)
-          <b style="color: rgb(0, 211, 18)">ขำระเงินเรียบร้อย</b>
+        @elseif($bill->status == 1)
+          <b style="color: rgb(0, 211, 18)">ชำระเงินเรียบร้อย</b>
         @endif</p>
 
       <div class="showdata">
@@ -78,24 +78,31 @@
         @endforeach
         <hr>
 
-        <div class="container mt-4">
-          <form class="p-3 bg-light rounded">
-              <div class="mb-3">
-                  <label for="adjustment" class="form-label">ค่าปรับ</label>
-                  <input type="text" class="form-control" id="adjustment" placeholder="กรอกค่าปรับ">
-              </div>
-      
-              <div class="mb-3">
-                  <label for="amountDue" class="form-label">ที่ต้องชำระ</label>
-                  <input type="text" class="form-control" id="amountDue" placeholder="กรอกจำนวนที่ต้องชำระ">
-              </div>
-      
-      
-              <div class="mb-3">
+        <div class="container mt-4 p-3 bg-light rounded">
+          <form action="{{ route('update-total-pay') }}" method="POST">
+            @csrf 
+             <input type="hidden" name="bill_id" value="{{ $bill->id }}">
+
+             <div class="mb-3">
+                 <label for="adjustment" class="form-label">ค่าปรับ</label>
+                 <input type="number" class="form-control" name="adjustment" id="adjustment" placeholder="กรอกค่าปรับ">
+             </div>
+         
+             <div class="mb-3">
+                 <label for="amountprice" class="form-label">ที่ต้องชำระ</label>
+                 <input type="number" class="form-control" name="amountprice"  placeholder="กรอกจำนวนที่ต้องชำระ" value="{{ $bill->total_pay }}">
+                </div>
+         
+             <button type="submit" class="btn btn-primary w-100 mb-4 mt-2">คำนวนราคา</button>
+              <div class="mb-4">
                   <label for="totalAmount" class="form-label">ยอดรวมทั้งหมด</label>
                   <p> {{($bill->total_pay) }} บาท</p>
               </div>
-              <button type="submit" class="btn btn-danger w-100 mb-5 mt-2">ขำระเงิน</button>
+          </form> 
+            <form action="{{ route('checkbill', ['id' => $bill->id]) }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-danger w-100 mb-5 mt-2">ชำระเงิน</button>
+            </form>
 
       
               <div class="text-center">
@@ -105,7 +112,7 @@
               <div class="text-center mt-5">
                   <p class="text-muted">IT BEEF SHABU</p>
               </div>
-          </form>
+          
       </div>
 
       </div>

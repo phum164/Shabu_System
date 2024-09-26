@@ -45,6 +45,10 @@ Route::post('/insertmenu',[MenuController::class,'create'])->name('insertmenu');
 Route::get('/edit/{id}',[MenuController::class,'edit'])->name('edit');
 Route::put('/editmenu/{id}',[MenuController::class,'update'])->name('editmenu');
 Route::get('/delete/{id}',[MenuController::class,'destroy'])->name('deletemenu');
+Route::post('/checkbill/{id}', [BillController::class, 'checkbill'])->name('checkbill');
+Route::post('/update-total-pay', [BillController::class, 'updateTotalPay'])->name('update-total-pay');
+
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

@@ -20,4 +20,14 @@ class Bill extends Model
     public function listorder(){
         return $this->hasMany(ListOrder::class);
     }
+    protected $fillable = [
+        'employee_id',
+        'table_id',
+        'person_amount',
+        'total_pay',
+        'status', 
+        'start_time',
+        'end_time',
+        'finish_time',
+    ];
 }
