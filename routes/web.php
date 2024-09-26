@@ -17,7 +17,7 @@ use App\Http\Controllers\RegisterController;
 
 
 Route::get('/', function () {
-    return redirect()-> route('login');
+    return redirect()-> route('home_admin');
 });
 
 Route::post('editemp/{id}',[EmployeeController::class,'update'])->name('edit_emp');

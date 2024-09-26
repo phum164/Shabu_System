@@ -16,7 +16,7 @@ class ListOrderController extends Controller
         $listorders = ListOrder::where('status', '=', 0)->get()->groupBy(function($timeorder) {
             return $timeorder->created_at->format('Y-m-d H:i:s'); // จัดกลุ่มตามเวลาที่แน่นอน
         });
-    
+        
         return view('MenuListAdmin', compact('listorders'));
     }
 
@@ -55,7 +55,7 @@ class ListOrderController extends Controller
     }
 
     // เมื่อบันทึกข้อมูลเสร็จแล้ว ให้ redirect กลับไปพร้อมกับข้อความ success
-    return redirect()->back()->with('success', 'คำสั่งซื้อถูกเพิ่มเรียบร้อยแล้ว!');
+    return redirect(route('Orderfood'))->with('success', 'คำสั่งซื้อถูกเพิ่มเรียบร้อยแล้ว!');
 }
 
 
