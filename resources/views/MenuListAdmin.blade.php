@@ -1,6 +1,28 @@
 @extends('layouts.layout_admin')
-@section('menu')
+@section('menu-active')
+<ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link " href="{{ route('home_admin') }}">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('table_admin' )}}">จัดการโต๊ะ</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="{{ route('menulist' )}}">รายการอาหารของลูกค้า</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">ข้อมูลพนักงาน</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('showstock')}}">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link " href="{{ route('Billadmin')}}">ใบเสร็จชำระเงิน</a>
+      </li>
+  </ul>
+@endsection
 
+@section('menu')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,7 +102,7 @@ p {
 </head>
 <body style="background-color: rgb(228, 228, 228)">
     <div class="container mt-5">
-        <div class="center">รายการอาหารของลูกค้า</div>
+        <div class="center">รายการอาหารของลูกค้า</div><br><br>
 
         <div class="block">
             <div class="row table-section">
@@ -146,4 +168,3 @@ p {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 @endsection
-</html>

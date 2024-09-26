@@ -68,6 +68,7 @@ function addItemToSidebar(imageSrc, name, quantity, menuId) {
                   <button class="del" onclick="changeAmount(-1, event)"> - </button>
                   <input class="numo" type="number" name="amount" value="${quantity}" min="1">
                   <button class="add" onclick="changeAmount(1, event)"> + </button>
+                  <button class="deletelist" onclick="deleteItem(event)"><i class="bi bi-trash3-fill"></i></button>
               </div>
           </div>
       `;
@@ -112,5 +113,14 @@ document.getElementById('submitOrder').addEventListener('click', function() {
       inputAmount.value = item.amount;
       form.appendChild(inputAmount);
   });
-  form.submit(); // ส่งฟอร์ม
+  form.submit(); 
 });
+
+// ฟังก์ชันเพื่อลบรายการ
+function deleteItem(event) {
+    const orderItem = event.target.closest('.oderlist-item');
+    const menuId = orderItem.getAttribute('data-id');
+  
+    orderItem.remove();
+    cartItems = cartItems.filter(item => item.menuId !== menuId);
+  }

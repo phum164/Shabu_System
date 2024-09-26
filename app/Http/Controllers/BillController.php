@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Bill;
 use App\Models\Table;
 use Carbon\Carbon;
+use App\Http\Controllers\TableController;
 
 class BillController extends Controller
 {
@@ -14,7 +15,16 @@ class BillController extends Controller
     {
         //
         $bills = Bill::all();
-        return view('#', compact('bills'));
+        return view('Billadmin', compact('bills'));
+    }
+    public function finsbill($id)
+    {
+        $table = Table::find($id);
+        if ($table) {
+            $table->update([
+                'status' => 1,
+            ]);
+        }
     }
 
 
@@ -73,18 +83,25 @@ class BillController extends Controller
         // Redirect back to the manage table view
         return redirect()->route('managetable');
     }
-    
-
     public function checkbill($id)
     {
         $time = date('Y-m-d H:i:s', time());
         $bill = Bill::find($id);
-        Table::status($bill->table_id, 0);
-        $bill->update([
-            'status' => 1,
-            'finish_time' => $time,
-        ]);
+    
+        if ($bill) {
+            $this->finsbill($bill->table_id);
+    
+            $bill->update([
+                'status' => 1,
+                'finish_time' => $time,
+            ]);
+        }
+    
+        return redirect()->back();
     }
+    
+
+
     /**
      * Remove the specified resource from storage.
      */
@@ -98,4 +115,24 @@ class BillController extends Controller
         $bill = Bill::findOrFail($billId);
         return view('show-bill', compact('bill'));
     }
+
+   function updateTotalPay(Request $request)
+    {
+    $bill = Bill::find($request->bill_id);
+
+    if ($bill) {
+        $adjustment = $request->input('adjustment', 0); 
+        $amountDue = $request->input('amountprice', 0); 
+    
+        $total_pay = $bill->total_pay + $adjustment ;
+        
+        // อัปเดตยอดรวมใหม่
+        $bill->total_pay = $total_pay;
+        $bill->save();
+    }
+
+    // ส่งกลับไปที่หน้าเดิม พร้อมกับข้อความสำเร็จ
+    return redirect()->back()->with('success', 'บิลได้รับการอัปเดตเรียบร้อยแล้ว');
+}
+
 }

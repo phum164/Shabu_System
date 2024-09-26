@@ -12,23 +12,17 @@
 <!-- เมนูฝั่งแอดมิน -->
 
 <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: rgb(235, 8, 8);">
-    <div class="container">
-      <a class="navbar-brand" href="#" style="font-weight: 600; letter-spacing: 1px;">IT BEEF SHABU</a>
+  <div class="container-fluid ms-3">
+    <a class="navbar-brand" href="#" style="font-weight: 600; letter-spacing: 1px;">IT BEEF SHABU</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse " id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('home_admin') }}">Home</a>
-          </li>
-        </ul>
+       @yield('menu-active')
       </div>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="#" style="word-spacing: 4px;"> <i class="bi bi-person-circle"></i>  Admin </a>
-          </li>
+         
           <li class="nav-item">
             <!-- Form สำหรับการ logout -->
             <form method="POST" action="{{ route('logout') }}" x-data>

@@ -8,9 +8,9 @@ body{
 }
 .receipt{
     background-color: white;
-    width: 38%;
+    width: 40%;
     margin: auto;
-    padding: 20px;
+    padding: 40px;
     line-height: 13px;
     border-radius: 20px;
 }

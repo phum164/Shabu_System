@@ -12,7 +12,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: rgb(235, 8, 8);">
     <div class="container">
-      <a class="navbar-brand" href="#" style="font-weight: 600; letter-spacing: 1px;">IT BEEF CHABU</a>
+      <a class="navbar-brand" href="#" style="font-weight: 600; letter-spacing: 1px;">IT BEEF SHABU</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -36,7 +36,9 @@
   <div class="row ms-1" style="min-height: 100vh;">
     <!-- Sidebar -->
    @yield('sidebar')
-   
+
+   @yield('contenthis')
+
     <!-- Main Content Area -->
     <div class="col-md-9">
       <div class="row g-3">

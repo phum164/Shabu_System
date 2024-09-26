@@ -38,6 +38,7 @@ Route::get('/table_admin', [TableController::class, 'index'])->name('table_admin
 Route::get('/Orderfood', [OrderfoodController::class, 'index'])->name('Orderfood');
 Route::get('/historyoder', [HistoryOController::class, 'index'])->name('historyoder');
 Route::get('/Totalprice', [TotalpriceController::class, 'index'])->name('totalprice');
+Route::get('/Billadmin', [BillController::class, 'index'])->name('Billadmin');
 Route::post('/listorders/{id}', [ListOrderController::class, 'store'])->name('listorders.store');
 Route::get('/showstock', [MenuController::class, 'showstock'])->name('showstock');
 Route::post('/addstock/{id}', [MenuController::class, 'stock'])->name('add_stock');
@@ -50,6 +51,10 @@ Route::post('/insertmenu',[MenuController::class,'create'])->name('insertmenu');
 Route::get('/edit/{id}',[MenuController::class,'edit'])->name('edit');
 Route::put('/editmenu/{id}',[MenuController::class,'update'])->name('editmenu');
 Route::get('/delete/{id}',[MenuController::class,'destroy'])->name('deletemenu');
+Route::post('/checkbill/{id}', [BillController::class, 'checkbill'])->name('checkbill');
+Route::post('/update-total-pay', [BillController::class, 'updateTotalPay'])->name('update-total-pay');
+
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

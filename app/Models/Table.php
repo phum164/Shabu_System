@@ -15,6 +15,9 @@ class Table extends Model
     public function bill(){
         return $this->hasMany(Bill::class);
     }
+    protected $fillable = [
+        'status'
+    ];
 
     public static function status($id, $status){
         $table = self::find($id);

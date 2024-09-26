@@ -49,7 +49,7 @@ class TableController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function addbill($id)
+    public static function addbill($id)
     {
         $table = Table::find($id);
         $table->update([
@@ -57,7 +57,7 @@ class TableController extends Controller
         ]);
     }
 
-    public function finsbill($id)
+    public static function finsbill($id)
     {
         $table = Table::find($id);
         $table->update([
@@ -65,7 +65,7 @@ class TableController extends Controller
         ]);
     }
 
-    public function fixtable($id)
+    public static function fixtable($id)
     {
         $table = Table::find($id);
         $table->update([
@@ -76,6 +76,7 @@ class TableController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    
     public function update(Request $request, string $id)
     {
         //
