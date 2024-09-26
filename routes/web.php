@@ -6,18 +6,26 @@ use App\Http\Controllers\TableadminController;
 use App\Http\Controllers\OrderfoodController;
 use App\Http\Controllers\HistoryOController;
 use App\Http\Controllers\TotalpriceController;
+use App\Http\Controllers\EmployeeController;
 
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('editemp/{id}',[EmployeeController::class,'update'])->name('edit_emp');
+Route::get('/editemp', function () {
+    return view('editemp');
+});
+
 Route::get('/empdata', function () {
     return view('empdata');
 });
+
 Route::get('/edithistory', function () {
     return view('edithistory');
 });
+
 Route::get('/admin', function () {
     return view('admin');
 });
