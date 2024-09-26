@@ -61,7 +61,8 @@ header {
     flex-direction: column;
     gap: 10px;
     width: 50%;
-    margin: auto;
+    margin: 10px auto;
+    border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .emp-id {
@@ -78,10 +79,16 @@ header {
     font-weight: bold;
 }
 
-.green {
-    background-color: #28a745;
-}
-
 .red {
     background-color: #dc3545;
+}
+
+.btn:hover{
+    transform: scale(1.03);
+}
+.btn{
+    transition: all 0.3ms;
+}
+label{
+    text-align: right;
 }

@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class TableController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $tables = Table::all();
@@ -20,9 +18,7 @@ class TableController extends Controller
     {
         
         $employee = Auth::user();   
-        $tables = Table::with('bill')->get(); // ดึงข้อมูลโต๊ะพร้อมบิล
-        
-        // ตรวจสอบว่ามีการเรียกดูโต๊ะที่ถูกต้อง
+        $tables = Table::with('bill')->get();
         $selectedTable = Table::with('bill')->findOrFail($id);
 
         return view('managetableadmin', compact('tables', 'selectedTable', 'employee'));

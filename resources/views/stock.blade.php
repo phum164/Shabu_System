@@ -29,6 +29,17 @@
         </script>
     @endif
 
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                title: 'ข้อผิดพลาด!',
+                text: "{{ session('error') }}",
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
+
     <table class="table-striped-columns mx-auto" style="width: 80%;">
         <thead>
             <tr>
@@ -92,14 +103,7 @@
                 reverseButtons: true, // สลับตำแหน่งปุ่ม
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Swal.fire({
-                        title: 'สต๊อกถูกเพิ่มแล้ว!',
-                        text: 'เพิ่มสต๊อกเรียบร้อยแล้ว',
-                        icon: 'success',
-                        confirmButtonColor: '#28a745',
-                    }).then(() => {
                         ev.target.submit();
-                    });
                 }
             });
             return false;

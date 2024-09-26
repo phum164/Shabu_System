@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Position;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -12,29 +13,31 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employee = User::all();
-        return view('#', compact('employee'));
+        $employees = User::all();
+        return view('empdata', compact('employees'));
     }
 
-    public function show($id)
-    {
-        //
-    }
+    // public function show($id)
+    // {
+    //     $emp = User::find($id);
+    //     return view('editemp', compact('emp'));
+    // }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit($id)
     {
-        $employee = User::findOrFail($id);
-        return view('editemp', compact('employee'));
+        $emp = User::findOrFail($id);
+        $position = Position::all();
+        return view('editemp', compact('emp','position'));
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-    {
+    {   
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
@@ -54,7 +57,7 @@ class EmployeeController extends Controller
         ]);
         $employee = User::findOrFail($id);
         $employee->update($validatedData);
-        return redirect()->route('employee')->with('success', 'อัปเดตข้อมูลพนักงานเรียบร้อยแล้ว');
+        return redirect()->route('showall_employee')->with('success', 'อัปเดตข้อมูลพนักงานเรียบร้อยแล้ว');
     }
 
     public function destroy($id)

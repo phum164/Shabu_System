@@ -11,19 +11,25 @@ use App\Http\Controllers\AddMenuAdminController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ListorderController;
 use App\Http\Controllers\BillController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\RegisterController;
 
 
 Route::get('/', function () {
-    return redirect()-> route('login');
+    return redirect()-> route('home_admin');
 });
 
-Route::get('/empdata', function () {
-    return view('empdata');
-});
+Route::post('editemp/{id}',[EmployeeController::class,'update'])->name('edit_emp');
+Route::get('/showedit/{id}', [EmployeeController::class,'edit'])->name('show_edit');
+
+Route::get('/empdata', [EmployeeController::class,'index'])->name('showall_employee');
 Route::get('/edithistory', function () {
     return view('edithistory');
+});
+
+Route::get('/admin', function () {
+    return view('admin');
 });
 
 Route::get('/home_admin', [AdminController::class, 'index'])->name('home_admin');
@@ -36,7 +42,8 @@ Route::get('/Billadmin', [BillController::class, 'index'])->name('Billadmin');
 Route::post('/listorders/{id}', [ListOrderController::class, 'store'])->name('listorders.store');
 Route::get('/showstock', [MenuController::class, 'showstock'])->name('showstock');
 Route::post('/addstock/{id}', [MenuController::class, 'stock'])->name('add_stock');
-Route::get('/Menulist', [MenuListAdminController::class, 'index'])->name('menulist');
+Route::get('/Menulist', [ListOrderController::class, 'index'])->name('menulist');
+Route::post('/Menulist-update', [ListOrderController::class, 'update'])->name('update.status');
 Route::get('/managetable/{id}', [TableController::class, 'manage'])->name('Managetable');
 Route::post('/bill/create', [BillController::class, 'create'])->name('bill.create');
 Route::post('/bill/update', [BillController::class, 'update'])->name('bill.update');
@@ -72,7 +79,7 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::middleware(('manager'))->group(function(){
         //ใส่ route ของผู้บริหาร
-        Route::get('/addemp', [RegisterController::class, 'showForm'])->name('addemp');
+        Route::get('/register', [RegisterController::class, 'showForm'])->name('addemp');
         Route::post('/register', [RegisterController::class, 'store'])->name('register');
     });
     Route::middleware(('stock'))->group(function(){

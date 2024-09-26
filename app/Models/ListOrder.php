@@ -20,7 +20,7 @@ class ListOrder extends Model
     }
 
         public function bill(){
-        return $this->hasMany(Bill::class);
+        return $this->belongsTo(Bill::class);
     }
    
     protected $fillable = [

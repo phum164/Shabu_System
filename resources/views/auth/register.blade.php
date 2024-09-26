@@ -68,8 +68,8 @@
                     {{ __('Already registered?') }}
                 </a>
 
-                <x-button class="ms-4" style="background-color: #dc3545;">
-                    {{ __('Register') }}
+                <x-button class="ms-4" style="background-color: #4ac03a;">
+                    {{ __('Add_employee') }}
                 </x-button>
             </div>
         </form>

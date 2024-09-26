@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ListOrder;
+use App\Models\Bill;
 
 class ListOrderController extends Controller
 {
@@ -12,9 +13,11 @@ class ListOrderController extends Controller
      */
     public function index()
     {
-        // $loder = ListOrder::whereNotIn('status', [1, 2])->get();
-        $loder = ListOrder::all();
-        return view('#',compact('loder'));
+        $listorders = ListOrder::where('status', '=', 0)->get()->groupBy(function($timeorder) {
+            return $timeorder->created_at->format('Y-m-d H:i:s'); // จัดกลุ่มตามเวลาที่แน่นอน
+        });
+        
+        return view('MenuListAdmin', compact('listorders'));
     }
 
     /**
@@ -52,7 +55,7 @@ class ListOrderController extends Controller
     }
 
     // เมื่อบันทึกข้อมูลเสร็จแล้ว ให้ redirect กลับไปพร้อมกับข้อความ success
-    return redirect()->back()->with('success', 'คำสั่งซื้อถูกเพิ่มเรียบร้อยแล้ว!');
+    return redirect(route('Orderfood'))->with('success', 'คำสั่งซื้อถูกเพิ่มเรียบร้อยแล้ว!');
 }
 
 
@@ -77,7 +80,13 @@ class ListOrderController extends Controller
      */
     public function update(Request $request)
     {
-        
+        if (!$request->has('order_ids')) {
+            return redirect()->back()->with('error', 'กรุณาเลือกเมนูก่อนยืนยัน');
+        }
+        $orderIds = $request->input('order_ids');
+        ListOrder::whereIn('id', $orderIds)->update(['status' => 1]);
+    
+        return redirect()->back()->with('success', 'ยืนยันสำเร็จ');
     }
 
     /**

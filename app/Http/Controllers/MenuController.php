@@ -54,7 +54,7 @@ class MenuController extends Controller
             'stock' => 100,
             'image' => $path . $filename
         ]);
-        return redirect('/showstock');
+        return redirect('/showstock')->with('success', 'เพิ่มเมนูเรียบร้อยแล้ว!');
     }
 
     /**
@@ -136,7 +136,7 @@ class MenuController extends Controller
 
         // ตรวจสอบว่ามีการเปลี่ยนแปลงชื่อหรือประเภทเมนูหรือไม่
         if ($menu->name == $request->menuName && $menu->menutype_id == $request->type_id && $checkImg) {
-            return redirect('/showstock')->with('errors', 'ไม่มีการเปลี่ยนแปลงข้อมูล');
+            return redirect('/showstock')->with('error', 'ไม่มีการเปลี่ยนแปลงข้อมูล');
         }
 
         // อัปเดตข้อมูลเมนู
