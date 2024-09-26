@@ -21,7 +21,7 @@ class MenuController extends Controller
      * Show the form for creating a new resource.
      */
     public function create(Request $request)
-    {
+    {   
         $request->validate(
             [
                 'menuName' => [
@@ -54,7 +54,7 @@ class MenuController extends Controller
             'stock' => 100,
             'image' => $path . $filename
         ]);
-        return redirect('/showstock');
+        return redirect('/stock');
     }
 
     /**
@@ -73,7 +73,7 @@ class MenuController extends Controller
         $menu->update([
             'stock' => $menu->stock + $request->stock
         ]);
-        return redirect('/showstock')->with('success', 'เพิ่มสต๊อกเรียบร้อยแล้ว!');
+        return redirect('/stock')->with('success', 'เพิ่มสต๊อกเรียบร้อยแล้ว!');
     }
 
     /**
@@ -136,7 +136,7 @@ class MenuController extends Controller
 
         // ตรวจสอบว่ามีการเปลี่ยนแปลงชื่อหรือประเภทเมนูหรือไม่
         if ($menu->name == $request->menuName && $menu->menutype_id == $request->type_id && $checkImg) {
-            return redirect('/showstock')->with('errors', 'ไม่มีการเปลี่ยนแปลงข้อมูล');
+            return redirect('/หtock')->with('errors', 'ไม่มีการเปลี่ยนแปลงข้อมูล');
         }
 
         // อัปเดตข้อมูลเมนู
@@ -145,7 +145,7 @@ class MenuController extends Controller
             'menutype_id' => $request->type_id,
             'image' => $menu->image
         ]);
-        return redirect('/showstock')->with('success', 'อัปเดตเมนูเรียบร้อยแล้ว');  
+        return redirect('/stock')->with('success', 'อัปเดตเมนูเรียบร้อยแล้ว');  
     }
 
     /**
@@ -158,7 +158,7 @@ class MenuController extends Controller
         if ($delete->image != 'img/menus/emptymenu.jpg' && file_exists(public_path($delete->image)))
             unlink(public_path($delete->image));
         $delete->delete();
-        return redirect('/showstock')->with('success', 'ลบเมนู ' . $name . ' เรียบร้อยแล้ว');
+        return redirect('/stock')->with('success', 'ลบเมนู ' . $name . ' เรียบร้อยแล้ว');
     }
 
     public function page()

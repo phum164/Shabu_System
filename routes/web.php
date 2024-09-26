@@ -42,7 +42,7 @@ Route::get('/historyoder', [HistoryOController::class, 'index'])->name('historyo
 Route::get('/Totalprice', [TotalpriceController::class, 'index'])->name('totalprice');
 Route::get('/Billadmin', [BillController::class, 'index'])->name('Billadmin');
 Route::post('/listorders/{id}', [ListOrderController::class, 'store'])->name('listorders.store');
-Route::get('/showstock', [MenuController::class, 'showstock'])->name('showstock');
+Route::get('/stock', [MenuController::class, 'showstock'])->name('showstock');
 Route::post('/addstock/{id}', [MenuController::class, 'stock'])->name('add_stock');
 Route::get('/Menulist', [MenuListAdminController::class, 'index'])->name('menulist');
 Route::get('/managetable/{id}', [TableController::class, 'manage'])->name('Managetable');

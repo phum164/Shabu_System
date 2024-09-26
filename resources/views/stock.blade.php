@@ -2,7 +2,7 @@
 @section('title', 'stock_menu')
 @section('headline', 'เพิ่มสต๊อกเมนู')
 @section('content')
-
+    <link rel="stylesheet" href="{{ asset('css/stock.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @if (session('success'))
@@ -26,50 +26,59 @@
             });
         </script>
     @endif
-
-    <table class="table-striped-columns mx-auto" style="width: 80%;">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Image</th>
-                <th scope="col">Name</th>
-                <th scope="col">Type</th>
-                <th scope="col">Stock</th>
-                <th scope="col">Among</th>
-                <th scope="col">EditMenu</th>
-                <th scope="col">DeletMenu</th>
-            </tr>
-        </thead>
-        @foreach ($menus as $item)
-            <tbody>
+    <div class="container">
+        <table class="table table-striped mx-auto" style="width: 93%;">
+            <thead>
                 <tr>
-                    <th scope="row da">{{ $item->id }}</th>
-                    <td><img src="{{ asset($item->image) }}" alt="รูปเมนู" width="50" height="50"></td>
-                    <td>{{ $item->name }}</td>
-                    <td>{{ $item->menutype->name }}</td>
-                    <td>{{ $item->stock }}</td>
-                    <td>
-                        <form method="POST" action="{{ route('add_stock', $item->id) }}" class="d-flex align-items-center"
-                            onsubmit="confirmAddStock(event,'{{ $item->name }}', this.stock.value);">
-                            @csrf
-                            <input type="number" name="stock" class="form-control w-25 me-2" placeholder="จำนวน">
-                            <button type="submit" class="btn btn-success">เพิ่มสต๊อก</button>
-                        </form>
-                    </td>
-                    <td>
-                        <a class="btn btn-warning" href="/edit/{{ $item->id }}" role="button"
-                            onclick="confirmEditStock(event,'{{ $item->name }}');">แก้ไข</a>
-                    </td>
-                    <td>
-                        <a class="btn btn-danger" href="/delete/{{ $item->id }}" role="button"
-                            onclick="confirmDelete(event, '{{ $item->name }}')">ลบเมนู</a>
-
-                    </td>
+                    <th scope="col">ID</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Among</th>
+                    <th scope="col">EditMenu</th>
+                    <th scope="col">DeletMenu</th>
                 </tr>
-            </tbody>
-        @endforeach
-    </table>
+            </thead>
+            @foreach ($menus as $item)
+                <tbody>
+                    <tr>
+                        <th scope="row da">{{ $item->id }}</th>
+                        <td><img src="{{ asset($item->image) }}" alt="รูปเมนู" width="100" height="50"></td>
+                        <td>{{ $item->name }}</td>
+                        <td>{{ $item->menutype->name }}</td>
+                        <td>{{ $item->stock }}</td>
+                        <td class="pad">
+                            <form method="POST" class="d-flex justify-content-evenly align-items-center flex-form" action="{{ route('add_stock', $item->id) }}"
+                                class="text-center"
+                                onsubmit="confirmAddStock(event,'{{ $item->name }}', this.stock.value);">
+                                @csrf
+                                <input type="number" maxlength="3" oninput="checkLength(this)" name="stock" class="form-control" style="width:90px; height:40px" placeholder="จำนวน" required>
+                                <button type="submit" class="btn btn-success">เพิ่มสต๊อก</button>
+                            </form>
+                        </td>
+                        <script>
+                            function checkLength(input) {
+                                const maxLength = 3; // จำนวนหลักสูงสุดที่อนุญาต
+                                if (input.value.length > maxLength) {
+                                    input.value = input.value.slice(0, maxLength); // ตัดค่าที่เกินออก
+                                }
+                            }
+                        </script>
+                        <td>
+                            <a class="btn btn-warning" href="/edit/{{ $item->id }}" role="button"
+                                onclick="confirmEditStock(event,'{{ $item->name }}');">แก้ไข</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger" href="/delete/{{ $item->id }}" role="button"
+                                onclick="confirmDelete(event, '{{ $item->name }}')">ลบเมนู</a>
 
+                        </td>
+                    </tr>
+                </tbody>
+            @endforeach
+        </table>
+    </div>
     <div class="mt-3">
         {{ $menus->links() }}
     </div>
@@ -130,7 +139,7 @@
             });
         }
 
-            function confirmEdit(ev, name) {
+        function confirmEdit(ev, name) {
             ev.preventDefault();
             var urlToRedirect = ev.currentTarget.getAttribute('href');
             Swal.fire({
