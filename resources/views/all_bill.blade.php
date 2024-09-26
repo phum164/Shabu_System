@@ -21,32 +21,44 @@
         <h2>ประวัติบิล</h2>
 
         <div class="search-bar">
-            <input type="text" placeholder="ค้นหาเมนูที่ต้องการ">
+            <input type="text" placeholder="ค้นหาบิลที่ต้องการ">
         </div>
 
         <table>
             <thead>
                 <tr>
-                    <th>IDบิล</th>
+                    <th>รหัสบิล</th>
                     <th>พนักงานผู้ทำรายการ</th>
                     <th>จำนวนคน</th>
                     <th>โต๊ะ</th>
+                    <th>ราคาทั้งหมด</th>
+                    <th>สถานะ</th>
                     <th>วันที่</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($bills as $bill)
                     <tr>
-                        <td>{{$bill->id}}</td>
-                        <td>{{$bill->employee_id}}</td>
-                        <td>{{$bill->table_id}}</td>
-                        <td>{{$bill->person_amount}}</td>
-                        <td>{{$bill->total_pay}}</td>
-                        <td>{{$bill->created_at->format('Y-m-d H:i')}}</td>
+                        <td>{{ $bill->id }}</td>
+                        <td>{{ $bill->employee_id }}</td>
+                        <td>{{ $bill->table_id }}</td>
+                        <td>{{ $bill->person_amount }}</td>
+                        <td>{{ $bill->total_pay }}</td>
+
+                        <td>
+                            @if ($bill->status == 1)
+                                <button class="btn btn-success">จ่ายแล้ว</button>
+                            @else
+                                <button class="btn btn-danger">ยังไม่จ่าย</button>
+                            @endif
+                        </td>
+                        <td>{{ $bill->created_at->format('Y-m-d H:i') }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+        <br>
+        {{ $bills->links() }}
     </section>
 </body>
 
