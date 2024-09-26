@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('css/empdata.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>Document</title>
 </head>
 
@@ -32,22 +34,26 @@
         <br>
         @foreach ($employees as $emp)
             <div class="emp">
-                <b class="emp-id">{{$emp->id}}</b>
-                <p>ชื่อ-นามสกุล: {{$emp->name}}</p>
-                <p>เงินเดือน: {{$emp->position->sarary}}</p>
-                <p>แผนก: {{$emp->position->name}}</p>
-                <a href="{{ route('edit'$emp->id) }}"  class="btn btn-primary">แก้ไขข้อมูล</a>
+                <b class="emp-id">{{ $emp->id }}</b>
+                <p>ชื่อ-นามสกุล: {{ $emp->name }}</p>
+                <p>เงินเดือน: {{ $emp->position->sarary }}</p>
+                <p>แผนก: {{ $emp->position->name }}</p>
+                <a href="{{ route('show_edit', $emp->id) }}" class="btn btn-primary">แก้ไขข้อมูล</a>
                 <br>
                 <!-- ฟอร์มสำหรับลบข้อมูล -->
-                <form action="{{ route('Employee.destroy', $emp->id) }}" method="POST" style="display:inline;">
+                <form action="#" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('คุณแน่ใจว่าจะลบข้อมูลนี้หรือไม่?');">ลบข้อมูล</button>
-                </form>            
+                    <button type="submit" class="btn btn-danger"
+                        onclick="return confirm('คุณแน่ใจว่าจะลบข้อมูลนี้หรือไม่?');">ลบข้อมูล</button>
+                </form>
             </div>
             <br>
         @endforeach
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>

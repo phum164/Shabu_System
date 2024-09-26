@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Position;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -16,18 +17,20 @@ class EmployeeController extends Controller
         return view('empdata', compact('employees'));
     }
 
-    public function show($id)
-    {
-        //
-    }
+    // public function show($id)
+    // {
+    //     $emp = User::find($id);
+    //     return view('editemp', compact('emp'));
+    // }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit($id)
     {
-        $employee = User::findOrFail($id);
-        return view('editemp', compact('employee'));
+        $emp = User::findOrFail($id);
+        $position = Position::all();
+        return view('editemp', compact('emp','position'));
     }
 
     /**

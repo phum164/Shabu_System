@@ -20,16 +20,10 @@ Route::get('/', function () {
     return redirect()-> route('login');
 });
 
-Route::get('editemp/{id}',[EmployeeController::class,'update'])->name('edit_emp');
-Route::get('/editemp', function () {
-    return view('editemp');
-});
+Route::post('editemp/{id}',[EmployeeController::class,'update'])->name('edit_emp');
+Route::get('/showedit/{id}', [EmployeeController::class,'edit'])->name('show_edit');
 
 Route::get('/empdata', [EmployeeController::class,'index'])->name('showall_employee');
-Route::get('/empdata', function () {
-    return view('empdata');
-});
-
 Route::get('/edithistory', function () {
     return view('edithistory');
 });
