@@ -11,6 +11,7 @@ use App\Http\Controllers\AddMenuAdminController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ListorderController;
 use App\Http\Controllers\BillController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\RegisterController;
 
@@ -19,9 +20,7 @@ Route::get('/', function () {
     return redirect()-> route('login');
 });
 
-Route::get('/empdata', function () {
-    return view('empdata');
-});
+Route::get('/empdata', [EmployeeController::class,'index'])->name('showall_employee');
 Route::get('/edithistory', function () {
     return view('edithistory');
 });

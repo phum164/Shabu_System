@@ -30,29 +30,16 @@
         <br>
         <hr>
         <br>
-        <div class="emp">
-            <b class="emp-id">รหัสพนักงาน EM001</b>
-            <p>ชื่อ-นามสกุล: ภูมรพี วงศ์สิริ</p>
-            <p>เงินเดือน: 35,000</p>
-            <p>แผนก: ผู้จัดการร้าน</p>
-            <button class="btn red">แก้ไขข้อมูล</button>
-        </div>
-        <br>
-        <div class="emp">
-            <b class="emp-id">รหัสพนักงาน EM002</b>
-            <p>ชื่อ-นามสกุล: สวัสดิ์ วันจันทร์</p>
-            <p>เงินเดือน: 20,000</p>
-            <p>แผนก: ผู้จัดการครัว</p>
-            <button class="btn red">แก้ไขข้อมูล</button>
-        </div>
-        <br>
-        <div class="emp">
-            <b class="emp-id">รหัสพนักงาน EM003</b>
-            <p>ชื่อ-นามสกุล: ธารา ตรีมิต</p>
-            <p>เงินเดือน: 15,000</p>
-            <p>แผนก: พนักงานต้อนรับ</p>
-            <button class="btn red">แก้ไขข้อมูล</button>
-        </div>
+        @foreach ($employees as $emp)
+            <div class="emp">
+                <b class="emp-id">{{$emp->id}}</b>
+                <p>ชื่อ-นามสกุล: {{$emp->name}}</p>
+                <p>เงินเดือน: {{$emp->position->sarary}}</p>
+                <p>แผนก: {{$emp->position->name}}</p>
+                <button class="btn red">แก้ไขข้อมูล</button>
+            </div>
+            <br>
+        @endforeach
     </section>
 </body>
 
