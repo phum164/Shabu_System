@@ -14,7 +14,7 @@ class BillController extends Controller
     {
         //
         $bills = Bill::all();
-        return view('#', compact('bills'));
+        return view('Billadmin', compact('bills'));
     }
 
 

@@ -15,10 +15,13 @@
       <a class="nav-link" href="{{ route('menulist' )}}">รายการอาหารของลูกค้า</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{{ route('empdata')}}">ข้อมูลพนักงาน</a>
+      <a class="nav-link" href="#">ข้อมูลพนักงาน</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{{ route('stock')}}">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
+      <a class="nav-link" href="{{ route('showstock')}}">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " href="{{ route('Billadmin')}}">ใบเสร็จชำระเงิน</a>
     </li>
   </ul>
 @endsection

@@ -13,12 +13,9 @@
 </ul>
 @endsection
 @section('search')
-<div class="hidden">{{$bill_id = 1}}</div>
-<h4>สั่งอาหาร  <span class="Serch"></h4>
-  <div class="box">
-      <input class="s-t" type="text" name="" id="" placeholder="ค้นหารายการอาหารที่ต้องการ...">
-      <a class="icon-s" href="#"><i class="bi bi-search sc"></i></a>
-  </div>
+<div class="hidden" style="display: none">{{$bill_id = 6}}</div>
+
+<h4>สั่งอาหาร </h4>
 @endsection
 @section('catagory')
 

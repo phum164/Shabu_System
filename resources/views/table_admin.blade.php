@@ -4,23 +4,26 @@
 @endpush
 
 @section('menu-active')
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" href="{{ route('home_admin') }}">Home</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link active" href="{{ route('table_admin' )}}">จัดการโต๊ะ</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{{ route('menulist' )}}">รายการอาหารของลูกค้า</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{{ route('empdata')}}">ข้อมูลพนักงาน</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{{ route('stock')}}">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
-    </li>
-  </ul>
+<ul class="navbar-nav">
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('home_admin') }}">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="{{ route('table_admin' )}}">จัดการโต๊ะ</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('menulist' )}}">รายการอาหารของลูกค้า</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">ข้อมูลพนักงาน</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('showstock')}}">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link " href="{{ route('Billadmin')}}">ใบเสร็จชำระเงิน</a>
+  </li>
+</ul>
 @endsection
 
 

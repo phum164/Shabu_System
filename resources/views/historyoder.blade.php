@@ -28,30 +28,26 @@
 
         @foreach ($hisorders as $order)
             @php
-                // เช็คว่าเวลาของ order นี้แตกต่างจากคำสั่งก่อนหน้าหรือไม่ (ระดับชั่วโมง:นาที)
                 $orderDateTime = $order->created_at->format('H:i');
             @endphp
 
             @if ($currentDateTime !== $orderDateTime)
                 @if ($currentDateTime !== null)
-                    </div> <!-- เพิ่มอันนี้ -->
-                </div> <!-- กับอันนี้ -->
+                    </div> 
+                </div> 
                 @endif
 
                 @php
-                    $currentDateTime = $orderDateTime; // อัปเดตเวลาใหม่
+                    $currentDateTime = $orderDateTime; 
                 @endphp
-
-                <!-- เปิด div ใหม่สำหรับคำสั่งซื้อที่มีเวลาแตกต่าง -->
                 <div class="historyOderGroup mb-4 my-2">
                     <div class="card shadow-sm">
                         <div class="card-header bg-danger text-white">
                             <h5 class="mb-0">คำสั่งซื้อเมื่อ {{ $order->created_at->diffForHumans() }}</h5>
                         </div>
                         <div class="card-body">
-            @endif
+                @endif
 
-            <!-- รายการอาหารในคำสั่งซื้อ -->
             <div class="historyOder mb-3">
                 <div class="row align-items-center">
                     <div class="col-2">
