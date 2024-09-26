@@ -46,7 +46,7 @@
         <!-- รายการจะถูกเพิ่มที่นี่ -->
       </div>
     </div><br>
-    <p>โต๊ะ 1</p>
+    <p>ชื่อโต๊ะ: {{ $table->name }}</p>
 
     <form id="orderForm" method="POST" action="{{ route('listorders.store',['id' => $bill_id])}}">
       @csrf

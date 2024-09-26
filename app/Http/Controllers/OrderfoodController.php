@@ -6,6 +6,10 @@ use App\Models\menutype;
 use App\Models\ListOrder;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\FuncCall;
+use App\Models\Table; 
+use App\Models\Bill; 
+
+
 
 class OrderfoodController extends Controller
 {
@@ -20,15 +24,15 @@ class OrderfoodController extends Controller
         }
     
         $menuTypes = MenuType::all(); 
-    
+        $bill = Bill::latest()->first(); 
+        $table = Table::find($bill->table_id); 
+
         return view('Orderfood', [
             'menus' => $menus, 
             'menuTypes' => $menuTypes,
-            'selected' => $typeId 
+            'selected' => $typeId, 
+            'table' => $table,
+
         ]);
     }
-
-
-
-
 }
