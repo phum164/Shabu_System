@@ -24,7 +24,7 @@
             @endif
             <p>
                 <i class="bi bi-person-fill"></i>
-                @if($table->bill && $table->bill->count() > 0)
+                @if($table->bill && $table->bill->count() != 0)
                     {{ $table->bill->last()->person_amount }} คน
                     ฿ {{ $table->bill->last()->total_pay }}
                 @else

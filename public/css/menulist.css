@@ -1,0 +1,55 @@
+.center {
+    text-align: center;
+    align-items: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+.table-header {
+font-weight: bold;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100%;
+text-align: center;
+}
+.menu-divider {
+    width: 100%;
+    margin-left: 0;
+}
+.table-section {
+    display: flex;
+    margin-bottom: 30px;
+}
+.block {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px 15px;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+.btn-success {
+padding: 10px 20px; /* ปรับขนาด padding */
+font-size: 1rem;
+width: 100%;
+}
+h4 {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+h5, p {
+    font-weight: bold;
+    margin: 5px 0;
+}
+h5 {
+    font-size: 1rem;
+}
+p {
+    font-size: 0.85rem;
+}
+.checkbox-container input[type="checkbox"] {
+    width: 25px;
+    height: 25px;
+    transform: scale(1.5);
+}

@@ -11,7 +11,7 @@
         <div class="col-md-4 p-3" style="background-color: white;">
             <div class="table-list">
                 @foreach ($tables as $table)
-                <div class="table-status mb-3 selectable-table {{ $table->status == 0 ? 'open' : 'close' }}" id="table-{{ $table->id }}" onclick="selectTable({{ $table->id }})">
+                <div class="table-status mb-3 selectable-table {{ $table->status == 1 ? 'open' : 'close' }}" id="table-{{ $table->id }}" onclick="selectTable({{ $table->id }})">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="table-info">โต๊ะ {{ $table->id }}</div>
                         <p>เวลาที่เหลือ</p>
@@ -89,7 +89,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="editModalLabel">โต๊ะ <span id="table-number">{{ $selectedTable->id }}</span></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" aria-label="Close" onclick="closeModal()"></button>
       </div>
       <div class="modal-body text-center">
         <form id="openTableForm" action="{{ route('bill.create') }}" method="POST">
@@ -125,7 +125,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="editModalLabel">โต๊ะ <span id="table-number">{{ $selectedTable->id }}</span></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" aria-label="Close" onclick="closeModal()"></button>
       </div>
       <div class="modal-body text-center">
       <form id="openTableForm" action="{{ route('bill.update') }}" method="POST">
@@ -167,6 +167,14 @@
         modal.show();
     }
 
+
+    function closeModal() {
+        var modalElement = document.getElementById('editModal');
+        var modalInstance = bootstrap.Modal.getInstance(modalElement);
+        modalInstance.hide();
+    }
+
+
     function updatePeopleCount(change) {
         var peopleInput = document.getElementById('people-amount');
         var currentPeople = parseInt(peopleInput.value);
@@ -181,42 +189,15 @@
 
         // ดึงข้อมูลเวลาที่เหลือและแสดงใน modal
         var countdownElement = document.getElementById('time-remaining');
-        var startTime = '{{ $selectedTable->bill->last()->start_time }}';  // ดึงเวลาเริ่มจาก database
-        startTableCountdown(startTime, countdownElement.id);  // เรียกใช้ countdown
+        @if($selectedTable->bill && $selectedTable->bill->count() > 0)
+        var startTime = '{{ $selectedTable->bill->last()->start_time }}';
+        var startTime = now();
+        @endif
+
+        startTableCountdown(startTime, countdownElement.id);
 
         var modal = new bootstrap.Modal(document.getElementById('editModal'));
         modal.show();
-    }
-
-    function startTableCountdown(startTime, elementId) {
-        // Convert startTime (from Laravel) to JavaScript Date object
-        const startDate = new Date(startTime);  
-        const countdownTime = 2 * 60 * 60 * 1000;  // 2 hours in milliseconds
-        const endTime = startDate.getTime() + countdownTime;
-
-        // Update the countdown every second
-        let timer = setInterval(function() {
-            const now = new Date().getTime();
-            const diff = endTime - now;
-
-            if (diff <= 0) {
-                clearInterval(timer);
-                document.getElementById(elementId).innerHTML = "<div class='expired'>หมดเวลา</div>";
-                return;
-            }
-
-            // Calculate the time remaining
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-            // Display the countdown
-            document.getElementById(elementId).innerHTML = 
-                "<div class='hours'><div class='numbers'>" + hours + "</div>hours</div>" +
-                "<div class='minutes'><div class='numbers'>" + minutes + "</div>minutes</div>" +
-                "<div class='seconds'><div class='numbers'>" + seconds + "</div>seconds</div>";
-            
-        }, 1000);  // Update every second
     }
 </script>
 

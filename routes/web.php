@@ -35,7 +35,8 @@ Route::get('/Totalprice', [TotalpriceController::class, 'index'])->name('totalpr
 Route::post('/listorders/{id}', [ListOrderController::class, 'store'])->name('listorders.store');
 Route::get('/showstock', [MenuController::class, 'showstock'])->name('showstock');
 Route::post('/addstock/{id}', [MenuController::class, 'stock'])->name('add_stock');
-Route::get('/Menulist', [MenuListAdminController::class, 'index'])->name('menulist');
+Route::get('/Menulist', [ListOrderController::class, 'index'])->name('menulist');
+Route::post('/Menulist-update', [ListOrderController::class, 'update'])->name('update.status');
 Route::get('/managetable/{id}', [TableController::class, 'manage'])->name('Managetable');
 Route::post('/bill/create', [BillController::class, 'create'])->name('bill.create');
 Route::post('/bill/update', [BillController::class, 'update'])->name('bill.update');

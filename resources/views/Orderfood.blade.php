@@ -13,7 +13,7 @@
 </ul>
 @endsection
 @section('search')
-<div class="hidden">{{$bill_id = 1}}</div>
+<div class="hidden" style="display: none">{{$bill_id = 4}}</div>
 <h4>สั่งอาหาร  <span class="Serch"></h4>
   <div class="box">
       <input class="s-t" type="text" name="" id="" placeholder="ค้นหารายการอาหารที่ต้องการ...">
