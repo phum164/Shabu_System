@@ -95,7 +95,6 @@
         <form id="openTableForm" action="{{ route('bill.create') }}" method="POST">
           @csrf
           <input type="hidden" name="tableid" id="table-id-input">
-          <input type="hidden" name="empid" value="{{ $employee->id }}">
 
           <div class="mb-3">
             <label for="people-amount" class="form-label">จำนวนคน</label>
@@ -131,7 +130,6 @@
       <form id="openTableForm" action="{{ route('bill.update') }}" method="POST">
             @csrf
             <input type="hidden" name="tableid" id="table-id-input">
-            <input type="hidden" name="empid" value="{{ $employee->id }}">
           <div class="mb-3">
             <label for="people-amount" class="form-label">จำนวนคน</label>
             <div class="input-group justify-content-center">
