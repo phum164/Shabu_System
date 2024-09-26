@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderfoodController;
 use App\Http\Controllers\HistoryOController;
 use App\Http\Controllers\TotalpriceController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\BillController;
 
 
 Route::get('/', function () {
@@ -22,9 +23,8 @@ Route::get('/empdata', function () {
     return view('empdata');
 });
 
-Route::get('/edithistory', function () {
-    return view('edithistory');
-});
+Route::get('/allbill', [BillController::class, 'showall_bill'])->name('all_bill.showall_bill');
+
 
 Route::get('/admin', function () {
     return view('admin');
