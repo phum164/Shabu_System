@@ -1,18 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.layout_admin')
+@push('style')
+    
+@endpush
+<link rel="stylesheet" href="{{ asset('css/empdata.css') }}">
+@section('menu-active')
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('home_admin') }}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('table_admin') }}">จัดการโต๊ะ</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('menulist') }}">รายการอาหารของลูกค้า</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="/empdata">ข้อมูลพนักงาน</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('showstock') }}">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="{{ route('Billadmin') }}">ใบเสร็จชำระเงิน</a>
+        </li>
+    </ul>
+@endsection
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>Document</title>
-</head>
-
-<body>
-    <link rel="stylesheet" href="{{ asset('css/empdata.css') }}">
+@section('menu')
     @if (session('success'))
         <script>
             Swal.fire({
@@ -36,14 +50,14 @@
         </script>
     @endif
 
-    <header>
+    {{-- <header>
         <div class="header-title">
             <h1>IT BEEF chabu</h1>
         </div>
         <div class="search">
             <input type="text" placeholder="ค้นหา">
         </div>
-    </header>
+    </header> --}}
 
     <section class="employee-section">
         <div class="empadd">
@@ -73,5 +87,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
-</body>
-</html>
+@endsection

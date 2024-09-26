@@ -11,7 +11,7 @@
       <a class="nav-link active" href="{{ route('menulist' )}}">รายการอาหารของลูกค้า</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">ข้อมูลพนักงาน</a>
+      <a class="nav-link" href="/empdata">ข้อมูลพนักงาน</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{{ route('showstock')}}">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
