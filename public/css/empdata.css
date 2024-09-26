@@ -61,7 +61,8 @@ header {
     flex-direction: column;
     gap: 10px;
     width: 50%;
-    margin: auto;
+    margin: 10px auto;
+    border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .emp-id {

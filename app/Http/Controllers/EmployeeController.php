@@ -37,7 +37,7 @@ class EmployeeController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-    {
+    {   
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
@@ -57,7 +57,7 @@ class EmployeeController extends Controller
         ]);
         $employee = User::findOrFail($id);
         $employee->update($validatedData);
-        return redirect()->route('employee')->with('success', 'อัปเดตข้อมูลพนักงานเรียบร้อยแล้ว');
+        return redirect()->route('showall_employee')->with('success', 'อัปเดตข้อมูลพนักงานเรียบร้อยแล้ว');
     }
 
     public function destroy($id)

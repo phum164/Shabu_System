@@ -73,7 +73,7 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::middleware(('manager'))->group(function(){
         //ใส่ route ของผู้บริหาร
-        Route::get('/addemp', [RegisterController::class, 'showForm'])->name('addemp');
+        Route::get('/register', [RegisterController::class, 'showForm'])->name('addemp');
         Route::post('/register', [RegisterController::class, 'store'])->name('register');
     });
     Route::middleware(('stock'))->group(function(){
