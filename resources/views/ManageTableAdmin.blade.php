@@ -42,22 +42,20 @@
                 <div class="table-status mb-3 selectable-table {{ $table->status == 1 ? 'open' : 'close' }}" id="table-{{ $table->id }}" onclick="selectTable({{ $table->id }})">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="table-info">โต๊ะ {{ $table->id }}</div>
+                        <p class="mb-1 mt-2 ms-5">หมดเวลาที่</p>
                     </div>
                     <div class="d-flex align-items-center">
                         <div class="people-info">
                             <i class="bi bi-person-fill"></i>
                             @if($table->bill && $table->bill->count() > 0)
                                 {{ $table->bill->last()->person_amount }} คน
-                                <p class="mb-1 mt-2">เวลาที่เหลือ :</p>
                             @else
                                 0 คน 
                             @endif
                         </div>
                         <div class="time-remaining text-black" id="time-remaining-{{ $table->id }}">
                             @if($table->status == 0 && $table->bill && $table->bill->count() > 0)
-                                <script>
-                                    startTableCountdown('{{ $table->bill->last()->start_time }}', 'time-remaining-{{ $table->id }}');
-                                </script>
+                            {{ \Carbon\Carbon::parse($table->bill->last()->end_time)->format('H:i:s') }}
                             @else
                                 00:00:00
                             @endif
@@ -229,7 +227,6 @@
         var startTime = '{{ $selectedTable->bill->last()->start_time }}';
         var startTime = now();
         @endif
-
         startTableCountdown(startTime, countdownElement.id);
 
         var modal = new bootstrap.Modal(document.getElementById('editModal'));
