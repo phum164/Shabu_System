@@ -50,9 +50,8 @@ class ListOrderController extends Controller
             $listOrder->save(); 
         }
     
-        return redirect(route('Orderfood'))->with('success', 'คำสั่งซื้อถูกเพิ่มเรียบร้อยแล้ว!');
+        return redirect(route('Orderfood',['id'=>$id]))->with('success', 'คำสั่งซื้อถูกเพิ่มเรียบร้อยแล้ว!');
     }
-
 
     /**
      * Display the specified resource.

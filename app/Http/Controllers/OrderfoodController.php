@@ -13,9 +13,9 @@ use App\Models\Bill;
 
 class OrderfoodController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request,$id)
     {
-        $typeId = $request->input('id'); 
+        $typeId = $request->input('id');
     
         if ($typeId) {
             $menus = Menu::where('menutype_id', $typeId)->get(); 
@@ -24,7 +24,7 @@ class OrderfoodController extends Controller
         }
     
         $menuTypes = MenuType::all(); 
-        $bill = Bill::latest()->first(); 
+        $bill = Bill::find($id);
         $table = Table::find($bill->table_id); 
         
         return view('Orderfood', [
@@ -32,12 +32,9 @@ class OrderfoodController extends Controller
             'menuTypes' => $menuTypes,
             'selected' => $typeId, 
             'table' => $table,
-            'bill' => $bill,  
+            'bill' => $bill,
+            'id'  => $id,
         ]);
     }
-    
-   
-    
-
     
 }

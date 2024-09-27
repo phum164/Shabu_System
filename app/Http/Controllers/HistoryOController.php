@@ -8,15 +8,13 @@ use Carbon\Carbon;
 
 class HistoryOController extends Controller
 {
-    public function index()
+    public function index($id)
     {
-        $hisorders = ListOrder::with('menu')  
+        $hisorders = ListOrder::where('bill_id',$id)
             ->orderBy('created_at', 'desc')
-            ->take(10)
-            ->get();
-
-        
-        return view('historyoder', compact('hisorders'));
+            ->take(10)->get();
+        // dd($hisorders[0]->menu);
+        return view('historyoder', compact('hisorders','id'));
     }
 }
 

@@ -12,15 +12,15 @@ class ListOrder extends Model
     use SoftDeletes;
     protected $table = 'listsorders';
     public function menu(){
-        return $this->belongsTo(Menu::class);
+        return $this->belongsTo(Menu::class,'menu_id');
     }
 
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'employee_id');
     }
 
         public function bill(){
-        return $this->belongsTo(Bill::class);
+        return $this->belongsTo(Bill::class,'bill_id');
     }
    
     protected $fillable = [
