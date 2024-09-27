@@ -5,7 +5,7 @@
 @section('menu-active')
 <ul class="navbar-nav">
   <li class="nav-item">
-    <a class="nav-link " href="{{ route('home_admin') }}">Home</a>
+    <a class="nav-link " href="{{ route('home_admin') }}">หน้าหลัก</a>
   </li>
   <li class="nav-item">
     <a class="nav-link active" href="{{ route('table_admin' )}}">จัดการโต๊ะ</a>
@@ -19,24 +19,22 @@
   <li class="nav-item">
     <a class="nav-link" href="{{ route('showstock')}}">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link " href="{{ route('Billadmin')}}">ใบเสร็จชำระเงิน</a>
-  </li>
+ 
 </ul>
 @endsection
 
 
-    
-@section('menu')
-<!-- อย่าพึ่งทำอะไร ทำให้มันไม่ error ตอน push เฉยๆเดะมาทำต่อจ้า แต่ถ้าใครอยากทำให้ก็ได้นะจุบุ -->
 
 @push('style')
 <link rel="stylesheet" href="{{ asset('css/managetableadmin.css') }}">
 @endpush
 
+@section('fixcon')
+  <div class="container-fluid">
+@endsection
 @section('menu')
-<div class="container-fluid">
-    <div class="row">
+<div class="container">
+  <div class="row">
         <!-- Sidebar โต๊ะทางซ้าย -->
         <div class="col-md-4 p-3" style="background-color: white;">
             <div class="table-list">
@@ -44,15 +42,15 @@
                 <div class="table-status mb-3 selectable-table {{ $table->status == 1 ? 'open' : 'close' }}" id="table-{{ $table->id }}" onclick="selectTable({{ $table->id }})">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="table-info">โต๊ะ {{ $table->id }}</div>
-                        <p>เวลาที่เหลือ</p>
                     </div>
                     <div class="d-flex align-items-center">
                         <div class="people-info">
                             <i class="bi bi-person-fill"></i>
                             @if($table->bill && $table->bill->count() > 0)
                                 {{ $table->bill->last()->person_amount }} คน
+                                <p class="mb-1 mt-2">เวลาที่เหลือ :</p>
                             @else
-                                0 คน
+                                0 คน 
                             @endif
                         </div>
                         <div class="time-remaining text-black" id="time-remaining-{{ $table->id }}">
@@ -71,7 +69,7 @@
         </div>
 
         <!-- Main Content แสดงรายละเอียดโต๊ะที่เลือกทางขวา -->
-        <div class="col-md-8">
+        <div class="col-md-8 mt-3">
             @if(isset($selectedTable))
             <div id="order-details">
                 <div class="card mb-3">
@@ -85,7 +83,7 @@
                                     0 คน
                                 @endif
                             </div>
-                            <div class="mb-2"><strong>เวลาที่เหลือ:</strong>
+                            <div class="mb-2"><strong>เวลาที่เหลือ :</strong>
                                 <span id="selected-table-countdown">
                                     @if($selectedTable->status == 0 && $selectedTable->bill && $selectedTable->bill->count() > 0)
                                         <script>
@@ -101,8 +99,13 @@
                             @if($selectedTable->status == 1)
                                 <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal" onclick="openModal({{ $selectedTable->id }})">เปิดโต๊ะ</button>
                             @else
-                                <button class="btn btn-dark text-white mr-2" data-bs-toggle="modal" data-bs-target="#editModal" onclick="openEditModal({{ $selectedTable->id }})">แก้ไข</button>
-                                <button class="btn btn-danger text-white">เช็คบิล</button>
+                                <button class="btn btn-dark text-white mr-2 me-2" data-bs-toggle="modal" data-bs-target="#editModal" onclick="openEditModal({{ $selectedTable->id }})">แก้ไข</button>
+                                <a href="{{ url('Billadmin') }}">
+                                  <button class="btn btn-danger text-white me-2">เช็คบิล</button>
+                                </a>   
+                                <a href="{{ url('Orderfood') }}">
+                                  <button class="btn btn-success text-white">สั่งอาหาร</button>
+                                </a>                           
                             @endif
                         </div>
                     </div>
@@ -188,6 +191,11 @@
         // เปลี่ยน URL เพื่อให้ส่งค่า tableNumber ไปยัง URL
         window.location.href = '/managetable/' + tableNumber;
     }
+
+    function checkbill(){
+        window.location.href = 'Billadmin';
+    }
+
 
     function openModal(tableId) {
         document.getElementById('table-id-input').value = tableId;

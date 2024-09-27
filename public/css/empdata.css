@@ -1,12 +1,11 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600&display=swap');
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: whitesmoke;
+    background-color: rgb(228, 228, 228);
+    font-family: 'kanit', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 header {

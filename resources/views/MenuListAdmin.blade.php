@@ -2,7 +2,7 @@
 @section('menu-active')
 <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link " href="{{ route('home_admin') }}">Home</a>
+      <a class="nav-link " href="{{ route('home_admin') }}">หน้าหลัก</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{{ route('table_admin' )}}">จัดการโต๊ะ</a>
@@ -16,28 +16,20 @@
     <li class="nav-item">
       <a class="nav-link" href="{{ route('showstock')}}">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link " href="{{ route('Billadmin')}}">ใบเสร็จชำระเงิน</a>
-      </li>
+    
   </ul>
 @endsection
 
 @push('style')
 <link rel="stylesheet" href="{{ asset('css/menulist.css') }}">
 @endpush
-@section('menu')
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menulist</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body style="background-color: rgb(228, 228, 228)">
-    <div class="container mt-5">
-        <div class="center">รายการอาหารของลูกค้า</div><br><br>
 
+@section('fixcon')
+  <div class="container mt-4 mb-4">
+@endsection
+
+@section('menu')
+<h2 class="text-center">รายการอาหารของลูกค้า</h2>
         <!-- วนลูปกลุ่มของออเดอร์ที่ถูกจัดกลุ่มตามเวลา -->
         @foreach ($listorders as $created_at => $orders)
             <form action="{{ route('update.status') }}" method="POST">

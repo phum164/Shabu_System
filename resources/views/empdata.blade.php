@@ -1,12 +1,11 @@
 @extends('layouts.layout_admin')
 @push('style')
-    
-@endpush
 <link rel="stylesheet" href="{{ asset('css/empdata.css') }}">
+@endpush
 @section('menu-active')
     <ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('home_admin') }}">Home</a>
+            <a class="nav-link" href="{{ route('home_admin') }}">หน้าหลัก</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ route('table_admin') }}">จัดการโต๊ะ</a>
@@ -20,9 +19,7 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ route('showstock') }}">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link " href="{{ route('Billadmin') }}">ใบเสร็จชำระเงิน</a>
-        </li>
+        
     </ul>
 @endsection
 

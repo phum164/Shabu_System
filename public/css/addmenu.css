@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600&display=swap');
+
+body {
+    background-color: rgb(255, 255, 255);
+    font-family: 'kanit', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+
 #admenu{
     display: flex;
     flex-direction: column;

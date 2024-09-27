@@ -35,11 +35,10 @@
         </ul>
       </div>
     </div>
-  </nav><br>
-
+  </nav>
 <!-- คัวเมนูหน้าแอดมิน -->
-<div class="container">
-    <div class="row">
+@yield('fixcon')
+  <div class="row">
         @yield('menu')
     </div>
 </div>

@@ -22,7 +22,7 @@
       <div class="collapse navbar-collapse " id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('home_admin') }}">Home</a>
+            <a class="nav-link" href="{{ route('home_admin') }}">หน้าหลัก</a>
           </li>
          
           <li class="nav-item">
@@ -37,9 +37,7 @@
           <li class="nav-item">
             <a class="nav-link active" href="{{ route('showstock')}}">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link " href="{{ route('Billadmin')}}">ใบเสร็จชำระเงิน</a>
-          </li>
+          
         </ul>
       </div>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">

@@ -6,7 +6,7 @@
 @section('menu-active')
     <ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('home_admin') }}">Home</a>
+            <a class="nav-link" href="{{ route('home_admin') }}">หน้าหลัก</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" href="{{ route('table_admin') }}">จัดการโต๊ะ</a>
@@ -27,10 +27,13 @@
 @endsection
 
 
+@section('fixcon')
+  <div class="container mt-5 mb-3">
+@endsection
 @section('menu')
     <br>
     <h2>การจัดการโต๊ะภายในร้าน</h2><br>
-    <div class="row">
+    <div class="row mt-3">
         @foreach ($tables as $table)
             <div class="col-sm-12 col-md-6 col-lg-3">
                 <div class="table">
