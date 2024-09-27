@@ -39,39 +39,40 @@
   <div class="container-fluid">
     <div class="receipt">
       <h3 class="text-center mb-3">IT BEEF SHABU</h3>
-      @foreach($bills as $bill)
-      <p class="text-center">ใบเสร็จชำระเงิน</p>
-
-      <div class="showdata">
-        <p>โต๊ะ : {{ $bill->table->id ?? 'N/A' }} | Bill ID : {{ $bill->id }}</p>
-        <p>วันที่ : {{ \Carbon\Carbon::parse($bill->start_time)->format('d/m/Y') }} | เวลา : {{ \Carbon\Carbon::parse($bill->start_time)->format('H:i') }}</p>
-        <p>ผู้ทำรายการ : {{ auth()->user()->name }}</p>
-        <hr>
-        <div class="detail">
-          <div class="row text-center">
-            <div class="col-4">
-              <p><b>รายการ</b></p>
-              <p>ผู้ใหญ่</p><br>
-            </div>
-            <div class="col-4">
-              <p><b>จำนวน</b></p>
-              <p>{{ $bill->person_amount }} ท่าน</p><br>
-            </div>
-            <div class="col-4">
-              <p><b>ราคา</b></p>
-              <p>{{($bill->total_pay) }} บาท</p>
-            </div>
+      @php
+      $latestBill = $bills->last(); 
+      @endphp
+  
+    @if($latestBill)
+    <p class="text-center">ยอดรวมทั้งหมด
+    </p>
+  
+    <div class="showdata">
+      <p>โต๊ะ : {{ $latestBill->table->id ?? 'N/A' }} | Bill ID : {{ $latestBill->id }}</p>
+      <p>วันที่ : {{ \Carbon\Carbon::parse($latestBill->start_time)->format('d/m/Y') }} | เวลา : {{ \Carbon\Carbon::parse($latestBill->start_time)->format('H:i') }}</p>
+      <p>ผู้ทำรายการ : {{ auth()->user()->name }}</p>
+      <hr>
+      <div class="detail">
+        <div class="row text-center">
+          <div class="col-4">
+            <p><b>รายการ</b></p>
+            <p>ผู้ใหญ่</p><br>
+          </div>
+          <div class="col-4">
+            <p><b>จำนวน</b></p>
+            <p>{{ $latestBill->person_amount }} ท่าน</p><br>
+          </div>
+          <div class="col-4">
+            <p><b>ราคา</b></p>
+            <p>{{ $latestBill->total_pay }} บาท</p>
+          </div>
         </div>
-        @endforeach
-        <hr>
-
-        <div class="container mt-4">
-              <div class="mb-3">
-                  <label class="form-label">ยอดรวมทั้งหมด :   {{($bill->total_pay) }} บาท</p></label>
-                
-                </div>
-    
-
+      </div>
+    </div>
+    <hr>
+  @else
+    <p>ไม่มีใบเสร็จที่ต้องแสดง</p>
+  @endif
       
            
 

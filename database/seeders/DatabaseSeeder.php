@@ -14,12 +14,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Menutype::create(['name' => 'เนื้อสัตว์']);
-        Menutype::create(['name' => 'ผัก']);
+        Menutype::create(['name' => 'เนื้อวัว']);
+        Menutype::create(['name' => 'เนื้อหมู']);
         Menutype::create(['name' => 'ทะเล']);
-        Menutype::create(['name' => 'เครื่องใน']);
+        Menutype::create(['name' => 'ผัก']);
         Menutype::create(['name' => 'ของทานเล่น']);
-        Menutype::create(['name' => 'ของหวาน']);
         Menutype::create(['name' => 'รายการอื่นๆ']);
     }
 }

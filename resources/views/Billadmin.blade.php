@@ -33,9 +33,7 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ route('showstock')}}">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="{{ route('showstock')}}">ใบเสร็จชำระเงิน</a>
-          </li>
+         
         </ul>
       </div>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
@@ -47,41 +45,52 @@
   <div class="container-fluid">
     <div class="receipt">
       <h3 class="text-center mb-3">IT BEEF SHABU</h3>
-      @foreach($bills as $bill)
-      <p class="text-center">ใบเสร็จชำระเงิน |   
-        @if ($bill->status == 0)
-          <b style="color: rgb(255, 0, 0)"> ยังไม่ชำระเงิน</b>
-        @elseif($bill->status == 1)
-          <b style="color: rgb(0, 211, 18)">ชำระเงินเรียบร้อย</b>
-        @endif</p>
-
-      <div class="showdata">
-        <p>โต๊ะ : {{ $bill->table->id ?? 'N/A' }} | Bill ID : {{ $bill->id }}</p>
-        <p>วันที่ : {{ \Carbon\Carbon::parse($bill->start_time)->format('d/m/Y') }} | เวลา : {{ \Carbon\Carbon::parse($bill->start_time)->format('H:i') }}</p>
-        <p>ผู้ทำรายการ : {{ auth()->user()->name }}</p>
-        <hr>
-        <div class="detail">
-          <div class="row text-center">
-            <div class="col-4">
-              <p><b>รายการ</b></p>
-              <p>ผู้ใหญ่</p><br>
-            </div>
-            <div class="col-4">
-              <p><b>จำนวน</b></p>
-              <p>{{ $bill->person_amount }} ท่าน</p><br>
-            </div>
-            <div class="col-4">
-              <p><b>ราคา</b></p>
-              <p>{{($bill->total_pay) }} บาท</p>
-            </div>
+      
+      @php
+      $latestBill = $bills->last(); 
+      @endphp
+  
+    @if($latestBill)
+    <p class="text-center">ใบเสร็จชำระเงิน |   
+      @if ($latestBill->status == 0)
+        <b style="color: rgb(255, 0, 0)"> ยังไม่ชำระเงิน</b>
+      @elseif($latestBill->status == 1)
+        <b style="color: rgb(0, 211, 18)">ชำระเงินเรียบร้อย</b>
+      @endif
+    </p>
+  
+    <div class="showdata">
+      <p>โต๊ะ : {{ $latestBill->table->id ?? 'N/A' }} | Bill ID : {{ $latestBill->id }}</p>
+      <p>วันที่ : {{ \Carbon\Carbon::parse($latestBill->start_time)->format('d/m/Y') }} | เวลา : {{ \Carbon\Carbon::parse($latestBill->start_time)->format('H:i') }}</p>
+      <p>ผู้ทำรายการ : {{ auth()->user()->name }}</p>
+      <hr>
+      <div class="detail">
+        <div class="row text-center">
+          <div class="col-4">
+            <p><b>รายการ</b></p>
+            <p>ผู้ใหญ่</p><br>
+          </div>
+          <div class="col-4">
+            <p><b>จำนวน</b></p>
+            <p>{{ $latestBill->person_amount }} ท่าน</p><br>
+          </div>
+          <div class="col-4">
+            <p><b>ราคา</b></p>
+            <p>{{ $latestBill->total_pay }} บาท</p>
+          </div>
         </div>
-        @endforeach
+      </div>
+    </div>
+    <hr>
+  @else
+    <p>ไม่มีใบเสร็จที่ต้องแสดง</p>
+  @endif
         <hr>
 
         <div class="container mt-4 p-3 bg-light rounded">
           <form action="{{ route('update-total-pay') }}" method="POST">
             @csrf 
-             <input type="hidden" name="bill_id" value="{{ $bill->id }}">
+             <input type="hidden" name="bill_id" value="{{ $latestBill->id }}">
 
              <div class="mb-3">
                  <label for="adjustment" class="form-label">ค่าปรับ</label>
@@ -90,16 +99,16 @@
          
              <div class="mb-3">
                  <label for="amountprice" class="form-label">ที่ต้องชำระ</label>
-                 <input type="number" class="form-control" name="amountprice"  placeholder="กรอกจำนวนที่ต้องชำระ" value="{{ $bill->total_pay }}">
+                 <input type="number" class="form-control" name="amountprice"  placeholder="กรอกจำนวนที่ต้องชำระ" value="{{ $latestBill->total_pay }}">
                 </div>
          
              <button type="submit" class="btn btn-primary w-100 mb-4 mt-2">คำนวนราคา</button>
               <div class="mb-4">
                   <label for="totalAmount" class="form-label">ยอดรวมทั้งหมด</label>
-                  <p> {{($bill->total_pay) }} บาท</p>
+                  <p> {{($latestBill->total_pay) }} บาท</p>
               </div>
           </form> 
-            <form action="{{ route('checkbill', ['id' => $bill->id]) }}" method="POST">
+            <form action="{{ route('checkbill', ['id' => $latestBill->id]) }}" method="POST">
                 @csrf
                 <button type="submit" class="btn btn-danger w-100 mb-5 mt-2">ชำระเงิน</button>
             </form>

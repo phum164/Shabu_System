@@ -26,13 +26,18 @@ class OrderfoodController extends Controller
         $menuTypes = MenuType::all(); 
         $bill = Bill::latest()->first(); 
         $table = Table::find($bill->table_id); 
-
+        
         return view('Orderfood', [
             'menus' => $menus, 
             'menuTypes' => $menuTypes,
             'selected' => $typeId, 
             'table' => $table,
-
+            'bill' => $bill,  
         ]);
     }
+    
+   
+    
+
+    
 }

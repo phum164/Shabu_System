@@ -103,9 +103,9 @@
                                 <a href="{{ url('Billadmin') }}">
                                   <button class="btn btn-danger text-white me-2">เช็คบิล</button>
                                 </a>   
-                                <a href="{{ url('Orderfood') }}">
+                                <a href="{{ route('Orderfood', ['bill_id' => $selectedTable->bill->last()->id]) }}">
                                   <button class="btn btn-success text-white">สั่งอาหาร</button>
-                                </a>                           
+                              </a>                
                             @endif
                         </div>
                     </div>
