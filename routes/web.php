@@ -88,3 +88,4 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::get('/createbill', [BillController::class, 'create'])->name('cratebill');
 Route::get('/show-bill/{billId}', [BillController::class, 'showBill'])->name('bill.show');
+

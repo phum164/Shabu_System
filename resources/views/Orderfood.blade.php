@@ -65,43 +65,11 @@
             </div><br>
             <p>โต๊ะ 1</p>
 
-<<<<<<< HEAD
-<div class="col-sm-12 col-md-3 sidebar order-md-last">
-  @if (session('success'))
-  <div class="alert alert-success">
-  {{ session('success') }}
-  </div>
-@endif
-  <div class="timeout">
-    <p>คุณเหลือเวลาอีก</p>
-    <p>1 : 59 : 59</p>
-  </div>
-  <div class="listoder">
-    <p><i class="bi bi-cart3"></i> รายการอาหารของคุณ</p>
-    <div class="oderitem">
-      <div class="oderlist">
-        <!-- รายการจะถูกเพิ่มที่นี่ -->
-      </div>
-    </div><br>
-    <p>ชื่อโต๊ะ: {{ $table->name }}</p>
-
-    <form id="orderForm" method="POST" action="{{ route('listorders.store',['id' => $bill_id])}}">
-      @csrf
-      <input type="hidden" value="">
-      <button type="submit" id="submitOrder" class="comf">สั่งอาหาร</button>
-    </form>
-
-
-  </div>
-</div>
-
-=======
             <form id="orderForm" method="POST" action="{{ route('listorders.store', ['id' => $bill_id]) }}">
                 @csrf
                 <input type="hidden" value="">
                 <button type="submit" id="submitOrder" class="comf">สั่งอาหาร</button>
             </form>
->>>>>>> origin/Bom
 
 
         </div>
