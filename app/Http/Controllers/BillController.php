@@ -110,10 +110,10 @@ class BillController extends Controller
     {
         //
     }
-    public function showBill($billId)
+    public function showBill($id)
     {
-        $bill = Bill::findOrFail($billId);
-        return view('show-bill', compact('bill'));
+        $bill = Bill::findOrFail($id);
+        return view('Billadmin', compact('bill'));
     }
 
    function updateTotalPay(Request $request)
