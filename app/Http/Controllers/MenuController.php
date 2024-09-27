@@ -136,7 +136,7 @@ class MenuController extends Controller
 
         // ตรวจสอบว่ามีการเปลี่ยนแปลงชื่อหรือประเภทเมนูหรือไม่
         if ($menu->name == $request->menuName && $menu->menutype_id == $request->type_id && $checkImg) {
-            return redirect('/หtock')->with('errors', 'ไม่มีการเปลี่ยนแปลงข้อมูล');
+            return redirect('/stock')->with('errors', 'ไม่มีการเปลี่ยนแปลงข้อมูล');
         }
 
         // อัปเดตข้อมูลเมนู
