@@ -96,10 +96,8 @@ class BillController extends Controller
                 'finish_time' => $time,
             ]);
         }
-
-        return redirect()->route('table_admin');
-
     
+        return redirect()->back();
     }
     
 

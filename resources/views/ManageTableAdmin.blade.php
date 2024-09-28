@@ -19,6 +19,7 @@
   <li class="nav-item">
     <a class="nav-link" href="{{ route('showstock')}}">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
   </li>
+ 
 </ul>
 @endsection
 

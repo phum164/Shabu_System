@@ -1,8 +1,4 @@
 @extends('layouts.layout_admin')
-@push('style')
-<link rel="stylesheet" href="{{ asset('css/menulist.css') }}">
-@endpush
-
 @section('menu-active')
 <ul class="navbar-nav">
     <li class="nav-item">
@@ -20,8 +16,13 @@
     <li class="nav-item">
       <a class="nav-link" href="{{ route('showstock')}}">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
     </li>
+    
   </ul>
 @endsection
+
+@push('style')
+<link rel="stylesheet" href="{{ asset('css/menulist.css') }}">
+@endpush
 
 @section('fixcon')
   <div class="container mt-4 mb-4">
