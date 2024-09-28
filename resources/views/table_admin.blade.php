@@ -35,13 +35,11 @@
         @foreach ($tables as $table)
             <div class="col-sm-12 col-md-6 col-lg-3">
                 <div class="table">
-                    <!-- ลิงก์ไปที่หน้า managetableadmin.blade.php โดยส่ง id ของโต๊ะ -->
                     <a href="{{ route('Managetable', ['id' => $table->id]) }}">
                         <img src="{{ asset('img/table.png') }}" alt="รูปโต๊ะ">
                     </a><br><br>
                     <p>โต๊ะ {{ $table->id }}</p>
                     <hr>
-                    <!-- ตรวจสอบสถานะของโต๊ะ -->
                     @if ($table->status == 1)
                         <p class="status o">Open</p>
                     @else
@@ -57,12 +55,6 @@
                             0 คน ฿ 0
                         @endif
                     </p>
-
-                    {{-- @if ($table->bill && $table->bill->count() > 0)
-                        {{ $table->bill->last()->person_amount }} คน
-                        ฿ {{ $table->bill->last()->total_pay }}
-                    @else
-                    @endif --}}
 
                 </div>
             </div>
