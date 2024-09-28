@@ -6,7 +6,7 @@
 
 @section('headline', 'เพิ่มสต๊อกเมนู')
 @section('content')
-
+    <link rel="stylesheet" href="{{ asset('css/stock.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @if (session('success'))
@@ -79,12 +79,12 @@
                         <a class="btn btn-danger" href="/delete/{{ $item->id }}" role="button"
                             onclick="confirmDelete(event, '{{ $item->name }}')">ลบเมนู</a>
 
-                    </td>
-                </tr>
-            </tbody>
-        @endforeach
-    </table>
-
+                        </td>
+                    </tr>
+                </tbody>
+            @endforeach
+        </table>
+    </div>
     <div class="mt-3">
         {{ $menus->links() }}
     </div>
@@ -138,7 +138,7 @@
             });
         }
 
-            function confirmEdit(ev, name) {
+        function confirmEdit(ev, name) {
             ev.preventDefault();
             var urlToRedirect = ev.currentTarget.getAttribute('href');
             Swal.fire({

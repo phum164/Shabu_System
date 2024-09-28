@@ -20,6 +20,8 @@ Route::get('/', function () {
     return redirect()-> route('home_admin');
 });
 
+Route::get('/allbill', [BillController::class, 'showBill'])->name('all_bill.showBill');
+
 Route::post('editemp/{id}',[EmployeeController::class,'update'])->name('edit_emp');
 Route::get('/showedit/{id}', [EmployeeController::class,'edit'])->name('show_edit');
 

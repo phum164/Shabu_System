@@ -1,0 +1,16 @@
+table th, table td {
+    padding: 15px;
+    border: 1px solid #ccc;
+    text-align: left;
+    text-align: center;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+td{
+    max-width: 160px;
+    overflow-wrap: anywhere;
+}
