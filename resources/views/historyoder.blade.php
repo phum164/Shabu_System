@@ -3,14 +3,15 @@
 @section('active')
     <ul class="navbar-nav">
         <li class="nav-item">
+            <a class="nav-link " href="{{ route('home_admin') }}">หน้าหลัก</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{ route('Orderfood',['id'=>$id]) }}">สั่งอาหาร</a>
         </li>
         <li class="nav-item">
             <a class="nav-link active" href="{{ route('historyoder',['id'=>$id]) }}">ประวัติการสั่งอาหาร</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('totalprice') }}">ยอดรวมทั้งหมด</a>
-        </li>
+        
     </ul>
 @endsection
 

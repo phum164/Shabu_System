@@ -12,36 +12,36 @@
 </head>
 
 <body>
-    <!-- เมนูฝั่งแอดมิน -->
-    <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: rgb(235, 8, 8);">
-        <div class="container-fluid ms-3">
-            <a class="navbar-brand" href="#" style="font-weight: 600; letter-spacing: 1px;">IT BEEF SHABU</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse " id="navbarNav">
-                @yield('menu-active')
-            </div>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
+<!-- เมนูฝั่งแอดมิน -->
+<nav class="navbar navbar-expand-lg navbar-dark " style="background-color: rgb(235, 8, 8);">
+  <div class="container-fluid ms-3">
+    <a class="navbar-brand" href="{{ route('home_admin') }}" style="font-weight: 600; letter-spacing: 1px;">IT BEEF SHABU</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse " id="navbarNav">
+       @yield('menu-active')
+      </div>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+         
+          <li class="nav-item">
+            <!-- Form สำหรับการ logout -->
+            <form method="POST" action="{{ route('logout') }}" x-data>
+              @csrf
+              <button class="nav-link" style="word-spacing: 4px;" @click.prevent="$root.submit();">
+                <i class="bi bi-box-arrow-right"></i>  Logout
+              </button>
+            </form>
+          </li>
+        </ul>
+      </div>
+  </div>
+</nav>
 
-                    <li class="nav-item">
-                        <!-- Form สำหรับการ logout -->
-                        <form method="POST" action="{{ route('logout') }}" x-data>
-                            @csrf
-                            <button class="nav-link" style="word-spacing: 4px;" @click.prevent="$root.submit();">
-                                <i class="bi bi-box-arrow-right"></i> Logout
-                            </button>
-                        </form>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!-- คัวเมนูหน้าแอดมิน -->
-    @yield('fixcon')
-    <div class="row">
+<!-- คัวเมนูหน้าแอดมิน -->
+@yield('fixcon')
+  <div class="row">
         @yield('menu')
     </div>
     </div>
