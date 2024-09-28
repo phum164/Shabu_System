@@ -34,6 +34,8 @@
                 </x-button>
             </div>
         </form>
+        <br>
+        <br>
     </x-authentication-card>
 </x-guest-layout>
 @endsection

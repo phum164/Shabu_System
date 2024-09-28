@@ -11,18 +11,18 @@
             @csrf
 
             <div>
-                <x-label for="name" value="{{ __('Name') }}" />
+                <x-label for="name" value="{{ __('ชื่อ-สกุล') }}" />
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             </div>
 
             <div class="mt-4">
-                <x-label for="email" value="{{ __('Email') }}" />
+                <x-label for="email" value="{{ __('อีเมลล์') }}" />
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             </div>
 
             <div class="mt-4">
-                <x-label for="tell_number" value="{{ __('Tell Number') }}" />
-                <x-input id="tell_number" class="block mt-1 w-full" type="text" name="tell_number" :value="old('tell_number')" required />
+                <x-label for="tell_number" value="{{ __('เบอร์โทรศัพท์') }}" />
+                <x-input id="tell_number" class="block mt-1 w-full" type="text" name="tell_number" :value="old('tell_number')" required maxlength="10" pattern="\d{10}" type="text" name="tell_number" :value="old('tell_number')" required />
             </div>
 
             <div class="mt-4">
@@ -64,8 +64,8 @@
             @endif
 
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('home_admin') }}">
+                    {{ __('back') }}
                 </a>
 
                 <x-button class="ms-4" style="background-color: #4ac03a;">
@@ -73,6 +73,7 @@
                 </x-button>
             </div>
         </form>
+        <div class="row=1"></div>
     </x-authentication-card>
 </x-guest-layout>
 @endsection

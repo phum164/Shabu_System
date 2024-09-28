@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ListOrder;
 use App\Models\Bill;
+use App\Models\Menu;
+use App\Models\User;
 
 class ListOrderController extends Controller
 {
@@ -47,7 +49,7 @@ class ListOrderController extends Controller
             $listOrder->menu_id = $menuId;
             $listOrder->amount = $request->amount[$index];
             $listOrder->bill_id = $id;  
-            $listOrder->save(); 
+            $listOrder->save();
         }
     
         return redirect(route('Orderfood',['id'=>$id]))->with('success', 'คำสั่งซื้อถูกเพิ่มเรียบร้อยแล้ว!');
@@ -77,8 +79,24 @@ class ListOrderController extends Controller
         if (!$request->has('order_ids')) {
             return redirect()->back()->with('error', 'กรุณาเลือกเมนูก่อนยืนยัน');
         }
-        $orderIds = $request->input('order_ids');
-        ListOrder::whereIn('id', $orderIds)->update(['status' => 1]);
+        $orders = $request->order_ids;
+        foreach($orders as $order){
+            $list = ListOrder::find($order);
+            $menu = Menu::find($list->menu_id);
+            if($list->amount <= $menu->stock){
+                $menu->update([
+                    'stock' => $menu->stock - $list->amount,
+                ]);
+                $list->status = 1;
+                $list->employee_id = auth()->user()->id;
+                $list->save();
+            }else{
+                $list->status = 3;
+                $list->save();
+            }
+        }
+        // $orderIds = $request->input('order_ids');
+        // ListOrder::whereIn('id', $orderIds)->update(['status' => 1]);
     
         return redirect()->back()->with('success', 'ยืนยันสำเร็จ');
     }

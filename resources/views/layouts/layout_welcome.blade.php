@@ -21,7 +21,7 @@
   </nav><br>
 
 <!-- คัวเมนูหน้าแอดมิน -->
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         @yield('menu')
     </div>

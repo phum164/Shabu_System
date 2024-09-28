@@ -3,6 +3,16 @@
 @section('menu')
     <!-- CSS -->
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600&display=swap');
+
+        body {
+            background-color: rgb(255, 255, 255);
+            font-family: 'kanit', sans-serif;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
         .container {
             max-width: 500px;
             /* ลดความกว้างของบล็อกฟอร์ม */
@@ -82,8 +92,8 @@
                     </div>
                 @endif
                 {{-- <form action="/insertmenu" method="POST" enctype="multipart/form-data"> --}}
-                <form action="{{ isset($editmenu) ? route('editmenu',$editmenu->id) : route('insertmenu') }}"
-                    method="POST" enctype="multipart/form-data">
+                <form action="{{ isset($editmenu) ? route('editmenu', $editmenu->id) : route('insertmenu') }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     @if (isset($editmenu))
                         @method('PUT')
@@ -117,7 +127,8 @@
                         <label for="menuCategory">เลือกหมวดหมู่</label>
                         <select class="form-control" id="menuCategory" name="type_id" required>
                             @foreach ($types as $type)
-                                <option value="{{ $type->id }}"{{ isset($editmenu) && $editmenu->menutype_id == $type->id ? ' selected' : '' }}>
+                                <option
+                                    value="{{ $type->id }}"{{ isset($editmenu) && $editmenu->menutype_id == $type->id ? ' selected' : '' }}>
                                     {{ $type->name }}
                                 </option>
                             @endforeach
