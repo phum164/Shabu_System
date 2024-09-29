@@ -57,7 +57,7 @@ class EmployeeController extends Controller
         ]);
         $employee = User::findOrFail($id);
         $employee->update($validatedData);
-        return redirect()->route('epmdata')->with('success', 'อัปเดตข้อมูลพนักงานเรียบร้อยแล้ว');
+        return redirect()->route('empdata')->with('success', 'อัปเดตข้อมูลพนักงานเรียบร้อยแล้ว');
     }
 
     public function destroy($id)

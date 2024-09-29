@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Position;
+use Livewire\Attributes\Validate;
 
 class PositionController extends Controller
 {
     public function index()
     {
         $positions = Position::all();
-        return view('#',compact('positions'));
+        return view('/editsarary',compact('positions'));
     }
 
     /**
@@ -53,9 +54,18 @@ class PositionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,$id)
     {
-        //
+        $request->validate([
+            'sarary' => 'required|numeric|min:0',
+        ], [
+            'sarary.required' => 'กรุณาระบุเงินเดือน',
+            'sarary.numeric' => 'เงินเดือนต้องเป็นตัวเลข',
+            'sarary.min' => 'เงินเดือนไม่สามารถต่ำกว่า 0',
+        ]);
+
+        $position = Position::find($id);
+        $newsarary = $request->sarary;
     }
 
     /**

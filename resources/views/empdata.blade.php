@@ -32,6 +32,9 @@
         <div class="empadd">
             <a class="btn btn-success" href="/register">เพิ่มพนักงาน</a>
         </div>
+        {{-- <div class="empadd">
+            <a class="btn btn-success" href="/">เงินเดือน</a>
+        </div> --}}
         <hr>
         @foreach ($employees as $emp)
             <div class="emp">

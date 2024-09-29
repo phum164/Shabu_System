@@ -46,6 +46,6 @@ class RegisterController extends Controller
         // เรียกใช้ CreateNewUser เพื่อสร้างผู้ใช้ใหม่
         $this->createNewUser->create($validatedData);
 
-        return redirect()->route('showall_employee')->with('success', 'พนักงานใหม่ถูกสร้างแล้ว');
+        return redirect()->route('empdata')->with('success', 'พนักงานใหม่ถูกสร้างแล้ว');
     }
 }
