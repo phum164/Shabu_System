@@ -269,8 +269,8 @@
         function decreaseMenu(){
             let numberOfPerson =document.getElementById("numberOfPerson").textContent;
             let intNumberOfPerson = parseInt(numberOfPerson) - 1;
-            if(intNumberOfPerson <= 0){
-                intNumberOfPerson = 0;
+            if(intNumberOfPerson < 1){
+                intNumberOfPerson = 1;
             }
             document.getElementById("numberOfPerson").textContent =intNumberOfPerson
             document.getElementById("person_amount").value = intNumberOfPerson;
