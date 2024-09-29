@@ -12,36 +12,63 @@
 </head>
 
 <body>
-<!-- เมนูฝั่งแอดมิน -->
-<nav class="navbar navbar-expand-lg navbar-dark " style="background-color: rgb(235, 8, 8);">
-  <div class="container-fluid ms-3">
-    <a class="navbar-brand" href="{{ route('home_admin') }}" style="font-weight: 600; letter-spacing: 1px;">IT BEEF SHABU</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse " id="navbarNav">
-       @yield('menu-active')
-      </div>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-         
-          <li class="nav-item">
-            <!-- Form สำหรับการ logout -->
-            <form method="POST" action="{{ route('logout') }}" x-data>
-              @csrf
-              <button class="nav-link" style="word-spacing: 4px;" @click.prevent="$root.submit();">
-                <i class="bi bi-box-arrow-right"></i>  Logout
-              </button>
-            </form>
-          </li>
-        </ul>
-      </div>
-  </div>
-</nav>
+    <!-- เมนูฝั่งแอดมิน -->
+    <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: rgb(235, 8, 8);">
+        <div class="container-fluid ms-3">
+            <a class="navbar-brand" href="{{ route('home_admin') }}" style="font-weight: 600; letter-spacing: 1px;">IT
+                BEEF SHABU</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarNav">
+                <ul class="navbar-nav mx-auto text-center">
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('home_admin') ? 'active' : '' }}"
+                            href="{{ route('home_admin') }}">หน้าหลัก</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('table_admin') ? 'active' : '' }}"
+                            href="{{ route('table_admin') }}">จัดการโต๊ะ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('menulist') ? 'active' : '' }}"
+                            href="{{ route('menulist') }}">รายการอาหารของลูกค้า</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('empdata') ? 'active' : '' }}"
+                            href="/empdata">ข้อมูลพนักงาน</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('showstock') ? 'active' : '' }}"
+                            href="{{ route('showstock') }}">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('all_bill.showBill') ? 'active' : '' }}"
+                            href="{{ route('all_bill.showBill') }}">บิลทั้งหมด</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
 
-<!-- คัวเมนูหน้าแอดมิน -->
-@yield('fixcon')
-  <div class="row">
+                    <li class="nav-item">
+                        <!-- Form สำหรับการ logout -->
+                        <form method="POST" action="{{ route('logout') }}" x-data>
+                            @csrf
+                            <button class="nav-link" style="word-spacing: 4px;" @click.prevent="$root.submit();">
+                                <i class="bi bi-box-arrow-right"></i> Logout
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- คัวเมนูหน้าแอดมิน -->
+    @yield('fixcon')
+    <div class="row">
         @yield('menu')
     </div>
     </div>

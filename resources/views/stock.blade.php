@@ -1,9 +1,5 @@
 @extends('layouts.admin')
-
-
-@section('title', 'stock_menu')
-
-
+@section('title', 'stocks')
 @section('headline', 'เพิ่มสต๊อกเมนู')
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/stock.css') }}">
@@ -42,52 +38,89 @@
         </script>
     @endif
 
-    <table class="table-striped-columns mx-auto" style="width: 80%;">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Image</th>
-                <th scope="col">Name</th>
-                <th scope="col">Type</th>
-                <th scope="col">Stock</th>
-                <th scope="col">Among</th>
-                <th scope="col">EditMenu</th>
-                <th scope="col">DeletMenu</th>
-            </tr>
-        </thead>
-        @foreach ($menus as $item)
-            <tbody>
+    <div class="container">
+        <div class="row">
+            <div class="col-4 mx-auto">
+            </div>
+            <div class="col-md-6">
+            </div>
+            <div class="col-md-2" id="addmenu">
+                <a href="{{ route('Addmenuadmin') }}" class="btn btn-success" role="button">เพิ่มเมนูอาหาร</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-4 text-start">
+                <form action="/showstock/search" method="GET">
+                    <div class="input-group mb-4">
+                        <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input class="form-control" placeholder="Search" type="text" name="search">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    @if ($menus->isEmpty())
+        <p style="text-align: center">ไม่พบเมนู</p>
+    @else
+        <table class="table-striped-columns mx-auto" style="width: 80%;">
+            <thead>
                 <tr>
-                    <th scope="row da">{{ $item->id }}</th>
-                    <td><img src="{{ asset($item->image) }}" alt="รูปเมนู" width="50" height="50"></td>
-                    <td>{{ $item->name }}</td>
-                    <td>{{ $item->menutype->name }}</td>
-                    <td>{{ $item->stock }}</td>
-                    <td>
-                        <form method="POST" action="{{ route('add_stock', $item->id) }}" class="d-flex align-items-center"
-                            onsubmit="confirmAddStock(event,'{{ $item->name }}', this.stock.value);">
-                            @csrf
-                            <input type="number" name="stock" class="form-control w-25 me-2" placeholder="จำนวน">
-                            <button type="submit" class="btn btn-success">เพิ่มสต๊อก</button>
-                        </form>
-                    </td>
-                    <td>
-                        <a class="btn btn-warning" href="/edit/{{ $item->id }}" role="button"
-                            onclick="confirmEditStock(event,'{{ $item->name }}');">แก้ไข</a>
-                    </td>
-                    <td>
-                        <a class="btn btn-danger" href="/delete/{{ $item->id }}" role="button"
-                            onclick="confirmDelete(event, '{{ $item->name }}')">ลบเมนู</a>
+                    <th scope="col">ID</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Among</th>
+                    <th scope="col">EditMenu</th>
+                    <th scope="col">DeletMenu</th>
+                </tr>
+            </thead>
+            @foreach ($menus as $item)
+                <tbody>
+                    <tr>
+                        <th scope="row da">{{ $item->id }}</th>
+                        <td><img src="{{ asset($item->image) }}" alt="รูปเมนู" width="50" height="50"></td>
+                        <td>{{ $item->name }}</td>
+                        <td>{{ $item->menutype->name }}</td>
+                        <td>{{ $item->stock }}</td>
+                        <td>
+                            <form method="POST" action="{{ route('add_stock', $item->id) }}"
+                                class="d-flex jstify-content-evenly align-items-center flex-form"
+                                onsubmit="confirmAddStock(event,'{{ $item->name }}', this.stock.value);">
+                                @csrf
+                                <input type="number" name="stock" class="form-control mx-2" maxlength="3" min="0"
+                                    placeholder="จำนวน" style="width: 90px; height:40px; -moz-appearance: textfield;"
+                                    required>
+                                <button type="submit" class="btn btn-success">เพิ่มสต๊อก</button>
+                            </form>
+                        </td>
+                        <td>
+                            <a class="btn btn-warning" href="/edit/{{ $item->id }}" role="button"
+                                onclick="confirmEditStock(event,'{{ $item->name }}');">แก้ไข</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger" href="/delete/{{ $item->id }}" role="button"
+                                onclick="confirmDelete(event, '{{ $item->name }}')">ลบเมนู</a>
 
                         </td>
                     </tr>
                 </tbody>
             @endforeach
         </table>
-    </div>
-    <div class="mt-3">
-        {{ $menus->links() }}
-    </div>
+        </div>
+        <div class="mt-3">
+            @if (isset($search))
+                {{ $menus->appends(['search' => $search])->links() }}
+            @else
+                {{ $menus->links() }}
+            @endif
+        </div>
+    @endif
 
     <script>
         function confirmAddStock(ev, menuName, stockAmount) {
@@ -105,7 +138,7 @@
                 reverseButtons: true, // สลับตำแหน่งปุ่ม
             }).then((result) => {
                 if (result.isConfirmed) {
-                        ev.target.submit();
+                    ev.target.submit();
                 }
             });
             return false;

@@ -3,6 +3,7 @@ table th, table td {
     border: 1px solid #ccc;
     text-align: left;
     text-align: center;
+    border-width: thin;
 }
 table {
     width: 100%;
@@ -13,4 +14,8 @@ table {
 td{
     max-width: 160px;
     overflow-wrap: anywhere;
+}
+
+thead{
+    background-color: gray;
 }

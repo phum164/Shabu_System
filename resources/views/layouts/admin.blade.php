@@ -15,30 +15,31 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: rgb(235, 8, 8);">
   <div class="container-fluid ms-3">
-      <a class="navbar-brand" href="#" style="font-weight: 600; letter-spacing: 1px;">IT BEEF SHABU</a>
+      <a class="navbar-brand" href="{{ route('home_admin') }}" style="font-weight: 600; letter-spacing: 1px;">IT BEEF SHABU</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse " id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('home_admin') }}">หน้าหลัก</a>
-          </li>
-         
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('table_admin' )}}">จัดการโต๊ะ</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="{{ route('menulist' )}}">รายการอาหารของลูกค้า</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/empdata">ข้อมูลพนักงาน</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="{{ route('showstock')}}">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
-          </li>
-          
-        </ul>
+          <ul class="navbar-nav mx-auto text-center">
+              <li class="nav-item">
+                  <a class="nav-link {{ request()->routeIs('home_admin*') ? 'active' : '' }}" href="{{ route('home_admin') }}">หน้าหลัก</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link {{ request()->routeIs('table_admin*') ? 'active' : '' }}" href="{{ route('table_admin') }}">จัดการโต๊ะ</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link {{ request()->routeIs('menulist*') ? 'active' : '' }}" href="{{ route('menulist') }}">รายการอาหารของลูกค้า</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link {{ request()->is('empdata*') ? 'active' : '' }}" href="/empdata">ข้อมูลพนักงาน</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link {{ request()->is('showstock*') || request()->has('search') ? 'active' : '' }}" href="{{ route('showstock') }}">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link {{ request()->is('allbill*') && (request()->has('sbill') || request()->has('stabel')) ? 'active' : '' }}" href="{{ route('all_bill.showBill') }}">บิลทั้งหมด</a>
+              </li>
+          </ul>
       </div>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
@@ -57,20 +58,6 @@
     </div>
   </nav><br>
 
-    {{-- <div class="container text-center">
-        <div class="row-2">
-            <div class="col-3 border border-success-subtle">
-                    <form action="/action_page.php">
-                        <input type="text" placeholder="Search.." name="search">
-                        <button type="submit"><i class="fa fa-search"></i></button>
-                    </form>
-            </div>
-            <div class="col-3 border border-success-subtle">column</div>
-            <div class="col-3 border border-success-subtle">
-                Column
-            </div>
-        </div>
-    </div> --}}
     <div class="container">
         <div class="row-2 m-3">
             <div class="col-3">
@@ -79,31 +66,6 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="row">
-            {{-- <div class="col-md-4">
-                <form action="/action_page.php" method="get">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search.." name="search">
-                        <button class="btn btn-outline-secondary" type="submit"><i class="fa fa-search"></i></button>
-                    </div>
-                </form>
-            </div> --}}
-            <div class="col-4 mx-auto">
-                <div class="input-group mb-4">
-                    <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
-                    <input class="form-control" placeholder="Search" type="text">
-                </div>
-            </div>
-            <div class="col-md-6">
-            </div>
-            <div class="col-md-2" id="addmenu">
-                {{-- <button type="button" class="btn bg-gradient-success w-auto me-1 mb-0">เพิ่มเมนูอาหาร</button> --}}
-                {{-- <button type="button" class="btn btn-success"><b>เพิ่มเมนูอาหาร</b></button> --}}
-                <a href="{{route('Addmenuadmin')}}" class="btn btn-success" role="button">เพิ่มเมนูอาหาร</a>
-            </div>
-        </div>
-    </div>
 
 
     <!-- คัวเมนูหน้าแอดมิน -->

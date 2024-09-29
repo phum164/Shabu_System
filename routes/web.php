@@ -20,8 +20,8 @@ Route::get('/', function () {
     return redirect()-> route('home_admin');
 });
 
-Route::get('/allbill', [BillController::class, 'showBill'])->name('all_bill.showBill');
-
+Route::get('/allbill', [BillController::class, 'allBill'])->name('all_bill.showBill');
+Route::get('/allbill/search', [BillController::class, 'search'])->name('search_bill');
 Route::post('editemp/{id}',[EmployeeController::class,'update'])->name('edit_emp');
 Route::get('/showedit/{id}', [EmployeeController::class,'edit'])->name('show_edit');
 
@@ -43,6 +43,7 @@ Route::get('/Totalprice', [TotalpriceController::class, 'index'])->name('totalpr
 Route::get('/Billadmin/{id}', [BillController::class, 'showBill'])->name('Billadmin');
 Route::post('listorders/{id}', [ListOrderController::class, 'store'])->name('listorders.store');
 Route::get('/showstock', [MenuController::class, 'showstock'])->name('showstock');
+Route::get('/showstock/search', [MenuController::class, 'search'])->name('searchstock');
 Route::post('/addstock/{id}', [MenuController::class, 'stock'])->name('add_stock');
 Route::get('/Menulist', [ListOrderController::class, 'index'])->name('menulist');
 Route::post('/Menulist-update', [ListOrderController::class, 'update'])->name('update.status');

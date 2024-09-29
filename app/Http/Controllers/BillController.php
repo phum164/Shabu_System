@@ -102,15 +102,27 @@ class BillController extends Controller
     
     }
     
+    public function allBill(){
+        $bills = Bill::paginate(10);
+        $total_incom = Bill::where('status', 1)->sum('total_pay');
+        return view('all_bill',compact('bills','total_incom'));
+    }
 
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    //check bill
-    public function destroy(string $id)
+    public function search(Request $request)
     {
-        //
+        $billId = $request->sbill;
+        $tableId = $request->stabel;
+        $query = Bill::query();
+        if ($billId && $tableId) {
+            $query->where('id', $billId)->where('table_id', $tableId);
+        } elseif ($billId) {
+            $query->where('id', $billId);
+        } elseif ($tableId) {
+            $query->where('table_id', $tableId);
+        }
+        $bills = $query->paginate(10);
+        $total_incom = Bill::where('status', 1)->sum('total_pay');
+        return view('all_bill',compact('bills','total_incom'));
     }
     public function showBill($id)
     {
@@ -128,7 +140,6 @@ class BillController extends Controller
     
         $total_pay = $bill->total_pay + $adjustment ;
         
-        // อัปเดตยอดรวมใหม่
         $bill->total_pay = $total_pay;
         $bill->save();
     }

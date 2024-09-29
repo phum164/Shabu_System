@@ -2,26 +2,6 @@
   @push('style')
       <link rel="stylesheet" href="{{ asset('css/managetableadmin.css') }}">
   @endpush
-  @section('menu-active')
-      <ul class="navbar-nav">
-          <li class="nav-item">
-              <a class="nav-link " href="{{ route('home_admin') }}">หน้าหลัก</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link active" href="{{ route('table_admin') }}">จัดการโต๊ะ</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="{{ route('menulist') }}">รายการอาหารของลูกค้า</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="#">ข้อมูลพนักงาน</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="{{ route('showstock') }}">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
-          </li>
-
-      </ul>
-  @endsection
 
   @push('style')
       <link rel="stylesheet" href="{{ asset('css/managetableadmin.css') }}">
@@ -55,9 +35,10 @@
                                       </div>
                                       <div class="time-remaining text-black" id="time-remaining-{{ $table->id }}">
                                           @if ($table->status == 0 && $table->bill && $table->bill->count() > 0)
-                                          <span class="ms-4">{{ \Carbon\Carbon::parse($table->bill->last()->end_time)->format('H:i:s') }}</span>
+                                              <span
+                                                  class="ms-4">{{ \Carbon\Carbon::parse($table->bill->last()->end_time)->format('H:i:s') }}</span>
                                           @else
-                                          <span class="ms-3">00:00:00</span>
+                                              <span class="ms-3">00:00:00</span>
                                           @endif
                                       </div>
                                   </div>
@@ -76,7 +57,7 @@
                                           <div class="mb-2"><strong>โต๊ะ</strong> <span
                                                   id="table-number">{{ $selectedTable->id }}</span></div>
                                           <div class="mb-2"><strong>จำนวนคน:</strong>
-                                              @if ($selectedTable->bill && $selectedTable->bill->count() > 0)
+                                              @if ($selectedTable->status == 0 && $selectedTable->bill->count() > 0)
                                                   {{ $selectedTable->bill->last()->person_amount }} คน
                                               @else
                                                   0 คน
@@ -84,7 +65,7 @@
                                           </div>
                                           <div class="mb-2"><strong>หมดเวลาที่ :</strong>
                                               <span id="selected-table-countdown">
-                                                  @if ($selectedTable->status == 0 && $selectedTable->bill )
+                                                  @if ($selectedTable->status == 0 && $selectedTable->bill)
                                                       {{ \Carbon\Carbon::parse($selectedTable->bill->last()->end_time)->format('H:i:s') }}
                                                   @else
                                                       00:00:00
@@ -120,129 +101,140 @@
 
           <!-- Modal for Editing -->
           <div class="modal fade" id="OpenTableModal" tabindex="-1" aria-labelledby="openModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title" id="openModalLabel">โต๊ะ <span id="table-number">{{ $table->id }}</span></h5>
-                  <button type="button" class="btn-close" aria-label="Close" onclick="closeModal()"></button>
-              </div>
-              <div class="modal-body text-center">
-                  <form id="openTableForm" action="{{ route('bill.create') }}" method="POST">
-                      @csrf
-                      <input type="hidden" name="tableid" id="table-id-input" value="{{ $table->id }}">
+              <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="openModalLabel">โต๊ะ <span
+                                  id="table-number">{{ $table->id }}</span></h5>
+                          <button type="button" class="btn-close" aria-label="Close" onclick="closeModal()"></button>
+                      </div>
+                      <div class="modal-body text-center">
+                          <form id="openTableForm" action="{{ route('bill.create') }}" method="POST">
+                              @csrf
+                              <input type="hidden" name="tableid" id="table-id-input" value="{{ $table->id }}">
 
-                      <div class="d-flex justify-content-around">
-                          <div class="mb-3">
-                              <label for="person_amount" class="form-label">จำนวนคน</label>
-                              <div class="input-group justify-content-center">
-                                  <button type="button" class="btn btn-outline-secondary" onclick="updatePeopleCount(-1)">-</button>
-                                  <input type="text" class="form-control text-center" id="person_amount" name="amount" value="1" readonly>
-                                  <button type="button" class="btn btn-outline-secondary" onclick="updatePeopleCount(1)">+</button>
+                              <div class="d-flex justify-content-around">
+                                  <div class="mb-3">
+                                      <label for="person_amount" class="form-label">จำนวนคน</label>
+                                      <div class="input-group justify-content-center">
+                                          <button type="button" class="btn btn-outline-secondary"
+                                              onclick="updatePeopleCount(-1)">-</button>
+                                          <input type="text" class="form-control text-center" id="person_amount"
+                                              name="amount" value="1" readonly>
+                                          <button type="button" class="btn btn-outline-secondary"
+                                              onclick="updatePeopleCount(1)">+</button>
+                                      </div>
+                                  </div>
+
+                                  <!-- จัดวางข้อมูลเวลาที่เหลือ -->
+                                  <div class="mb-3">
+                                      <label for="time-remaining" class="form-label">เวลา</label>
+                                      <input type="text" class="form-control text-center" id="time-remaining"
+                                          name="time_remaining" value="2:00:00" readonly>
+                                  </div>
                               </div>
-                          </div>
 
-                          <!-- จัดวางข้อมูลเวลาที่เหลือ -->
-                          <div class="mb-3">
-                              <label for="time-remaining" class="form-label">เวลา</label>
-                              <input type="text" class="form-control text-center" id="time-remaining" name="time_remaining" value="2:00:00" readonly>
-                          </div>
+                              <!-- ปุ่มเริ่มจับเวลา -->
+                              <div class="modal-footer justify-content-center">
+                                  <button type="submit" class="btn btn-danger">เริ่มจับเวลา</button>
+                              </div>
+                          </form>
                       </div>
-
-                      <!-- ปุ่มเริ่มจับเวลา -->
-                      <div class="modal-footer justify-content-center">
-                          <button type="submit" class="btn btn-danger">เริ่มจับเวลา</button>
-                      </div>
-                  </form>
+                  </div>
               </div>
           </div>
-      </div>
-  </div>
 
 
           <!-- ฟอร์มการแก้ไขเวลาที่หมด -->
-<!-- ฟอร์มการแก้ไขเวลาที่หมด -->
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">โต๊ะ <span id="table-number">{{ $selectedTable->id }}</span></h5>
-                <button type="button" class="btn-close" aria-label="Close" onclick="closeModal()"></button>
-            </div>
-            <div class="modal-body text-center">
-                <form id="openTableForm" action="{{ route('bill.update') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="tableid" id="table-id-input">
-
-                    <div class="d-flex justify-content-around">
-                      <div class="mb-3">
-                          <label for="person_amount" class="form-label">จำนวนคน</label>
-                          <div class="input-group justify-content-center">
-                              <button type="button" class="btn btn-outline-secondary" onclick="updatePeopleCount(-1)">-</button>
-                              <input type="text" class="form-control text-center" id="person_amount" name="amount" 
-                                  value="{{ $selectedTable->bill->last()->person_amount}}">
-                              <button type="button" class="btn btn-outline-secondary" onclick="updatePeopleCount(1)">+</button>
-                          </div>
+          <!-- ฟอร์มการแก้ไขเวลาที่หมด -->
+          <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="editModalLabel">โต๊ะ <span
+                                  id="table-number">{{ $selectedTable->id }}</span></h5>
+                          <button type="button" class="btn-close" aria-label="Close" onclick="closeModal()"></button>
                       </div>
+                      <div class="modal-body text-center">
+                          <form id="openTableForm" action="{{ route('bill.update') }}" method="POST">
+                              @csrf
+                              <input type="hidden" name="tableid" id="table-id-input">
+
+                              <div class="d-flex justify-content-around">
+                                  <div class="mb-3">
+                                      <label for="person_amount" class="form-label">จำนวนคน</label>
+                                      <div class="input-group justify-content-center">
+                                          <button type="button" class="btn btn-outline-secondary"
+                                              onclick="updatePeopleCount(-1)">-</button>
+                                          <input type="text" class="form-control text-center" id="person_amount"
+                                              name="amount" value="{{ $selectedTable->bill->last()->person_amount }}">
+                                          <button type="button" class="btn btn-outline-secondary"
+                                              onclick="updatePeopleCount(1)">+</button>
+                                      </div>
+                                  </div>
 
 
-                        <!-- ฟิลด์เวลาที่หมด -->
-                        <div class="mb-3">
-                            <label for="time-remaining" class="form-label">เวลาที่หมด</label>
-                            <input type="text" class="form-control text-center" id="time-remaining" name="time_remaining" 
-                                value="{{ $selectedTable->bill->count() > 0 ? \Carbon\Carbon::parse($selectedTable->bill->last()->end_time)->format('H:i:s') : '00:00:00' }}" readonly>
-                        </div>
-                    </div>
+                                  <!-- ฟิลด์เวลาที่หมด -->
+                                  <div class="mb-3">
+                                      <label for="time-remaining" class="form-label">เวลาที่หมด</label>
+                                      <input type="text" class="form-control text-center" id="time-remaining"
+                                          name="time_remaining"
+                                          value="{{ $selectedTable->bill->count() > 0 ? \Carbon\Carbon::parse($selectedTable->bill->last()->end_time)->format('H:i:s') : '00:00:00' }}"
+                                          readonly>
+                                  </div>
+                              </div>
 
-                    <div class="modal-footer justify-content-center">
-                        <button type="submit" class="btn btn-danger">ตกลง</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+                              <div class="modal-footer justify-content-center">
+                                  <button type="submit" class="btn btn-danger">ตกลง</button>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
 
 
 
 
 
-  <script>
-        function selectTable(tableNumber) {
+          <script>
+              function selectTable(tableNumber) {
 
-          window.location.href = '/managetable/' + tableNumber;
+                  window.location.href = '/managetable/' + tableNumber;
               }
 
-        function checkbill() {
-          window.location.href = 'Billadmin';
+              function checkbill() {
+                  window.location.href = 'Billadmin';
               }
 
-        function openTableModal(tableId) {
-          document.getElementById('table-id-input').value = tableId;
-          var modal = new bootstrap.Modal(document.getElementById('OpenTableModal'));
-          modal.show();
+              function openTableModal(tableId) {
+                  document.getElementById('table-id-input').value = tableId;
+                  var modal = new bootstrap.Modal(document.getElementById('OpenTableModal'));
+                  modal.show();
               }
 
-         function openEditModal(tableId) {
-          document.getElementById('table-id-input').value = tableId;
-          var modal = new bootstrap.Modal(document.getElementById('editModal'));
-          modal.show();
-      } 
-      function closeModal() {
-            var modalElement = document.getElementById('editModal');
-            var modalInstance = bootstrap.Modal.getInstance(modalElement);
-            modalInstance.hide();
-            }
+              function openEditModal(tableId) {
+                  document.getElementById('table-id-input').value = tableId;
+                  var modal = new bootstrap.Modal(document.getElementById('editModal'));
+                  modal.show();
+              }
 
-        function updatePeopleCount(person_amount) {
-          function updatePeopleCount(person_amount) {
-            var peopleInput = document.getElementById('person_amount');
-            var currentPeople = parseInt(peopleInput.value);
-            var newPeople = currentPeople + change;
-            if (newPeople >= 1 && newPeople <= 4) {
-                peopleInput.value = newPeople;
-            }}}
+              function closeModal() {
+                  var modalElement = document.getElementById('editModal');
+                  var modalInstance = bootstrap.Modal.getInstance(modalElement);
+                  modalInstance.hide();
+              }
 
-
-  </script>
+              function updatePeopleCount(person_amount) {
+                  function updatePeopleCount(person_amount) {
+                      var peopleInput = document.getElementById('person_amount');
+                      var currentPeople = parseInt(peopleInput.value);
+                      var newPeople = currentPeople + change;
+                      if (newPeople >= 1 && newPeople <= 4) {
+                          peopleInput.value = newPeople;
+                      }
+                  }
+              }
+          </script>
 
       @endsection
