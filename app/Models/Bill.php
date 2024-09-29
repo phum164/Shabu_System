@@ -12,10 +12,10 @@ class Bill extends Model
     use SoftDeletes;
 
     public function table(){
-        return $this->belongsTo(Table::class);
+        return $this->belongsTo(Table::class,'table_id');
     }
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'employee_id');
     }
     public function listorder(){
         return $this->hasMany(ListOrder::class);

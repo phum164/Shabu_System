@@ -161,6 +161,11 @@ class MenuController extends Controller
         return redirect('/showstock')->with('success', 'ลบเมนู ' . $name . ' เรียบร้อยแล้ว');
     }
 
+    public function search(Request $request){
+        $search = $request->search;
+        $menus = Menu::where('name', 'LIKE', "%{$search}%")->paginate(10);
+        return view('stock', compact('menus'))->with('search', $search);
+    }
     public function page()
     {
         return view('adminpagetest');

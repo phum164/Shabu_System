@@ -2,6 +2,7 @@
 @push('style')
     <link rel="stylesheet" href="{{ asset('css/empdata.css') }}">
 @endpush
+<<<<<<< HEAD
 @section('menu-active')
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -22,6 +23,8 @@
 
     </ul>
 @endsection
+=======
+>>>>>>> main
 
 @section('menu')
     @if (session('success'))
@@ -47,14 +50,6 @@
         </script>
     @endif
 
-    {{-- <header>
-        <div class="header-title">
-            <h1>IT BEEF chabu</h1>
-        </div>
-        <div class="search">
-            <input type="text" placeholder="ค้นหา">
-        </div>
-    </header> --}}
 
     <section class="employee-section">
         <div class="empadd">
@@ -102,9 +97,8 @@
                 <a href="{{ route('show_edit', $emp->id) }}" class="btn btn-warning">แก้ไขข้อมูล</a>
 
                 <!-- ฟอร์มสำหรับลบข้อมูล -->
-                <form action="#" method="POST">
+                <form action="/delete" method="GET">
                     @csrf
-                    @method('DELETE')
                     <button type="submit" class="btn btn-danger w-100"
                         onclick="return confirm('คุณแน่ใจว่าจะลบข้อมูลนี้หรือไม่?');">ลบข้อมูล</button>
                 </form>
