@@ -77,6 +77,7 @@ class BillController extends Controller
         if ($bill) {
             // Update the person amount and save the bill
             $bill->person_amount = $request->person_amount;
+            $bill->total_pay = $request->person_amount * 299;
             $bill->save();
         }
     
