@@ -1,6 +1,6 @@
 @extends('layouts.layout_admin')
 @push('style')
-<link rel="stylesheet" href="{{ asset('css/empdata.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/empdata.css') }}">
 @endpush
 @section('menu-active')
     <ul class="navbar-nav">
@@ -19,7 +19,7 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ route('showstock') }}">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
         </li>
-        
+
     </ul>
 @endsection
 
@@ -63,12 +63,42 @@
         <hr>
         @foreach ($employees as $emp)
             <div class="emp">
-                <b class="text-primary">รหัสพนักงาน: {{ $emp->id }}</b>
-                <p>ชื่อ-นามสกุล: {{ $emp->name }}</p>
-                <p>เงินเดือน: {{ $emp->position->sarary }}</p>
-                <p>เบอร์โทร: {{ $emp->tell_number }}</p>
-                <p>อีเมลล์: {{ $emp->email }}</p>
-                <p>แผนก: {{ $emp->position->name }}</p>
+                <div class="text-primary form-group row align-items-center">
+                    <label for="" class="col-sm-6 col-form-label text-right">รหัสพนักงาน:</label>
+                    <div class="col-sm-6">
+                        <label for="">{{ $emp->id }}</label>
+                    </div>
+                </div>
+                <div class="form-group row align-items-center">
+                    <label for="" class="col-sm-6 col-form-label text-right">ชื่อ-นามสกุล:</label>
+                    <div class="col-sm-6">
+                        <label for="">{{ $emp->name }}</label>
+                    </div>
+                </div>
+                <div class="form-group row align-items-center">
+                    <label for="" class="col-sm-6 col-form-label text-right">เงินเดือน:</label>
+                    <div class="col-sm-6">
+                        <label for="">{{ $emp->position->sarary }}</label>
+                    </div>
+                </div>
+                <div class="form-group row align-items-center">
+                    <label for="" class="col-sm-6 col-form-label text-right">เบอร์โทร:</label>
+                    <div class="col-sm-6">
+                        <label for="">{{ $emp->tell_number }}</label>
+                    </div>
+                </div>
+                <div class="form-group row align-items-center">
+                    <label for="" class="col-sm-6 col-form-label text-right">อีเมลล์:</label>
+                    <div class="col-sm-6">
+                        <label for="">{{ $emp->email }}</label>
+                    </div>
+                </div>
+                <div class="form-group row align-items-center">
+                    <label for="" class="col-sm-6 col-form-label text-right">แผนก:</label>
+                    <div class="col-sm-6">
+                        <label for="">{{ $emp->position->name }}</label>
+                    </div>
+                </div>
                 <a href="{{ route('show_edit', $emp->id) }}" class="btn btn-warning">แก้ไขข้อมูล</a>
 
                 <!-- ฟอร์มสำหรับลบข้อมูล -->
