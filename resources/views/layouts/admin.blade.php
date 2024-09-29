@@ -37,7 +37,7 @@
                   <a class="nav-link {{ request()->is('showstock*') || request()->has('search') ? 'active' : '' }}" href="{{ route('showstock') }}">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link {{ request()->is('allbill*') && (request()->has('sbill') || request()->has('stabel')) ? 'active' : '' }}" href="{{ route('all_bill.showBill') }}">บิลทั้งหมด</a>
+                  <a class="nav-link {{ request()->is('allbill*') || (request()->has('sbill') || request()->has('stabel')) ? 'active' : '' }}" href="{{ route('all_bill.showBill') }}">บิลทั้งหมด</a>
               </li>
           </ul>
       </div>
