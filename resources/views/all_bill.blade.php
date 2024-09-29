@@ -37,7 +37,12 @@
                         <tr>
                             <td>{{ $bill->id }}</td>
                             <td>{{ $bill->table_id }}</td>
-                            <td>{{ $bill->employee_id }}</td>
+                            <td> @if($bill->user)
+                                {{ $bill->user->name }}
+                            @else
+                                ไม่พบข้อมูลพนักงาน
+                            @endif</td>
+                            {{-- <td>{{ $bill->employee_id}}</td> --}}
                             <td>{{ $bill->person_amount }}</td>
                             <td>{{ number_format($bill->total_pay, 0) }}</td>
                             <td>{{ $bill->created_at->format('d-m-Y H:i') }}</td>

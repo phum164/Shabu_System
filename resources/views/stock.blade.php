@@ -87,7 +87,7 @@
                         <td><img src="{{ asset($item->image) }}" alt="รูปเมนู" width="50" height="50"></td>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->menutype->name }}</td>
-                        <td>{{ $item->stock }}</td>
+                        <td>{{ number_format($item->stock,0); }}</td>
                         <td>
                             <form method="POST" action="{{ route('add_stock', $item->id) }}"
                                 class="d-flex jstify-content-evenly align-items-center flex-form"

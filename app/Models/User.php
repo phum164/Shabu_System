@@ -21,7 +21,7 @@ class User extends Authenticatable
     use SoftDeletes;
 
     public function position(){
-        return $this->belongsTo(Position::class);
+        return $this->belongsTo(Position::class,'position_id');
     }
 
     public function bill(){

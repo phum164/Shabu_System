@@ -103,7 +103,7 @@ class BillController extends Controller
     }
     
     public function allBill(){
-        $bills = Bill::paginate(10);
+        $bills = Bill::orderBy('id', 'desc')->paginate(10);
         $total_incom = Bill::where('status', 1)->sum('total_pay');
         return view('all_bill',compact('bills','total_incom'));
     }

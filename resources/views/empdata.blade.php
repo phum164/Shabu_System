@@ -27,14 +27,6 @@
         </script>
     @endif
 
-    {{-- <header>
-        <div class="header-title">
-            <h1>IT BEEF chabu</h1>
-        </div>
-        <div class="search">
-            <input type="text" placeholder="ค้นหา">
-        </div>
-    </header> --}}
 
     <section class="employee-section">
         <div class="empadd">
@@ -45,16 +37,15 @@
             <div class="emp">
                 <b class="text-primary">รหัสพนักงาน: {{ $emp->id }}</b>
                 <p>ชื่อ-นามสกุล: {{ $emp->name }}</p>
-                <p>เงินเดือน: {{ $emp->position->sarary }}</p>
+                <p>เงินเดือน: {{ number_format($emp->position->sarary,0) }} บาท</p>
                 <p>เบอร์โทร: {{ $emp->tell_number }}</p>
                 <p>อีเมลล์: {{ $emp->email }}</p>
                 <p>แผนก: {{ $emp->position->name }}</p>
                 <a href="{{ route('show_edit', $emp->id) }}" class="btn btn-warning">แก้ไขข้อมูล</a>
 
                 <!-- ฟอร์มสำหรับลบข้อมูล -->
-                <form action="#" method="POST">
+                <form action="/delete" method="GET">
                     @csrf
-                    @method('DELETE')
                     <button type="submit" class="btn btn-danger w-100"
                         onclick="return confirm('คุณแน่ใจว่าจะลบข้อมูลนี้หรือไม่?');">ลบข้อมูล</button>
                 </form>

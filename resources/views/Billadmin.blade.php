@@ -78,7 +78,7 @@
           </div>
           <div class="col-4">
             <p><b>ราคา</b></p>
-            <p>{{ $latestBill->total_pay }} บาท</p>
+            <p>{{ number_format($latestBill->total_pay,0) }} บาท</p>
           </div>
         </div>
       </div>
@@ -107,7 +107,7 @@
              <button type="submit" class="btn btn-primary w-100 mb-4 mt-2">คำนวนราคา</button>
               <div class="mb-4">
                   <label for="totalAmount" class="form-label">ยอดรวมทั้งหมด</label>
-                  <p> {{($latestBill->total_pay) }} บาท</p>
+                  <p> {{number_format($latestBill->total_pay,0)}} บาท</p>
               </div>
           </form> 
             <form action="{{ route('checkbill', ['id' => $latestBill->id]) }}" method="POST">

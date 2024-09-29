@@ -30,7 +30,7 @@
                         <i class="bi bi-person-fill"></i>
                         @if ($table->status == 0)
                             {{ $table->bill->last()->person_amount }} คน
-                            ฿ {{ $table->bill->last()->total_pay }}
+                            ฿ {{ number_format($table->bill->last()->total_pay,0) }}
                         @else
                             0 คน ฿ 0
                         @endif
