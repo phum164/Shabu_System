@@ -37,16 +37,15 @@ class BillController extends Controller
         $bill->person_amount = (int)$request->person_amount; 
         $bill->total_pay = $request->person_amount * 299; 
         $bill->status = 0;
-        $bill->start_time = now(); // กำหนดฟิลด์ start_time
+        $bill->start_time = now();
         $bill->end_time = now()->addHours(2); 
         $bill->save();
-    
-        // Update table status
+        
+        
         $table = Table::find($request->tableid);
-        $table->status = 0; // Make the table unavailable
+        $table->status = 0;
         $table->save();
         
-        // Redirect back to manage table view with the selected table ID
         return redirect('/managetable/' . $request->tableid);
     }
     
@@ -57,9 +56,9 @@ class BillController extends Controller
         // Retrieve the last bill associated with the table
         $bill = $selectedTable->bill->last();
         if ($bill) {
-            $start_time = $bill->start_time;  // Get the bill's start time
+            $start_time = $bill->start_time;
         } else {
-            $start_time = now();  // Default to current time if no bill exists
+            $start_time = now();
         }
     
         // Calculate the end time (2 hours after the start time)
@@ -75,13 +74,11 @@ class BillController extends Controller
         $bill = Bill::where('table_id', $request->tableid)->latest()->first();
     
         if ($bill) {
-            // Update the person amount and save the bill
             $bill->person_amount = $request->person_amount;
             $bill->total_pay = $request->person_amount * 299;
             $bill->save();
         }
-    
-        // Redirect back to the manage table view
+
         return redirect()->route('Managetable',["id" => $request->tableid]);
     }
     public function checkbill($id)
