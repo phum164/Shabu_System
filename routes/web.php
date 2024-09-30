@@ -49,13 +49,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/allbill/search', [BillController::class, 'search'])->name('search_bill');
         Route::get('/managetable/{id}', [TableController::class, 'manage'])->name('Managetable');
         Route::get('/table_admin', [TableController::class, 'index'])->name('table_admin');
+        Route::get('/Orderfood/{id}', [OrderfoodController::class, 'index'])->name('Orderfood');
+        Route::get('/historyoder/{id}', [HistoryOController::class, 'index'])->name('historyoder');
     });
     });
     Route::middleware(('kitch'))->group(function () {
         //ใส่ route ของพนักงานครัว
         Route::get('/Menulist', [ListOrderController::class, 'index'])->name('menulist');
-        Route::get('/Orderfood/{id}', [OrderfoodController::class, 'index'])->name('Orderfood');
-        Route::get('/historyoder/{id}', [HistoryOController::class, 'index'])->name('historyoder');
         Route::post('listorders/{id}', [ListOrderController::class, 'store'])->name('listorders.store');
         Route::post('/Menulist-update', [ListOrderController::class, 'update'])->name('update.status');
     Route::middleware(('manager'))->group(function () {
