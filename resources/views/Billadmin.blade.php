@@ -51,12 +51,7 @@
       @endphp
   
     @if($latestBill)
-    <p class="text-center">ใบเสร็จชำระเงิน |   
-      @if ($latestBill->status == 0)
-        <b style="color: rgb(255, 0, 0)"> ยังไม่ชำระเงิน</b>
-      @elseif($latestBill->status == 1)
-        <b style="color: rgb(0, 211, 18)">ชำระเงินเรียบร้อย</b>
-      @endif
+    <p class="text-center">ใบเสร็จชำระเงิน 
     </p>
   
     <div class="showdata">
