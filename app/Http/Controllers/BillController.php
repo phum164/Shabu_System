@@ -46,7 +46,7 @@ class BillController extends Controller
         $table->status = 0;
         $table->save();
         
-        return redirect('/managetable/' . $request->tableid);
+        return redirect('/managetable/' . $request->tableid)->with('success','สร้างบิลเสร็จสิ้น');
     }
     
     public function showTable($id)

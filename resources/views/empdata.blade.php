@@ -1,6 +1,6 @@
 @extends('layouts.layout_admin')
 @push('style')
-<link rel="stylesheet" href="{{ asset('css/empdata.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/empdata.css') }}">
 @endpush
 
 @section('menu')
@@ -40,7 +40,7 @@
             <div class="emp">
                 <b class="text-primary">รหัสพนักงาน: {{ $emp->id }}</b>
                 <p>ชื่อ-นามสกุล: {{ $emp->name }}</p>
-                <p>เงินเดือน: {{ number_format($emp->position->sarary,0) }} บาท</p>
+                <p>เงินเดือน: {{ number_format($emp->position->sarary, 0) }} บาท</p>
                 <p>เบอร์โทร: {{ $emp->tell_number }}</p>
                 <p>อีเมลล์: {{ $emp->email }}</p>
                 <p>แผนก: {{ $emp->position->name }}</p>
@@ -49,12 +49,30 @@
                 <!-- ฟอร์มสำหรับลบข้อมูล -->
                 <form action="/delete" method="GET">
                     @csrf
-                    <button type="submit" class="btn btn-danger w-100"
-                        onclick="return confirm('คุณแน่ใจว่าจะลบข้อมูลนี้หรือไม่?');">ลบข้อมูล</button>
+                    <button type="submit" class="btn btn-danger w-100" onclick="confirmDelete()">ลบข้อมูล</button>
                 </form>
             </div>
         @endforeach
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function confirmDelete() {
+            Swal.fire({
+                title: 'คุณแน่ใจหรือไม่?',
+                text: "คุณกำลังจะลบข้อมูลพนักงาน การกระทำนี้ไม่สามารถย้อนกลับได้!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'ใช่, ลบเลย!',
+                cancelButtonText: 'ยกเลิก'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('deleteForm').submit();
+                }
+            });
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>

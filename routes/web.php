@@ -29,9 +29,10 @@ Route::get('/admin', function () {
 Route::get('/', function () {
     return redirect()->route('home_admin');
 });
-Route::get('/home_admin', [AdminController::class, 'index'])->name('home_admin');
+
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/home_admin', [AdminController::class, 'index'])->name('home_admin');
     Route::middleware(['admin'])->group(function () {
         Route::get('/adminpage', [MenuController::class, 'page'])->name('admin.page');
     });
@@ -49,12 +50,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/table_admin', [TableController::class, 'index'])->name('table_admin');
         Route::get('/Orderfood/{id}', [OrderfoodController::class, 'index'])->name('Orderfood');
         Route::get('/historyoder/{id}', [HistoryOController::class, 'index'])->name('historyoder');
+        Route::post('listorders/{id}', [ListOrderController::class, 'store'])->name('listorders.store');
     });
     });
     Route::middleware(('kitch'))->group(function () {
         //ใส่ route ของพนักงานครัว
         Route::get('/Menulist', [ListOrderController::class, 'index'])->name('menulist');
-        Route::post('listorders/{id}', [ListOrderController::class, 'store'])->name('listorders.store');
         Route::post('/Menulist-update', [ListOrderController::class, 'update'])->name('update.status');
     Route::middleware(('manager'))->group(function () {
         //ใส่ route ของผู้บริหาร

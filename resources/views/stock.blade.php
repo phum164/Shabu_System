@@ -87,7 +87,7 @@
                         <td><img src="{{ asset($item->image) }}" alt="รูปเมนู" width="50" height="50"></td>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->menutype->name }}</td>
-                        <td>{{ number_format($item->stock,0); }}</td>
+                        <td>{{ number_format($item->stock, 0) }}</td>
                         <td>
                             <form method="POST" action="{{ route('add_stock', $item->id) }}"
                                 class="d-flex jstify-content-evenly align-items-center flex-form"
@@ -197,21 +197,14 @@
                 html: `<b>คุณต้องการลบเมนู <span style="color:#f39c12;">${name}</span> ใช่หรือไม่?</b>`,
                 icon: "warning",
                 showCancelButton: true,
-                confirmButtonColor: "#d33", // ปรับปุ่มยืนยันเป็นสีแดง
+                confirmButtonColor: "#d33",
                 cancelButtonColor: "#3085d6",
                 confirmButtonText: "<i class='fa fa-trash'></i> ใช่, ลบ",
                 cancelButtonText: "<i class='fa fa-times'></i> ยกเลิก",
                 reverseButtons: false,
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Swal.fire({
-                        title: 'เมนูถูกลบ!',
-                        text: 'ลบเมนูเรียบร้อยแล้ว',
-                        icon: 'success',
-                        confirmButtonColor: '#28a745',
-                    }).then(() => {
-                        window.location.href = urlToRedirect;
-                    });
+                    window.location.href = urlToRedirect;
                 }
             });
         }
