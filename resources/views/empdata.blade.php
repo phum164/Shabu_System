@@ -40,7 +40,7 @@
             <div class="emp">
                 <b class="text-primary">รหัสพนักงาน: {{ $emp->id }}</b>
                 <p>ชื่อ-นามสกุล: {{ $emp->name }}</p>
-                <p>เงินเดือน: {{ number_format($emp->position->sarary, 0) }} บาท</p>
+                <p>เงินเดือน: {{ number_format($emp->position->salary,0) }} บาท</p>
                 <p>เบอร์โทร: {{ $emp->tell_number }}</p>
                 <p>อีเมลล์: {{ $emp->email }}</p>
                 <p>แผนก: {{ $emp->position->name }}</p>

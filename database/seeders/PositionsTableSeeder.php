@@ -15,23 +15,23 @@ class PositionsTableSeeder extends Seeder
     {
         Position::create([
             'name' => 'admin',
-            'sarary' => 100000
+            'salary' => 100000
         ]);
         Position::create([
             'name' => 'manager',
-            'sarary' => 50000
+            'salary' => 50000
         ]);
         Position::create([
             'name' => 'kitchen',
-            'sarary' => 15000
+            'salary' => 15000
         ]);
         Position::create([
             'name' => 'cashier',
-            'sarary' => 17000
+            'salary' => 17000
         ]);
         Position::create([
             'name' => 'stock controller',
-            'sarary' => 13000
+            'salary' => 13000
         ]);
     }
 }

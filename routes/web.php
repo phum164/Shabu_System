@@ -27,7 +27,7 @@ Route::get('/admin', function () {
     return view('admin');
 });
 Route::get('/', function () {
-    return redirect()->route('home_admin');
+    return redirect()->route('login');
 });
 
 
