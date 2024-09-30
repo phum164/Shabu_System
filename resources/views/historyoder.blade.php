@@ -18,7 +18,6 @@
 
 @section('catagory')
     <h4 class="text-center">ประวัติการสั่งอาหาร</h4>
-    <p class="text-center">โชว์เวลาที่เหลือตรงนี้</p> <br>
 @endsection
 
 @section('oder')

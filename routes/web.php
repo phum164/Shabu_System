@@ -2,11 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\TableadminController;
 use App\Http\Controllers\OrderfoodController;
 use App\Http\Controllers\HistoryOController;
 use App\Http\Controllers\TotalpriceController;
-use App\Http\Controllers\MenuListAdminController;
 use App\Http\Controllers\AddMenuAdminController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ListorderController;

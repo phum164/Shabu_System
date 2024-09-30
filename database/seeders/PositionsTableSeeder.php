@@ -13,10 +13,25 @@ class PositionsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        Position::create(['name' => 'admin']);
-        Position::create(['name' => 'manager']);
-        Position::create(['name' => 'kitchen']);
-        Position::create(['name' => 'cashier']);
-        Position::create(['name' => 'stock controller']);
+        Position::create([
+            'name' => 'admin',
+            'sarary' => 100000
+        ]);
+        Position::create([
+            'name' => 'manager',
+            'sarary' => 50000
+        ]);
+        Position::create([
+            'name' => 'kitchen',
+            'sarary' => 15000
+        ]);
+        Position::create([
+            'name' => 'cashier',
+            'sarary' => 17000
+        ]);
+        Position::create([
+            'name' => 'stock controller',
+            'sarary' => 13000
+        ]);
     }
 }
