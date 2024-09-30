@@ -48,7 +48,7 @@
                 <label for="position_salary" class="col-sm-2 col-form-label text-right">เงินเดือน:</label>
                 <div class="col-sm-10">
                     <input type="number" name="position_salary" id="position_salary"
-                        placeholder="{{ number_format($emp->position->sarary, 0) }}" class="form-control" disabled>
+                        placeholder="{{ number_format($emp->position->salary, 0) }}" class="form-control" disabled>
                 </div>
             </div>
 
