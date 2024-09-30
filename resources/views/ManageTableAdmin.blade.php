@@ -28,7 +28,7 @@
                                       <div class="people-info">
                                           <i class="bi bi-person-fill"></i>
                                           @if ($table->bill->where('status', 0)->count() > 0)
-                                              {{ $table->bill->last()->person_amount }} คน
+                                          {{ optional($table->bill->last())->person_amount ?? '0' }} คน
                                           @else
                                               0 คน
                                           @endif
@@ -107,13 +107,15 @@
                   </div>
               </div>
           </div>
+        </div>
+   
 
           <!-- Modal for Editing -->
           <div class="modal fade" id="OpenTableModal" tabindex="-1" aria-labelledby="openModalLabel" aria-hidden="true">
              <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="openModalLabel">โต๊ะ <span id="table-number">{{ $table->id }}</span></h5>
+                        <h5 class="modal-title" id="openModalLabel">โต๊ะ <span id="table-number">{{ $selectedTable->id }}</span></h5>
                         <button type="button" class="btn-close" aria-label="Close" onclick="closeModal()"></button>
                     </div>
                 <div class="modal-body text-center">
@@ -123,15 +125,15 @@
 
                         <div class="d-flex justify-content-around">
                             <div class="mb-3">
-                            <label for="person_amount" class="form-label">จำนวนคน</label>
-                             <div class="input-group justify-content-center">
-                                <div class="wrapper">
-                                    <span class="minus">-</span>
-                                    <span class="num">1</span>
-                                <span class="plus">+</span>
-                                </div>
+                                <label for="person_amount" class="form-label">จำนวนคน</label>
+                                <div class="input-group justify-content-center">
+                                        <div class="wrapper">
+                                        <span class="minus">-</span>
+                                        <span   span class="num">1</span>
+                                        <span class="plus">+</span>
+                                        </div>
                                 <input type="hidden" name="person_amount" id="person_amount" value="1">
-                            </div>
+                                </div>
                             </div>
                             <!-- ฟิลด์เวลาที่หมด -->
                             <div class="mb-3">  
@@ -166,10 +168,10 @@
                             <div class="input-group justify-content-center">
                                 <div class="wrapper">
                                     <button type="button" id="minus" onclick="decreaseMenu()">-</button>
-                                    <label class="num" id="numberOfPerson">{{ $selectedTable->bill->last()->person_amount <= 0 ? 1 : $selectedTable->bill->last()->person_amount}}</label>
+                                    <label class="num" id="numberOfPerson">{{$selectedTable->bill->last()->person_amount ?? '0' }}</label>
                                     <button type="button" id="plus" onclick="increaseMenu()">+</button>
                                 </div>
-                                <input type="hidden" name="person_amount" id="person_amount_update" value="{{ $selectedTable->bill->last()->person_amount}}">
+                                <input type="hidden" name="person_amount" id="person_amount_update" value="{{$selectedTable->bill->count() > 0 ? $selectedTable->bill->last()->person_amount : '0' }}">
                             </div>
                         </div>
 
@@ -204,7 +206,7 @@
             if(form){
                 form.submit();
             }else{
-                alert("Kuy")    
+                alert("ERROR")    
             }
             
         }
@@ -267,8 +269,8 @@
         function decreaseMenu(){
             let numberOfPerson =document.getElementById("numberOfPerson").textContent;
             let intNumberOfPerson = parseInt(numberOfPerson) - 1;
-            if(intNumberOfPerson < 0){
-                intNumberOfPerson = 0;
+            if(intNumberOfPerson < 1){
+                intNumberOfPerson = 1;
             }
             document.getElementById("numberOfPerson").textContent =intNumberOfPerson
             document.getElementById("person_amount").value = intNumberOfPerson;
