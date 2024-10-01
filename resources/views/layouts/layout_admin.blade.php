@@ -49,19 +49,6 @@
                     </li>
                 </ul>
             </div>
-            {{-- <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <!-- Form สำหรับการ logout -->
-                        <form method="POST" action="{{ route('logout') }}" x-data>
-                            @csrf
-                            <button class="nav-link" style="word-spacing: 4px;" @click.prevent="$root.submit();">
-                                <i class="bi bi-box-arrow-right"></i> Logout
-                            </button>
-                        </form>
-                    </li>
-                </ul>
-            </div> --}}
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
