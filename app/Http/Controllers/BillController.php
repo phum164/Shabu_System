@@ -118,7 +118,7 @@ class BillController extends Controller
         } elseif ($tableId) {
             $query->where('table_id', $tableId);
         }
-        $bills = $query->paginate(10);
+        $bills = $query->orderBy('id', 'desc')->paginate(10);
         $total_incom = Bill::where('status', 1)->sum('total_pay');
         return view('all_bill', compact('bills', 'total_incom'));
     }

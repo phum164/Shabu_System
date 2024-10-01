@@ -12,7 +12,9 @@
                 <label for="id" class="col-sm-2 col-form-label">รหัสพนักงาน:</label>
                 <div class="col-sm-10">
                     <input type="text" name="id" id="id" value="{{ $emp->id }}" class="form-control"
-                        readonly>
+                        readonly hidden>
+                    <input type="text" name="id" id="id" value="{{ $emp->id }}" class="form-control"
+                        disabled>
                 </div>
             </div>
 

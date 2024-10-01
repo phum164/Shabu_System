@@ -70,14 +70,14 @@
         <table class="table-striped-columns mx-auto" style="width: 80%;">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Stock</th>
-                    <th scope="col">Among</th>
-                    <th scope="col">EditMenu</th>
-                    <th scope="col">DeletMenu</th>
+                    <th class="text-white" scope="col">ID</th>
+                    <th class="text-white" scope="col">Image</th>
+                    <th class="text-white" scope="col">Name</th>
+                    <th class="text-white" scope="col">Type</th>
+                    <th class="text-white" scope="col">Stock</th>
+                    <th class="text-white" scope="col">Among</th>
+                    <th class="text-white" scope="col">EditMenu</th>
+                    <th class="text-white" scope="col">DeletMenu</th>
                 </tr>
             </thead>
             @foreach ($menus as $item)
@@ -94,8 +94,8 @@
                                 onsubmit="confirmAddStock(event,'{{ $item->name }}', this.stock.value);">
                                 @csrf
                                 <input type="number" name="stock" class="form-control mx-2" maxlength="3" min="0"
-                                    placeholder="จำนวน" style="width: 90px; height:40px; -moz-appearance: textfield;"
-                                    required>
+                                    oninput="checkLength(this)" placeholder="จำนวน"
+                                    style="width: 90px; height:40px; -moz-appearance: textfield;" required>
                                 <button type="submit" class="btn btn-success">เพิ่มสต๊อก</button>
                             </form>
                         </td>
@@ -123,11 +123,19 @@
     @endif
 
     <script>
+        function checkLength(input) {
+            const maxLength = 3; // จำนวนหลักสูงสุดที่อนุญาต
+            if (input.value.length > maxLength) {
+                input.value = input.value.slice(0, maxLength); // ตัดค่าที่เกินออก
+            }
+        }
+
         function confirmAddStock(ev, menuName, stockAmount) {
             ev.preventDefault();
             Swal.fire({
                 title: "ยืนยันที่จะเพิ่มสต๊อก?",
-                html: `<b>คุณต้องการเพิ่มเมนู <span style="color:#f39c12;">${menuName}</span> จำนวน <span style="color:#f39c12;">${stockAmount}</span> ใช่หรือไม่?</b>`,
+                html: `<b>คุณต้องการเพิ่มเมนู <span style="color:#f39c12;">${menuName}</span> จำนวน <span
+            style="color:#f39c12;">${stockAmount}</span> ใช่หรือไม่?</b>`,
                 icon: "warning",
                 showCancelButton: true,
                 background: '#f2f2f2',

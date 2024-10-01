@@ -1,6 +1,6 @@
 table th, table td {
     padding: 15px;
-    border: 1px solid #ccc;
+    border: 1px solid #7c7c7c;
     text-align: left;
     text-align: center;
     border-width: thin;
@@ -17,5 +17,5 @@ td{
 }
 
 thead{
-    background-color: gray;
+    background-color: rgb(0, 0, 0);
 }
