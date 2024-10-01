@@ -8,6 +8,17 @@
     <form action="{{ route('edit_emp', $emp->id) }}" method="POST" style="margin: auto 0 0">
         @csrf
         <div class="emp my-25">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    {{ $errors->first() }}
+                </div>
+            @endif
+
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="form-group row align-items-center mb-3">
                 <label for="id" class="col-sm-2 col-form-label">รหัสพนักงาน:</label>
                 <div class="col-sm-10">
@@ -39,7 +50,7 @@
                 <div class="col-sm-10">
                     <select name="position_id" id="position_name" class="form-control" required>
                         @foreach ($position as $posi)
-                            @if ($posi->name != 'admin' && $posi->name != 'manager')
+                            @if ($posi->id != 1 && $posi->id != 2)
                                 <option value="{{ $posi->id }}">{{ $posi->name }}</option>
                             @endif
                         @endforeach

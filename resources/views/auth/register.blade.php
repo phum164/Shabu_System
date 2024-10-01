@@ -29,10 +29,12 @@
                 <x-label for="position">Position</x-label>
                 <select class="form-control" id="position" name="position_id" required>
                     @foreach ($positions as $position)
-                        <option value="{{ $position->id }}">
-                            {{ $position->name }}
-                        </option>
-                    @endforeach
+                            @if (auth()->user()->id == 1)
+                                <option value="{{$position->id}}">{{$position->name}}</option>
+                            @else
+                                <option value="{{ $position->id }}">{{ $position->name }}</option>
+                            @endif
+                        @endforeach
                 </select>
             </div>
 

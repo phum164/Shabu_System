@@ -25,32 +25,51 @@
         </button>
         <div class="collapse navbar-collapse " id="navbarNav">
             <ul class="navbar-nav mx-auto text-center">
-                <li class="nav-item">
+
+                <li class="nav-item mx-3">
                     <a class="nav-link {{ request()->routeIs('home_admin*') ? 'active' : '' }}"
                         href="{{ route('home_admin') }}">หน้าหลัก</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('table_admin*') ? 'active' : '' }}"
-                        href="{{ route('table_admin') }}">จัดการโต๊ะ</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('menulist*') ? 'active' : '' }}"
-                        href="{{ route('menulist') }}">รายการอาหารของลูกค้า</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->is('empdata*') ? 'active' : '' }}"
-                        href="/empdata">ข้อมูลพนักงาน</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->is('showstock*') || request()->has('search') ? 'active' : '' }}"
-                        href="{{ route('showstock') }}">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->is('allbill*') || (request()->has('sbill') || request()->has('stabel')) ? 'active' : '' }}"
-                        href="{{ route('all_bill.showBill') }}">บิลทั้งหมด</a>
-                </li>
+
+                @if (Auth::user()->position_id == 1 || Auth::user()->position_id == 4)
+                    <li class="nav-item mx-3">
+                        <a class="nav-link {{ request()->routeIs('table_admin*') ? 'active' : '' }}"
+                            href="{{ route('table_admin') }}">จัดการโต๊ะ</a>
+                    </li>
+                @endif
+
+                @if (Auth::user()->position_id == 1 || Auth::user()->position_id == 3)
+                    <li class="nav-item mx-3">
+                        <a class="nav-link {{ request()->routeIs('menulist*') ? 'active' : '' }}"
+                            href="{{ route('menulist') }}">รายการอาหารของลูกค้า</a>
+                    </li>
+                @endif
+
+                @if (Auth::user()->position_id == 1 || Auth::user()->position_id == 2)
+                    <li class="nav-item mx-3">
+                        <a class="nav-link {{ request()->is('empdata*') ? 'active' : '' }}"
+                            href="/empdata">ข้อมูลพนักงาน</a>
+                    </li>
+                @endif
+
+                @if (Auth::user()->position_id == 1 || Auth::user()->position_id == 5)
+                    <li class="nav-item mx-3">
+                        <a class="nav-link {{ request()->is('showstock*') || request()->has('search') ? 'active' : '' }}"
+                            href="{{ route('showstock') }}">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
+                    </li>
+                @endif
+
+                @if (Auth::check() &&
+                        (Auth::user()->position_id == 1 || Auth::user()->position_id == 2 || Auth::user()->position_id == 4))
+                    <li class="nav-item mx-3">
+                        <a class="nav-link {{ request()->is('allbill*') || (request()->has('sbill') || request()->has('stabel')) ? 'active' : '' }}"
+                            href="{{ route('all_bill.showBill') }}">บิลทั้งหมด</a>
+                    </li>
+                @endif
+
             </ul>
         </div>
+
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">

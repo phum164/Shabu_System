@@ -14,11 +14,6 @@ use App\Http\Controllers\PositionController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\RegisterController;
 
-
-
-
-
-
 Route::get('/edithistory', function () {
     return view('edithistory');
 });
@@ -75,7 +70,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/edit.position/{id}', [PositionController::class, 'update'])->name('edit.position');
         Route::post('/edit.position/{id}', [PositionController::class, 'update'])->name('edit.position');
         Route::get('/showedit/{id}', [EmployeeController::class, 'edit'])->name('show_edit');
-        Route::get('/delete/{id}', [EmployeeController::class, 'destroy'])->name('delete_emp');
+        Route::get('/delete.emp/{id}', [EmployeeController::class, 'destroy'])->name('delete_emp');
     });
     Route::middleware(('stock'))->group(function () {
         //ใส่ route ของ stock

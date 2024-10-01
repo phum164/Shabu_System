@@ -17,15 +17,6 @@ class EmployeeController extends Controller
         return view('empdata', compact('employees'));
     }
 
-    // public function show($id)
-    // {
-    //     $emp = User::find($id);
-    //     return view('editemp', compact('emp'));
-    // }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         $emp = User::findOrFail($id);
@@ -44,16 +35,14 @@ class EmployeeController extends Controller
             'tell_number' => [
                         'required',
                         'regex:/^0[0-9]{9}$/',
-                        'unique:users,tell_number'
             ],
             'position_id' => 'required|exists:positions,id',
         ], [
-            'name.required' => 'กรุณากรอก ชื่อ-สกุล พนักงาน',  // กำหนดข้อความเองสำหรับฟิลด์ 'name'
+            'name.required' => 'กรุณากรอก ชื่อ-สกุล พนักงาน',
             'email.required' => 'กรุณากรอกอีเมล',
             'email.unique' => 'อีเมลนี้ถูกใช้งานแล้ว',
             'tell_number.required' => 'กรุณากรอกหมายเลขโทรศัพท์',
             'tell_number.regex' => 'หมายเลขโทรศัพท์ต้องมี 10 หลักและขึ้นต้นด้วยเลข 0',
-            'tell_number.unique' => 'หมายเลขโทรศัพท์นี้มีผู้ใช้งานแล้ว',
         ]);
         $employee = User::findOrFail($id);
         $employee->update($validatedData);
@@ -62,7 +51,7 @@ class EmployeeController extends Controller
 
     public function destroy($id)
     {
-        $employee = User::findOfFail($id);
+        $employee = User::findOrFail($id);
         $name = $employee->name;
         $employee->delete();
         return redirect()->back()->with('success', 'ลบพนักงาน ' . $name . ' เรียบร้อย');
