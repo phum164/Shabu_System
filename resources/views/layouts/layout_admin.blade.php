@@ -49,9 +49,8 @@
                     </li>
                 </ul>
             </div>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            {{-- <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-
                     <li class="nav-item">
                         <!-- Form สำหรับการ logout -->
                         <form method="POST" action="{{ route('logout') }}" x-data>
@@ -60,6 +59,31 @@
                                 <i class="bi bi-box-arrow-right"></i> Logout
                             </button>
                         </form>
+                    </li>
+                </ul>
+            </div> --}}
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i> {{ Auth::user()->name }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{{ route('profile.show') }}"><i
+                                        class="bi bi-person"></i> Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}" x-data>
+                                    @csrf
+                                    <button class="dropdown-item" type="submit" @click.prevent="$root.submit();">
+                                        <i class="bi bi-box-arrow-right"></i> Logout
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>
