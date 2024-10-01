@@ -27,7 +27,7 @@ Route::get('/admin', function () {
     return view('admin');
 });
 Route::get('/', function () {
-    return redirect()->route('login');
+    return redirect()->route('home_admin');
 });
 
 Route::middleware([
@@ -36,8 +36,8 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+        return view('home_admin');
+    });
 });
 
 Route::middleware(['auth'])->group(function () {

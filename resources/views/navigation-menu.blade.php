@@ -4,9 +4,9 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
+                <div class="shrink-0 flex items-center ">
                     <a href="{{ route('home_admin') }}">
-                        <x-application-mark class="block h-9 w-auto" />
+                        <img src="{{ asset('img/table.png') }}" class="block h-9 w-auto rounded">
                     </a>
                 </div>
 

@@ -41,6 +41,11 @@
                                               <span class="ms-3">00:00:00</span>
                                           @endif
                                       </div>
+                                      @if ($table->bill->last() && $table->bill->last()->status == 0 && $table->bill->last()->end_time <= now())
+                                      <div>
+                                        <strong style="color:red; margin-left:70px">หมดเวลาแล้ว</strong>
+                                      </div>
+                                      @endif
                                   </div>
                               </div>
                           @endforeach
@@ -55,6 +60,11 @@
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-start">
                             <div class="mb-2"><strong>โต๊ะ</strong> <span id="table-number">{{ $selectedTable->id }}</span></div>
+                            @if($selectedTable->status==0)
+                            <div class="mb-2">
+                                <strong>Bill ID :</strong><span> {{$selectedTable->bill->last()->id}}</span>
+                            </div>
+                            @endif
                             <div class="mb-2"><strong>จำนวนคน:</strong>
                                 @if ($selectedTable->status==0)
                                     {{ $selectedTable->bill->last()->person_amount }} คน
@@ -75,7 +85,7 @@
                                       <div class="d-flex justify-content-end mt-3">
                                           @if ($selectedTable->status == 1)
                                               <button class="btn btn-success" data-bs-toggle="modal"
-                                                  data-bs-target="# OpenTableModal"
+                                                  data-bs-target="#OpenTableModal"
                                                   onclick="openTableModal({{ $selectedTable->id }})">เปิดโต๊ะ</button>
                                           @else
 
@@ -177,8 +187,8 @@
 
                         <!-- ฟิลด์เวลาที่หมด -->
                         <div class="mb-3">
-                            <label for="time-remaining" class="form-label =">เวลาที่หมด</label>
-                            <input type="text" class="form-control text-center b" id="time-remaining" style="background-color: opacity;" name="time_remaining" 
+                            <label for="time-remaining" class="form-label">เวลาที่หมด</label>
+                            <input type="text" class="form-control text-center b" id="time-remaining" style="background-color: #d3d3d3;" name="time_remaining" 
                                 value="{{ $selectedTable->bill->count() > 0 ? \Carbon\Carbon::parse($selectedTable->bill->last()->end_time)->format('H:i:s') : '00:00:00' }}" readonly>
                         </div>
                     </div>
@@ -234,7 +244,7 @@
         function closeModal() {
             var modalElement = document.getElementById('editModal');
             var modalInstance = bootstrap.Modal.getInstance(modalElement);
-            modalInstance.hide();
+            location.reload();
             }
 
         const plus = document.querySelector(".plus"),
