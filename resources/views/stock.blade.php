@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title', 'stocks')
-@section('headline', 'เพิ่มสต๊อกเมนู')
+@section('headline', 'จัดการเมนู')
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/stock.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -70,14 +70,14 @@
         <table class="table-striped-columns mx-auto" style="width: 80%;">
             <thead>
                 <tr>
-                    <th class="text-white" scope="col">ID</th>
-                    <th class="text-white" scope="col">Image</th>
-                    <th class="text-white" scope="col">Name</th>
-                    <th class="text-white" scope="col">Type</th>
-                    <th class="text-white" scope="col">Stock</th>
-                    <th class="text-white" scope="col">Among</th>
-                    <th class="text-white" scope="col">EditMenu</th>
-                    <th class="text-white" scope="col">DeletMenu</th>
+                    <th class="text-white" scope="col">ไอดี</th>
+                    <th class="text-white" scope="col">รูปเมนู</th>
+                    <th class="text-white" scope="col">ชิ่อเมนู</th>
+                    <th class="text-white" scope="col">ประเภทเมนู</th>
+                    <th class="text-white" scope="col">สต๊อก</th>
+                    <th class="text-white" scope="col">เพิ่มสต๊อก</th>
+                    <th class="text-white" scope="col">แก้ไขเมนู</th>
+                    <th class="text-white" scope="col">ลบเมนู</th>
                 </tr>
             </thead>
             @foreach ($menus as $item)

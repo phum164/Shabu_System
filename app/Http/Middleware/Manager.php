@@ -19,7 +19,7 @@ class Manager
         if (!Auth::check()) {
             return redirect('/login');
         }
-        if(auth()->user()->position && auth()->user()->isManager()){
+        if(auth()->user()->isManager()){
             return $next($request);
         }
         return redirect()->back();

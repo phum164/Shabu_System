@@ -19,7 +19,7 @@ class Kitch
         if (!Auth::check()) {
             return redirect('/login');
         }
-        if(auth()->user()->position && auth()->user()->isKitch()){
+        if(auth()->user()->isKitch()){
             return $next($request);
         }
         return redirect()->back();

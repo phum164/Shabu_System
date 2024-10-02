@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 @section('title', 'show_bill')
 @section('headline', 'บิลทั้งหมด')
-@push('styles')
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600&display=swap" rel="stylesheet">
-@endpush
+
+
+
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/allbill.css') }}">
     <div class="container">

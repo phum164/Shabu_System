@@ -188,7 +188,7 @@
                         <!-- ฟิลด์เวลาที่หมด -->
                         <div class="mb-3">
                             <label for="time-remaining" class="form-label">เวลาที่หมด</label>
-                            <input type="text" class="form-control text-center b" id="time-remaining" style="background-color: #d3d3d3;" name="time_remaining" 
+                            <input type="text" class="form-control text-center b" id="time-remaining" name="time_remaining" disabled
                                 value="{{ $selectedTable->bill->count() > 0 ? \Carbon\Carbon::parse($selectedTable->bill->last()->end_time)->format('H:i:s') : '00:00:00' }}" readonly>
                         </div>
                     </div>
@@ -201,10 +201,6 @@
         </div>
     </div>
 </div>
-
-
-
-
 
   <script>
         function formSubmit(){

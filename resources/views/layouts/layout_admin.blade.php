@@ -9,6 +9,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     @stack('style')
+    @yield('font')
 </head>
 
 <body>
@@ -53,12 +54,11 @@
                     @if (Auth::user()->position_id == 1 || Auth::user()->position_id == 5)
                         <li class="nav-item mx-3">
                             <a class="nav-link {{ request()->is('showstock*') || request()->has('search') ? 'active' : '' }}"
-                                href="{{ route('showstock') }}">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
+                                href="{{ route('showstock') }}">จัดการเมนู</a>
                         </li>
                     @endif
 
-                    @if (Auth::check() &&
-                            (Auth::user()->position_id == 1 || Auth::user()->position_id == 2 || Auth::user()->position_id == 4))
+                    @if (Auth::check() &&(Auth::user()->position_id == 1 || Auth::user()->position_id == 2 || Auth::user()->position_id == 4))
                         <li class="nav-item mx-3">
                             <a class="nav-link {{ request()->is('allbill*') || (request()->has('sbill') || request()->has('stabel')) ? 'active' : '' }}"
                                 href="{{ route('all_bill.showBill') }}">บิลทั้งหมด</a>

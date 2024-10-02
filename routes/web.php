@@ -56,11 +56,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/historyoder/{id}', [HistoryOController::class, 'index'])->name('historyoder');
         Route::post('listorders/{id}', [ListOrderController::class, 'store'])->name('listorders.store');
     });
-
     Route::middleware(('kitch'))->group(function () {
         //ใส่ route ของพนักงานครัว
         Route::get('/Menulist', [ListOrderController::class, 'index'])->name('menulist');
-        Route::post('/Menulist-update', [ListOrderController::class, 'update'])->name('update.status');
+        Route::post('/Menulist/update', [ListOrderController::class, 'update'])->name('update.status');
     });
     Route::middleware(('manager'))->group(function () {
         //ใส่ route ของผู้บริหาร
