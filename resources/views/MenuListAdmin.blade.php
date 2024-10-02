@@ -70,10 +70,13 @@ document.addEventListener('DOMContentLoaded', function() {
             checkboxes.forEach(function(checkbox) {
                 if (!checkbox.checked) {
                     allChecked = false;
-                    event.preventDefault();
-                alert('กรุณาเลือกเมนูให้ครบทุกอันก่อนยืนยัน');
                 }
             });
+
+            if (!allChecked) {
+                event.preventDefault();
+                alert('กรุณาเลือกเมนูให้ครบทุกอันก่อนยืนยัน');
+            }
         });
     });
 });
