@@ -27,7 +27,7 @@
             <ul class="navbar-nav mx-auto text-center">
 
                 <li class="nav-item mx-3">
-                    <a class="nav-link {{ request()->routeIs('home_admin*') ? 'active' : '' }}"
+                     <a class="nav-link {{ request()->routeIs('home_admin*') ? 'active' : '' }}"
                         href="{{ route('home_admin') }}">หน้าหลัก</a>
                 </li>
 
@@ -55,7 +55,7 @@
                 @if (Auth::user()->position_id == 1 || Auth::user()->position_id == 5)
                     <li class="nav-item mx-3">
                         <a class="nav-link {{ request()->is('showstock*') || request()->has('search') ? 'active' : '' }}"
-                            href="{{ route('showstock') }}">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
+                            href="{{ route('showstock') }}">จัดการเมนู</a>
                     </li>
                 @endif
 

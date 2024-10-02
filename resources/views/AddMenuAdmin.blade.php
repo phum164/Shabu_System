@@ -116,8 +116,6 @@
                     <!-- กรอกชื่อเมนู -->
                     <div class="form-group">
                         <label for="menuName">กรอกชื่อเมนู</label>
-                        {{-- <input type="text" class="form-control" id="menuName" name="menuName" placeholder="ชื่อเมนู"
-                            required> --}}
                         <input type="text" class="form-control" id="menuName" name="menuName" placeholder="ชื่อเมนู"
                             value="{{ isset($editmenu) ? $editmenu->name : '' }}" required>
                     </div>

@@ -9,28 +9,39 @@
     @endsection
 
     @section('menu')
-        <div class="col-sm-12 col-md-6 col-lg-4">
-            <div class="content">
-                <img src="{{ asset('img/table.png') }}" alt="รูปโลโก้ IT BEEF CHABU">
-                <a class="btn manage-table" href="{{ route('table_admin') }}" id="manage-table">จัดการโต๊ะ</a>
+        @if ((Auth::user()->position_id == 1 || Auth::user()->position_id == 4))
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="content">
+                    <img src="{{ asset('img/table.png') }}" alt="รูปโลโก้ IT BEEF CHABU">
+                    <a class="btn manage-table" href="{{ route('table_admin') }}" id="manage-table">จัดการโต๊ะ</a>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-12 col-md-6 col-lg-4">
-            <div class="content">
-                <img src="{{ asset('img/table.png') }}" alt="รูปโลโก้ IT BEEF CHABU">
-                <a class="btn" href="{{ route('menulist') }}">รายการอาหารของลูกค้า</a>
+        @endif
+
+        @if ((Auth::user()->position_id == 1 || Auth::user()->position_id == 3))
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="content">
+                    <img src="{{ asset('img/table.png') }}" alt="รูปโลโก้ IT BEEF CHABU">
+                    <a class="btn" href="{{ route('menulist') }}">รายการอาหารของลูกค้า</a>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-12 col-md-6 col-lg-4">
-            <div class="content">
-                <img src="{{ asset('img/table.png') }}" alt="รูปโลโก้ IT BEEF CHABU">
-                <a class="btn" href="/showstock">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
+        @endif
+
+        @if ((Auth::user()->position_id == 1 || Auth::user()->position_id == 5))
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="content">
+                    <img src="{{ asset('img/table.png') }}" alt="รูปโลโก้ IT BEEF CHABU">
+                    <a class="btn" href="/showstock">แก้ไข เพิ่ม/ลบเมนู เช็คสต๊อค</a>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-12 col-md-6 col-lg-4">
-            <div class="content">
-                <img src="{{ asset('img/table.png') }}" alt="รูปโลโก้ IT BEEF CHABU">
-                <a class="btn" href="/empdata">ข้อมูลพนักงาน</a>
+        @endif
+
+        @if ((Auth::user()->position_id == 1 || Auth::user()->position_id == 2))
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="content">
+                    <img src="{{ asset('img/table.png') }}" alt="รูปโลโก้ IT BEEF CHABU">
+                    <a class="btn" href="/empdata">ข้อมูลพนักงาน</a>
+                </div>
             </div>
-        </div>
+        @endif
     @endsection
