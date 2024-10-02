@@ -16,7 +16,7 @@
             </div>
 
             <div class="mt-4">
-                <x-label for="email" value="{{ __('อีเมลล์') }}" />
+                <x-label for="email" value="{{ __('อีเมล') }}" />
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             </div>
 
@@ -26,7 +26,7 @@
             </div>
 
             <div class="mt-4">
-                <x-label for="position">Position</x-label>
+                <x-label for="position">ตำแหน่ง</x-label>
                 <select class="form-control" id="position" name="position_id" required>
                     @foreach ($positions as $position)
                             @if (auth()->user()->id == 1)
@@ -39,12 +39,12 @@
             </div>
 
             <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
+                <x-label for="password" value="{{ __('รหัสผ่าน') }}" />
                 <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
             </div>
 
             <div class="mt-4">
-                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
+                <x-label for="password_confirmation" value="{{ __('ยืนยันรหัสผ่าน') }}" />
                 <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
 
@@ -66,12 +66,12 @@
             @endif
 
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('home_admin') }}">
-                    {{ __('back') }}
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('empdata') }}">
+                    {{ __('ย้อนกลับ') }}
                 </a>
 
                 <x-button class="ms-4" style="background-color: #4ac03a;">
-                    {{ __('Add_employee') }}
+                    {{ __('เพิ่มพนักงาน') }}
                 </x-button>
             </div>
         </form>
