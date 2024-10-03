@@ -8,8 +8,6 @@ body {
     box-sizing: border-box;
 }
 
-
-
 #admenu{
     display: flex;
     flex-direction: column;

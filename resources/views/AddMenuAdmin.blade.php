@@ -101,7 +101,7 @@
                     <!-- ส่วนอัปโหลดรูปภาพ -->
                     <div class="form-group text-center">
                         <label for="menuImage" class="d-block">
-                            <div style="border: 2px solid #ccc; padding: 30px; border-radius: 10px;">
+                            <div style="border: 2px solid #ccc; padding: 30px; border-radius: 10px;s">
                                 {{-- <img src="" id="previewImage" alt="เลือกอัปโหลดรูปภาพ" class="img-fluid"
                                     style="max-width: 100px; cursor: pointer;"> --}}
                                 {{-- <p>เพิ่มรูปภาพ</p> --}}
@@ -111,14 +111,14 @@
                             </div>
                         </label>
                         <input type="file" id="menuImage" name="menuImage" class="d-none" onchange="previewImage(event)">
-                    </div>
+                    </div><br>
 
                     <!-- กรอกชื่อเมนู -->
                     <div class="form-group">
                         <label for="menuName">กรอกชื่อเมนู</label>
                         <input type="text" class="form-control" id="menuName" name="menuName" placeholder="ชื่อเมนู"
                             value="{{ isset($editmenu) ? $editmenu->name : '' }}" required>
-                    </div>
+                    </div><br>
 
                     <!-- เลือกหมวดหมู่ -->
                     <div class="form-group">
@@ -146,6 +146,5 @@
     </div>
 
 
-    <!-- Bootstrap CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 @endsection
