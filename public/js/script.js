@@ -44,22 +44,20 @@ function changeAmount(change, event) {
 
 
 // เพิ่มรายการไปที่ตะกร้า
-let cartItems = []; // สร้างอาร์เรย์เพื่อเก็บข้อมูลตะกร้า
+let cartItems = []; 
 function addItemToSidebar(imageSrc, name, quantity, menuId) {
   const existingItemIndex = cartItems.findIndex(item => item.menuId === menuId);
 
   if (existingItemIndex !== -1) {
-      // ถ้าพบรายการเดิม เพิ่มจำนวน
       cartItems[existingItemIndex].amount += quantity;
       const input = document.querySelector(`.oderlist-item[data-id="${menuId}"] .numo`);
       if (input) {
           input.value = cartItems[existingItemIndex].amount; // อัปเดตค่าใน input
       }
   } else {
-      // ถ้าไม่พบ สร้างรายการใหม่
       const orderItem = document.createElement('div');
       orderItem.className = 'oderlist-item';
-      orderItem.setAttribute('data-id', menuId); // เพิ่ม data-id เพื่ออ้างอิง
+      orderItem.setAttribute('data-id', menuId); 
       orderItem.innerHTML = `
           <img class="imglist" src="${imageSrc}" alt="${name}">
           <div class="gbtnoder sib">
@@ -73,10 +71,9 @@ function addItemToSidebar(imageSrc, name, quantity, menuId) {
           </div>
       `;
       document.querySelector('.oderlist').appendChild(orderItem);
-      // เพิ่มข้อมูลลงใน cartItems
       cartItems.push({
           menuId: menuId,
-          amount: quantity // เก็บเฉพาะ menuId กับ amount
+          amount: quantity 
       });
   }
 }
