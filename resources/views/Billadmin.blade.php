@@ -47,7 +47,7 @@
       <h3 class="text-center mb-3">IT BEEF SHABU</h3>
       
       @php
-      $latestBill = $bills->last(); 
+      $latestBill = $bill
       @endphp
   
     @if($latestBill)

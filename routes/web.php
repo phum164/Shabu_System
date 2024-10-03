@@ -35,9 +35,10 @@ Route::get('/admin', function () {
 Route::get('/home_admin', [AdminController::class, 'index'])->name('home_admin');
 Route::get('/editmenu', [AdminController::class, 'editmenu'])->name('editmenu');
 Route::get('/table_admin', [TableController::class, 'index'])->name('table_admin');
-Route::get('/Orderfood', [OrderfoodController::class, 'index'])->name('Orderfood');
-Route::get('/historyoder', [HistoryOController::class, 'index'])->name('historyoder');
-Route::get('/Billadmin', [BillController::class, 'index'])->name('Billadmin');
+Route::get('/Orderfood/{id}', [OrderfoodController::class, 'index'])->name('Orderfood');
+Route::get('/historyoder/{id}', [HistoryOController::class, 'index'])->name('historyoder');
+Route::get('/Totalprice', [TotalpriceController::class, 'index'])->name('totalprice');
+Route::get('/Billadmin/{id}', [BillController::class, 'showBill'])->name('Billadmin');
 Route::post('listorders/{id}', [ListOrderController::class, 'store'])->name('listorders.store');
 Route::get('/showstock', [MenuController::class, 'showstock'])->name('showstock');
 Route::post('/addstock/{id}', [MenuController::class, 'stock'])->name('add_stock');

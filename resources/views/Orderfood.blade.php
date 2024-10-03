@@ -2,13 +2,10 @@
 @section('active')
     <ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('home_admin') }}">หน้าหลัก</a>
+            <a class="nav-link active" href="{{ route('Orderfood',['id'=>$id])}}">สั่งอาหาร</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" href="{{ route('Orderfood') }}">สั่งอาหาร</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('historyoder') }}">ประวัติการสั่งอาหาร</a>
+            <a class="nav-link" href="{{ route('historyoder',['id'=>$id]) }}">ประวัติการสั่งอาหาร</a>
         </li>
        
     </ul>
@@ -17,9 +14,7 @@
 @section('search')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    @php
-        $bill_id = request()->get('bill_id');
-    @endphp
+    {{$bill_id = request()->get('bill_id');}}
     
 
     @if (session('success'))

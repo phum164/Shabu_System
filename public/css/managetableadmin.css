@@ -77,10 +77,12 @@ body {
 }
 
 .people-info {
+    flex-grow: 1;
     margin-right: 10px;
 }
 
 .time-remaining {
+    text-align: right;
     margin-left: 10px;
 }
 
@@ -121,35 +123,42 @@ body {
         padding: 15px;
     }
     
-    .modal-header {
-        text-align: center;
-    }
+.modal-header {
+    text-align: center;
+}
     
-    .modal-header .modal-title {
-        font-weight: bold;
-    }
+.modal-header .modal-title {
+    font-weight: bold;
+}
     
-    .modal-footer {
-        display: flex;
-        justify-content: center;
-    }
+.modal-footer {
+    display: flex;
+    justify-content: center;
+}
     
-    #openTableForm .input-group button {
-        font-size: 1.5rem;
-        padding: 0.5rem 1rem;
-    }
+#openTableForm .input-group button {
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+}
     
-    #openTableForm .input-group input {
-        width: 50px;
-        font-size: 1.5rem;
-    }
+#openTableForm .input-group input {
+    width: 50px;
+    font-size: 1.5rem;
+}
     
-    #openTableForm .btn-danger {
-        font-size: 1.2rem;
-        padding: 10px 20px;
-        border-radius: 10px;
-    }
-    .selectable-table.active {
-        background-color: #e4f0ff;
-        border: 2px solid #007bff;
-    }
+#openTableForm .btn-danger {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+.selectable-table.active {
+    background-color: #e4f0ff;
+    border: 2px solid #007bff;
+}
+
+
+#minus,#plus{
+    border: none;
+    background-color: transparent;
+
+}
