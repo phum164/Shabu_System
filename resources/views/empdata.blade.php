@@ -36,7 +36,7 @@
         <hr>
         @foreach ($employees as $emp)
             @if ($emp->position_id == 1)
-            <div class="emp">
+                <div class="emp">
                     <b class="text-primary">รหัสพนักงาน: {{ $emp->id }}</b>
                     <p>ชื่อ-นามสกุล: {{ $emp->name }}</p>
                     <p>เงินเดือน: {{ number_format($emp->position->salary, 0) }} บาท</p>
@@ -44,10 +44,10 @@
                     <p>อีเมลล์: {{ $emp->email }}</p>
                     <p>แผนก: {{ $emp->position->name }}</p>
                     <!-- <a href="{{ route('show_edit', $emp->id) }}" class="btn btn-warning" disabled>แก้ไขข้อมูล</a>
-                    <form action="/delete.emp/{{ $emp->id }}" method="GET" id="deleteForm-{{ $emp->id }}">
-                        @csrf
-                        <button type="submit" class="btn btn-danger w-100" onclick="confirmDelete(event, {{ $emp->id }})" disabled>ลบข้อมูล</button>
-                    </form> -->
+                            <form action="/delete.emp/{{ $emp->id }}" method="GET" id="deleteForm-{{ $emp->id }}">
+                                @csrf
+                                <button type="submit" class="btn btn-danger w-100" onclick="confirmDelete(event, {{ $emp->id }})" disabled>ลบข้อมูล</button>
+                            </form> -->
                 </div>
             @endif
             @if ($emp->position_id != 1)
@@ -61,7 +61,8 @@
                     <a href="{{ route('show_edit', $emp->id) }}" class="btn btn-warning">แก้ไขข้อมูล</a>
                     <form action="/delete.emp/{{ $emp->id }}" method="GET" id="deleteForm-{{ $emp->id }}">
                         @csrf
-                        <button type="submit" class="btn btn-danger w-100" onclick="confirmDelete(event, {{ $emp->id }})">ลบข้อมูล</button>
+                        <button type="submit" class="btn btn-danger w-100"
+                            onclick="confirmDelete(event, {{ $emp->id }})">ลบข้อมูล</button>
                     </form>
                 </div>
             @endif

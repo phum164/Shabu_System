@@ -76,6 +76,7 @@
                     <th class="text-white" scope="col">ประเภทเมนู</th>
                     <th class="text-white" scope="col">สต๊อก</th>
                     <th class="text-white" scope="col">เพิ่มสต๊อก</th>
+                    <th class="text-white" scope="col">ลดสต๊อก</th>
                     <th class="text-white" scope="col">แก้ไขเมนู</th>
                     <th class="text-white" scope="col">ลบเมนู</th>
                 </tr>
@@ -96,7 +97,18 @@
                                 <input type="number" name="stock" class="form-control mx-2" maxlength="3" min="0"
                                     oninput="checkLength(this)" placeholder="จำนวน"
                                     style="width: 90px; height:40px; -moz-appearance: textfield;" required>
-                                <button type="submit" class="btn btn-success">เพิ่มสต๊อก</button>
+                                <button type="submit" class="btn btn-success">เพิ่ม</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="POST" action="{{ route('del_stock', $item->id) }}"
+                                class="d-flex jstify-content-evenly align-items-center flex-form"
+                                onsubmit="confirmDelStock(event,'{{ $item->name }}', this.stock.value);">
+                                @csrf
+                                <input type="number" name="stock" class="form-control mx-2" maxlength="3" min="0"
+                                    oninput="checkLength(this)" placeholder="จำนวน"
+                                    style="width: 90px; height:40px; -moz-appearance: textfield;" required>
+                                <button type="submit" class="btn btn-danger">ลด</button>
                             </form>
                         </td>
                         <td>
@@ -134,7 +146,7 @@
             ev.preventDefault();
             Swal.fire({
                 title: "ยืนยันที่จะเพิ่มสต๊อก?",
-                html: `<b>คุณต้องการเพิ่มเมนู <span style="color:#f39c12;">${menuName}</span> จำนวน <span
+                html: `<b>คุณต้องการเพิ่มจำนวนเมนู <span style="color:#f39c12;">${menuName}</span> จำนวน <span
             style="color:#f39c12;">${stockAmount}</span> ใช่หรือไม่?</b>`,
                 icon: "warning",
                 showCancelButton: true,
@@ -142,6 +154,28 @@
                 confirmButtonColor: "#28a745",
                 cancelButtonColor: "#d33",
                 confirmButtonText: "<i class='fa fa-check'></i> ใช่, เพิ่มสต๊อก",
+                cancelButtonText: "<i class='fa fa-times'></i> ยกเลิก",
+                reverseButtons: true, // สลับตำแหน่งปุ่ม
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    ev.target.submit();
+                }
+            });
+            return false;
+        }
+
+        function confirmDelStock(ev, menuName, stockAmount) {
+            ev.preventDefault();
+            Swal.fire({
+                title: "ยืนยันที่จะลดสต๊อก?",
+                html: `<b>คุณต้องการลดจำนวนเมนู <span style="color:#f39c12;">${menuName}</span> จำนวน <span
+            style="color:#f39c12;">${stockAmount}</span> ใช่หรือไม่?</b>`,
+                icon: "warning",
+                showCancelButton: true,
+                background: '#f2f2f2',
+                confirmButtonColor: "#28a745",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "<i class='fa fa-check'></i> ใช่, ลดสต๊อก",
                 cancelButtonText: "<i class='fa fa-times'></i> ยกเลิก",
                 reverseButtons: true, // สลับตำแหน่งปุ่ม
             }).then((result) => {

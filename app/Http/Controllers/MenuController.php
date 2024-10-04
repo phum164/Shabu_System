@@ -75,6 +75,31 @@ class MenuController extends Controller
         ]);
         return redirect('/showstock')->with('success', 'เพิ่มสต๊อกเรียบร้อยแล้ว!');
     }
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function delstock(Request $request, $id)
+    {
+        $request->validate([
+            'stock' => 'required|integer|min:1',
+        ], [
+            'stock.required' => 'กรุณาระบุจำนวนสต๊อก',
+            'stock.integer' => 'สต๊อกต้องเป็นจำนวนเต็ม',
+            'stock.min' => 'จำนวนต้องมากกว่า 0',
+        ]);
+        $menu = Menu::find($id);
+        // ตรวจสอบว่าจำนวนสต๊อกที่ต้องการลบต้องไม่มากกว่าจำนวนสต๊อกที่มีอยู่
+        if ($request->stock > $menu->stock) {
+            // หากมากเกินไป ให้ส่งกลับไปหน้าเดิมพร้อมกับข้อความแสดงข้อผิดพลาด
+            return redirect()->back()->withErrors([
+                'stock' => 'จำนวนสต๊อกที่ลดต้องไม่มากกว่าจำนวนสต๊อกที่มีอยู่'
+            ]);
+        }
+        $menu->update([
+            'stock' => $menu->stock - $request->stock
+        ]);
+        return redirect('/showstock')->with('success', 'ลดสต๊อกเรียบร้อยแล้ว!');
+    }
 
     /**
      * Display the specified resource.
@@ -145,7 +170,7 @@ class MenuController extends Controller
             'menutype_id' => $request->type_id,
             'image' => $menu->image
         ]);
-        return redirect('/showstock')->with('success', 'อัปเดตเมนูเรียบร้อยแล้ว');  
+        return redirect('/showstock')->with('success', 'อัปเดตเมนูเรียบร้อยแล้ว');
     }
 
     /**
@@ -161,7 +186,8 @@ class MenuController extends Controller
         return redirect('/showstock')->with('success', 'ลบเมนู ' . $name . ' เรียบร้อยแล้ว');
     }
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $search = $request->search;
         $menus = Menu::where('name', 'LIKE', "%{$search}%")->paginate(10);
         return view('stock', compact('menus'))->with('search', $search);

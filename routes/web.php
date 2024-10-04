@@ -76,6 +76,7 @@ Route::middleware(['auth'])->group(function () {
         //ใส่ route ของ stock
         Route::get('/editmenu', [AdminController::class, 'editmenu'])->name('editmenu');
         Route::post('/addstock/{id}', [MenuController::class, 'stock'])->name('add_stock');
+        Route::post('/delstock/{id}', [MenuController::class, 'delstock'])->name('del_stock');
         Route::post('/insertmenu', [MenuController::class, 'create'])->name('insertmenu');
         Route::get('/edit/{id}', [MenuController::class, 'edit'])->name('edit');
         Route::put('/editmenu/{id}', [MenuController::class, 'update'])->name('editmenu');
