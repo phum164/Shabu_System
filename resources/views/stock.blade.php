@@ -11,7 +11,8 @@
                 title: 'สำเร็จ!',
                 text: "{{ session('success') }}",
                 icon: 'success',
-                confirmButtonText: 'OK'
+                timer: 1000,
+                showConfirmButton: false,
             });
         </script>
     @endif

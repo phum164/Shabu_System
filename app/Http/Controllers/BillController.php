@@ -36,6 +36,7 @@ class BillController extends Controller
         $bill->employee_id = $employee_id;
         $bill->table_id = $request->tableid;
         $bill->person_amount = (int)$request->person_amount;
+        $bill->all_person_pay = $request->person_amount * 299;
         $bill->total_pay = $request->person_amount * 299;
         $bill->status = 0;
         $bill->start_time = now();
@@ -76,6 +77,7 @@ class BillController extends Controller
 
         if ($bill) {
             $bill->person_amount = $request->person_amount;
+            $bill->all_person_pay = $request->person_amount * 299;
             $bill->total_pay = $request->person_amount * 299;
             $bill->save();
         }
@@ -96,7 +98,7 @@ class BillController extends Controller
             ]);
         }
 
-        return redirect()->route('table_admin');
+        return redirect()->route('table_admin')->with('success', 'ชำระบิลบิลเรียบร้อยแล้ว');
     }
 
     public function allBill()
@@ -152,7 +154,7 @@ class BillController extends Controller
         if ($bill) {
             $adjustment = $request->input('adjustment', 0);
             $amountDue = $request->input('amountprice', 0);
-
+            $bill->add_pay = $adjustment;
             $total_pay = $bill->total_pay + $adjustment;
 
             $bill->total_pay = $total_pay;

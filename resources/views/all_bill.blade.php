@@ -12,8 +12,8 @@
                 <div class="search-bar">
                     <form action="/allbill/search" method="GET">
                         <div class="input-group d-flex align-items-center">
-                            <input class="form-control me-2" placeholder="บิล" type="text" name="sbill">
-                            <input class="form-control me-2" placeholder="โต๊ะ" type="text" name="stabel">
+                            <input class="form-control me-2" placeholder="บิล" type="number" name="sbill">
+                            <input class="form-control me-2" placeholder="โต๊ะ" type="number" name="stabel">
                             <button type="submit" class="btn btn-primary">Search</button>
                         </div>
                     </form>
@@ -53,9 +53,9 @@
                             <td>{{ $bill->created_at->format('d-m-Y H:i') }}</td>
                             <td>
                                 @if ($bill->status == 1)
-                                    <button class="btn btn-success">จ่ายแล้ว</button>
+                                    <a href="/Billadmin/{{$bill->id}}" class="btn btn-success">จ่ายแล้ว</a>
                                 @else
-                                    <button class="btn btn-danger">ยังไม่จ่าย</button>
+                                    <a href="/Billadmin/{{$bill->id}}" class="btn btn-danger">ยังไม่จ่าย</a>
                                 @endif
                             </td>
                         </tr>

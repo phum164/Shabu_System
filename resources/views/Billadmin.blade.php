@@ -79,17 +79,21 @@
                     <hr>
                     <div class="detail">
                         <div class="row text-center">
-                            <div class="col-4">
+                            <div class="col-3">
                                 <p><b>รายการ</b></p>
                                 <p>ผู้ใหญ่</p><br>
                             </div>
-                            <div class="col-4">
+                            <div class="col-3">
                                 <p><b>จำนวน</b></p>
                                 <p>{{ $latestBill->person_amount }} ท่าน</p><br>
                             </div>
-                            <div class="col-4">
+                            <div class="col-3">
+                                <p><b>ค่าปรับ</b></p>
+                                <p>{{ number_format($latestBill->add_pay, 0) }} บาท</p><br>
+                            </div>
+                            <div class="col-3">
                                 <p><b>ราคา</b></p>
-                                <p>{{ number_format($latestBill->total_pay, 0) }} บาท</p>
+                                <p>{{ number_format($latestBill->all_person_pay, 0) }} บาท</p>
                             </div>
                         </div>
                     </div>
@@ -114,38 +118,41 @@
                     </div>
                 @endif
 
-                <form action="{{ route('update-total-pay') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="bill_id" value="{{ $latestBill->id }}">
 
-                    <div class="mb-3">
-                        <label for="adjustment" class="form-label">ค่าปรับ</label>
-                        <input type="number" class="form-control" name="adjustment" id="adjustment"
-                            placeholder="กรอกค่าปรับ">
+                @if ($latestBill->status == 1)
+                    <button type="submit" class="btn btn-success w-100 mb-5 mt-2">ชำระเงินเรียบร้อย</button>
+                @else
+                    <form action="{{ route('update-total-pay') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="bill_id" value="{{ $latestBill->id }}">
+
+                        <div class="mb-3">
+                            <label for="adjustment" class="form-label">ค่าปรับ</label>
+                            <input type="number" class="form-control" name="adjustment" id="adjustment"
+                                placeholder="กรอกค่าปรับ">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="amountprice" class="form-label">ที่ต้องชำระ</label>
+                            <input type="number" class="form-control" name="amountprice"
+                                placeholder="กรอกจำนวนที่ต้องชำระ" value="{{ $latestBill->total_pay }}" readonly>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 mb-4 mt-2">คำนวนราคา</button>
+                        <div class="mb-4">
+                            <label for="totalAmount" class="form-label">ยอดรวมทั้งหมด</label>
+                            <p> {{ number_format($latestBill->total_pay, 0) }} บาท</p>
+                        </div>
+                    </form>
+                    <form action="{{ route('checkbill', ['id' => $latestBill->id]) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-danger w-100 mb-5 mt-2">ชำระเงิน</button>
+                    </form>
+                    <div class="text-center">
+                        <img src="{{ asset('img/qrcodecash.png') }}" alt="QR Code" class="img-fluid"
+                            style="max-width: 300px;">
                     </div>
-
-                    <div class="mb-3">
-                        <label for="amountprice" class="form-label">ที่ต้องชำระ</label>
-                        <input type="number" class="form-control" name="amountprice" placeholder="กรอกจำนวนที่ต้องชำระ"
-                            value="{{ $latestBill->total_pay }}">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary w-100 mb-4 mt-2">คำนวนราคา</button>
-                    <div class="mb-4">
-                        <label for="totalAmount" class="form-label">ยอดรวมทั้งหมด</label>
-                        <p> {{ number_format($latestBill->total_pay, 0) }} บาท</p>
-                    </div>
-                </form>
-                <form action="{{ route('checkbill', ['id' => $latestBill->id]) }}" method="POST">
-                    @csrf
-                    <button type="submit" class="btn btn-danger w-100 mb-5 mt-2">ชำระเงิน</button>
-                </form>
-
-
-                <div class="text-center">
-                    <img src="{{ asset('img/qrcodecash.png') }}" alt="QR Code" class="img-fluid"
-                        style="max-width: 300px;">
-                </div>
+                @endif
 
                 <div class="text-center mt-5">
                     <p class="text-muted">IT BEEF SHABU</p>

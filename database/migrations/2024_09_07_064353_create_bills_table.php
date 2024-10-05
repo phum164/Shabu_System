@@ -16,6 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('table_id');
             $table->integer('person_amount');
+            $table->integer('all_person_pay');
+            $table->integer('add_pay')->default(0);
             $table->integer('total_pay');
             $table->integer('status');
             $table->dateTime('start_time');
