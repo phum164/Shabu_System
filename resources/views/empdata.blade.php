@@ -41,7 +41,7 @@
                     <p>ชื่อ-นามสกุล: {{ $emp->name }}</p>
                     <p>เงินเดือน: {{ number_format($emp->position->salary, 0) }} บาท</p>
                     <p>เบอร์โทร: {{ $emp->tell_number }}</p>
-                    <p>อีเมลล์: {{ $emp->email }}</p>
+                    <p>อีเมล: {{ $emp->email }}</p>
                     <p>แผนก: {{ $emp->position->name }}</p>
                     <!-- <a href="{{ route('show_edit', $emp->id) }}" class="btn btn-warning" disabled>แก้ไขข้อมูล</a>
                             <form action="/delete.emp/{{ $emp->id }}" method="GET" id="deleteForm-{{ $emp->id }}">
@@ -56,7 +56,7 @@
                     <p>ชื่อ-นามสกุล: {{ $emp->name }}</p>
                     <p>เงินเดือน: {{ number_format($emp->position->salary, 0) }} บาท</p>
                     <p>เบอร์โทร: {{ $emp->tell_number }}</p>
-                    <p>อีเมลล์: {{ $emp->email }}</p>
+                    <p>อีเมล: {{ $emp->email }}</p>
                     <p>แผนก: {{ $emp->position->name }}</p>
                     <a href="{{ route('show_edit', $emp->id) }}" class="btn btn-warning">แก้ไขข้อมูล</a>
                     <form action="/delete.emp/{{ $emp->id }}" method="GET" id="deleteForm-{{ $emp->id }}">

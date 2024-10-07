@@ -14,7 +14,7 @@
                         <div class="input-group d-flex align-items-center">
                             <input class="form-control me-2" placeholder="บิล" type="number" name="sbill">
                             <input class="form-control me-2" placeholder="โต๊ะ" type="number" name="stabel">
-                            <button type="submit" class="btn btn-primary">Search</button>
+                            <button type="submit" class="btn bg-primary text-white">ค้นหา</button>
                         </div>
                     </form>
                 </div>
@@ -30,7 +30,9 @@
                         <th>โต๊ะ</th>
                         <th>พนักงานผู้ทำรายการ</th>
                         <th>จำนวนคน</th>
-                        <th>ราคาทั้งหมด</th>
+                        <th>ราคารวมตามจำนวนคน</th>
+                        <th>ค่าปรับ</th>
+                        <th>ราคารวมทั้งหมด</th>
                         <th>วันเวลา</th>
                         <th>สถานะ</th>
                     </tr>
@@ -49,6 +51,8 @@
                             </td>
                             {{-- <td>{{ $bill->employee_id}}</td> --}}
                             <td>{{ $bill->person_amount }}</td>
+                            <td>{{number_format($bill->all_person_pay,0)}}</td>
+                            <td>{{number_format($bill->add_pay)}}</td>
                             <td>{{ number_format($bill->total_pay, 0) }}</td>
                             <td>{{ $bill->created_at->format('d-m-Y H:i') }}</td>
                             <td>

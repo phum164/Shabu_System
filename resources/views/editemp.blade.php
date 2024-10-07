@@ -59,7 +59,7 @@
             </div>
 
             <div class="form-group row align-items-center mb-3">
-                <label for="email" class="col-sm-2 col-form-label text-right">อีเมลล์:</label>
+                <label for="email" class="col-sm-2 col-form-label text-right">อีเมล:</label>
                 <div class="col-sm-10">
                     <input type="email" name="email" id="email" placeholder="{{ $emp->email }}"
                         class="form-control" value="{{ $emp->email }}">

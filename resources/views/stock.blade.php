@@ -57,8 +57,8 @@
                 <form action="/showstock/search" method="GET">
                     <div class="input-group mb-4">
                         <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
-                        <input class="form-control" placeholder="Search" type="text" name="search">
-                        <button type="submit" class="btn btn-primary">Search</button>
+                        <input class="form-control" placeholder="ค้นหา" type="text" name="search">
+                        <button type="submit" class="btn btn-primary">ค้นหา</button>
                     </div>
                 </form>
             </div>
@@ -117,8 +117,8 @@
                                 onclick="confirmEditStock(event,'{{ $item->name }}');">แก้ไข</a>
                         </td>
                         <td>
-                            <a class="btn btn-danger" href="/delete/{{ $item->id }}" role="button"
-                                onclick="confirmDelete(event, '{{ $item->name }}')">ลบเมนู</a>
+                            <a class="bi bi-trash3-fill" href="/delete/{{ $item->id }}" 
+                                onclick="confirmDelete(event, '{{ $item->name }}')"></a>
 
                         </td>
                     </tr>
