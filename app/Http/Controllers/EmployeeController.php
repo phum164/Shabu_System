@@ -37,6 +37,8 @@ class EmployeeController extends Controller
                         'regex:/^0[0-9]{9}$/',
             ],
             'position_id' => 'required|exists:positions,id',
+            'position_salary' => 'required|numeric|min:0', // การตรวจสอบข้อมูลสำหรับเงินเดือน
+
         ], [
             'name.required' => 'กรุณากรอก ชื่อ-สกุล พนักงาน',
             'email.required' => 'กรุณากรอกอีเมล',
@@ -46,6 +48,8 @@ class EmployeeController extends Controller
         ]);
         $employee = User::findOrFail($id);
         $employee->update($validatedData);
+        $employee->position->update(['salary' => $request->position_salary]);
+        
         return redirect()->route('empdata')->with('success', 'อัปเดตข้อมูลพนักงานเรียบร้อยแล้ว');
     }
 

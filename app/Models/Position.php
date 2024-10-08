@@ -11,6 +11,11 @@ class Position extends Model
     use HasFactory;
     use SoftDeletes;
 
+
+    protected $fillable = [
+        'salary' // เพิ่มฟิลด์ salary ลงใน fillable เพื่ออนุญาต Mass Assignment
+    ];
+
     public function user(){
         return $this->hasMany(User::class);
     }
