@@ -120,6 +120,10 @@
 
 
                 @if ($latestBill->status == 1)
+                    <div class="d-flex justify-content-end mb-4">
+                        <label for="totalAmount" class="form-label mx-1">ยอดรวมทั้งหมด </label>
+                        <p> {{ number_format($latestBill->total_pay, 0) }} บาท</p>
+                    </div>
                     <button type="submit" class="btn btn-success w-100 mb-5 mt-2">ชำระเงินเรียบร้อย</button>
                 @else
                     <form action="{{ route('update-total-pay') }}" method="POST">

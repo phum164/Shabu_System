@@ -22,16 +22,16 @@ class PositionsTableSeeder extends Seeder
             'salary' => 50000
         ]);
         Position::create([
-            'name' => 'kitchen',
-            'salary' => 15000
+            'name' => 'พนักงานครัว',
+            'salary' => 20000
         ]);
         Position::create([
-            'name' => 'cashier',
-            'salary' => 17000
+            'name' => 'พนักงานต้อนรับ',
+            'salary' => 20000
         ]);
         Position::create([
-            'name' => 'stock controller',
-            'salary' => 13000
+            'name' => 'พนักงานจัดการสต๊อก',
+            'salary' => 25000
         ]);
     }
 }
